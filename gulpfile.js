@@ -32,7 +32,6 @@ const srcPath = {
     'js': './src/!(js)*/**/*.js',
     'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
-    'task': './src/task/**/*.pdf',
     'analysis': './code-analysis/',
 };
 
@@ -124,11 +123,6 @@ gulp.task('font', () => {
         .pipe(gulp.dest(distPath.font));
 });
 
-gulp.task('task', () => {
-    return gulp.src(srcPath.task)
-        .pipe(gulp.dest(distPath.task));
-})
-
 gulp.task('serve', () => {
     browserSync.init({
         server: distPath.dist,
@@ -143,8 +137,7 @@ gulp.task('build', gulpSequence('clean', ['js:lint', 'css:lint'], [
     'img',
     'js',
     'css',
-    'font',
-    'task'
+    'font'
 ]));
 
 gulp.task('watch', () => {
@@ -153,7 +146,6 @@ gulp.task('watch', () => {
     watch(srcPath.js, () => gulp.start('js'));
     watch(srcPath.img, () => gulp.start('img'));
     watch(srcPath.font, () => gulp.start('font'));
-    watch(srcPath.task, () => gulp.start('task'));
 });
 
 gulp.task('default', gulpSequence('build', ['watch', 'serve']));
