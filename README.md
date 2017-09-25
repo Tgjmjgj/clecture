@@ -10,4 +10,7 @@
 Процедурное программирование. Знакомство с C/C++ и IDE Visual Studio.
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Visual_Cpp/index.html "Лекция") 
 
+###Тема 2. Базовые операторы ввода/вывода
+Форматированный ввод/вывод. Строковый ввод/вывод. Потоковый ввод/вывод. Манипуляторы
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Input_Output/index.html "Лекция") 
 
