@@ -24,7 +24,7 @@
 					<h1>Основы алгоритмизации и программирования</h1>
 					<h3>Базовые операции ввода/вывода</h3>
 					<p>
-						<small>Edward &Aacute; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
+						<small>Edward &amp; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
 					</p>
 				</section>
 				<section>
@@ -177,7 +177,7 @@ scanf(&quot; %s &quot;, mas);
                         Функция <i>puts()</i> осуществляет вывод информации на экран. Параметром функции должна быть строка:
                     </blockquote>
                     <pre>
-                        <code class="revealjs">
+                    <code class="revealjs">
 puts(&quot;Эй ты,а ну иди сюда!&quot;); // строковый литерал
 
 #define MESSAGE &quot;Эй, не слышишь что-ли?&quot;
@@ -194,7 +194,7 @@ puts(str);
                         Функция <i>putchar()</i> предназначена для вывода единичного символа на экран. Параметром функции должен быть символ в том или ином виде.
                     </blockquote>
                     <pre>
-                        <code class="revealjs">
+                    <code class="revealjs">
 putchar('g'); // символьный литерал
 
 #define SYMBOL 'ж'
@@ -205,13 +205,12 @@ putchar(letter);  // символьная переменная
                         </code>
                     </pre>
                 </section>
-            </section>
-            <section>
-                <h3>Функция <i>gets()</i></h3>
-                <blockquote>
-                    Функция <i>gets()</i> вводит строку в переменную:
-                </blockquote>
-                <pre>
+                <section>
+                    <h3>Функция <i>gets()</i></h3>
+                    <blockquote>
+                        Функция <i>gets()</i> вводит строку в переменную:
+                    </blockquote>
+                    <pre>
                     <code class="revealjs">
 char ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR[60];
 printf(&quot;Как вас звать?&quot;);
@@ -219,20 +218,21 @@ gets(ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR);
 printf(&quot;Привет, %s\n&quot;, ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR);
                         </code>
                     </pre>
-            </section>
-            <section>
-                <h3>
-                    Функция <i>getchar()</i>
-                </h3>
-                <blockquote>
-                    Функция <i>getchar()</i> вводит с клавиатуры единичный символ:
-                </blockquote>
-                <pre>
+                </section>
+                <section>
+                    <h3>
+                        Функция <i>getchar()</i>
+                    </h3>
+                    <blockquote>
+                        Функция <i>getchar()</i> вводит с клавиатуры единичный символ:
+                    </blockquote>
+                    <pre>
                     <code class="revealjs">
 int code;
 code = getchar();
                     </code>
                 </pre>
+                </section>
             </section>
             <section>
                 <h2>Потоковый ввод/вывод</h2>
