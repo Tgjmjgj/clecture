@@ -30,7 +30,7 @@
 
 * Четвёртое задание
 	[_Четвёртое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_4/Task_4.pdf "Задание 4")
-	[***Решение***](ftp://tgjmjgj.github.io/Clecture/dist/completed/Task_4/Index.html "Решение задания 4")
+	[***Решение***](https://tgjmjgj.github.io/Clecture/dist/completed/Task_4/Index.html "Решение задания 4")
 
 * Пятое задание
 	[_Пятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_5/Task_5.pdf "Задание 2")
