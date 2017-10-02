@@ -17,6 +17,21 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Input_Output/index.html "Лекция") 
 
+###  Тема 4. Базовые операции
+Операции и их классификация. Приоритеты операций. Преобразование типов. Стандартные математические функции
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Operations/index.html "Лекция") 
+
+###  Тема 5. Сложные конструкции: условия, циклы
+Условный оператор if. Оператор выбора switch. Циклы for, while и do...while
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Complex_Constructs/index.html "Лекция") 
+
+###  Тема 6. Статические массивы
+Статические массивы. Инициализация. Многомерные массивы. Генерация случайных чисел
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Arrays/index.html "Лекция") 
+
 
 ##  Задания
 * Первое задание
