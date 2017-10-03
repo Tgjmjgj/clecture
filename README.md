@@ -12,7 +12,7 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Visual_Cpp/index.html "Лекция") 
 
-###  Тема 3. Базовые операторы ввода/вывода
+###  Тема 3. Ввод/вывод
 Форматированный ввод/вывод. Строковый ввод/вывод. Потоковый ввод/вывод. Манипуляторы.
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Input_Output/index.html "Лекция") 
@@ -32,6 +32,10 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Arrays/index.html "Лекция") 
 
+###  Тема 7. Указатели
+Указатели. Разыменование и получение адреса. Динамическое выделение памяти
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Pointers/index.html "Лекция") 
 
 ##  Задания
 * Первое задание
