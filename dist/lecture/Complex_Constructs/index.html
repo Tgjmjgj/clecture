@@ -134,7 +134,7 @@
                     Тип переменной изменить нельзя. Простейшая форма объявления переменных:
                 </blockquote>
                 <pre>
-                    <code class="revealjs">
+                    <code class="cpp">
 тип_данных имя_переменной;              //объявление переменной
 тип_данных имя_переменной = значение;   //объявление вместе с инициализацией
                     </code>
@@ -225,7 +225,7 @@
                         Константа с плавающей точкой – десятичное число, представленное в виде действительной величины с десятичной точкой или экспонентой. Формат имеет вид:
                     </blockquote>
                     <pre>
-                        <code class="revealjs">
+                        <code class="cpp">
 [ цифры ].[ цифры ] [ E [+|-] цифры ]
                         </code>
                     </pre>
@@ -274,7 +274,7 @@
                         Описание констант начинается с ключевого слова const, далее указывается тип и значение:
                     </blockquote>
                     <pre>
-                        <code class="revealjs">
+                        <code class="cpp">
 const int two = 2;
                         </code>
                     </pre>
@@ -290,7 +290,7 @@ const int two = 2;
                     Введение комментария начинается с символов /* и заканчивается символами */. Все, что помещено между ними, игнорируется:
                 </blockquote>
                 <pre>
-                    <code class="revealjs">
+                    <code class="cpp">
 /*  Это у нас
     такой
     многострочный
@@ -302,7 +302,7 @@ const int two = 2;
                     В этом случае концом комментария считается конец строки, так что нет необходимости отмечать его специальным символом:
                 </blockquote>
                 <pre>
-                    <code class="revealjs">
+                    <code class="cpp">
 // комментарий на одну строчку
                     </code>
                 </pre>
@@ -355,7 +355,7 @@ const int two = 2;
                     Кроме того, в программе  может быть использована глобальная директитва директива <i>using</i>:
                 </blockquote>
                 <pre>
-                <code class="revealjs">
+                <code class="cpp">
 using namespace std;
                     </code>
                 </pre>
@@ -413,7 +413,7 @@ using namespace std;
                         Формат директивы определяется как:
                     </blockquote>
                     <pre>
-                        <code class="revealjs">
+                        <code class="cpp">
 #define идентификатор строка_текста
                         </code>
                     </pre>
@@ -424,7 +424,7 @@ using namespace std;
                         Определения символических констант и макросов могут быть аннулированы при помощи директивы #undef.
                     </blockquote>
                     <pre>
-                    <code class="revealjs">
+                    <code class="cpp">
 #define TRI 3
 #define F 5
 #undef TRI              // TRI теперь не определен
@@ -442,7 +442,7 @@ using namespace std;
                         В этом случае макрос <i>assert</i> можно использовать для проверки значения <i>x</i> и вывода сообщения об ошибке, если значение <i>i</i> вышло из допустимого диапазона:
                     </blockquote>
                     <pre>
-                        <code class="revealjs">
+                        <code class="cpp">
 assert (x <= 10);
                         </code>
                     </pre>
@@ -454,7 +454,7 @@ assert (x <= 10);
                         <p>Для отключения всех макросов <i>assert</i> в проекте достаточно в начале программы добавать строку</p>
                     </blockquote>
                     <pre>
-                    <code class="revealjs">
+                    <code class="cpp">
 #define NDEBUG
                         </code>
                     </pre>
@@ -498,7 +498,7 @@ assert (x <= 10);
                         Главная функция может выглядеть следующим образом:
                     </blockquote>
                     <pre>
-                    <code class="revealjs">
+                    <code class="cpp">
 void tmain() { ... }
 
 int _tmain(int argc, char* argv[]) { ... }
@@ -546,7 +546,7 @@ int _tmain(int argc, char* argv[]) { ... }
 
 		</div>
 	</div>
-	<aside id="presentable-icon" class="revealjs">
+	<aside id="presentable-icon" class="cpp">
 		<a title="Содержание лекции" href="#/0/1">
 			<i class="fa fa-list-ul fa-2x"></i>
 		</a>

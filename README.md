@@ -37,6 +37,10 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Pointers/index.html "Лекция") 
 
+> Записки ламера
+>
+> [Ссылка](https://tgjmjgj.github.io/Clecture/dist/completed/hint_of_lamer.pdf "Советы для ламера")
+
 ##  Задания
 * Первое задание
 	[_Первое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_1/Task_1.pdf "Задание 1")
