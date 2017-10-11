@@ -1,0 +1,171 @@
+﻿<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Strings</title>
+	<meta name="description" content="strings, functions for string">
+	<meta name="keywords" content="string">
+	<meta name="author" content="Edward & Albert">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Строки и строковые функции</h3>
+                    <p>
+                        <small>Edward &amp; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
+                    </p>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <h1>Строки</h1>
+                <blockquote>
+                    В С++ существует два основынх вида строк:
+                </blockquote>
+                <ul>
+                    <li>Из С:   встроенный строковый тип, строка как массив символов</li>
+                    <li>Из С++: строка в виде класса <i>string</i></li>
+                </ul>
+                <blockquote>
+                    Класс <i>string</i> гораздо удобнее в использовании и предоставляет больше возможностей,
+                    и именно поэтому мы его рассматривать не будем)
+                </blockquote>
+            </section>
+            <section>
+                <h1>Встроенный строковый тип</h1>
+                <blockquote>
+                    <ul>
+                        <li>Строка символов хранится в памяти как массив</li>
+                        <li>Количество элементов в таком массиве на один элемент больше, чем изображение строки, 
+                        т.к. в конец строки добавлен '\0'  (нулевой байт или нуль-терминатор)</li>
+                    </ul>
+                    <img src="img/string_null.jpg"/>
+                </blockquote>
+            </section>
+            <section>
+                <h1>Инициализация строк</h1>
+                <blockquote>
+                    Поместить строку в массив можно либо при вводе, либо с помощью инициализаций:
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+char str1[] = "This is string";
+char str2[20] = { 'S', 't', 'R', 'i', 'N', 'g', '\0' };
+const char *str3 = "string\n";
+char str4[20];
+cin >> str4; // если ввести больше 19 символов, выдаст ошибку
+                    </code>
+                </pre>
+                <blockquote>
+                    Типичной ошибкой является невыделение достаточного места в массиве символов для хранения нулевого символа, завершающего строку.
+                </blockquote>
+            </section>
+            <section>
+                <h2>Ввод строки с клавиатуры</h2>
+                <blockquote>
+                    Удобным методом ввода строки является функция <i>cin.getline</i>. Она имеет три аргумента: массив символов, максимальный размер и символ-завершитель. 
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+char str1[80];
+cin.getline(str1, 80, '\n\);
+cin.getline(str1, 80);
+                    </code>
+                </pre>
+                <blockquote>
+                    Функция прекращает считывать символы если встречается символ-ограничитель '\n' и если количество считанных символов оказывается на один меньше, 
+                    чем указано во-втором аргументе. Третий аргумент имеет '\n' в качестве значения по умолчанию, так что в вызове функции его можно опустить.
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h2>Коды символов</h2>
+                    <blockquote>
+                        Манипуляции со строками и символами на самом деле подразумевают манипуляции с соответствующими численными  кодами, а не с самими символами.
+                        <p>При сравнении двух символов сравниваются их численные коды</p>
+                    </blockquote>
+                    <table>
+                        <tr>
+                            <td>'0' - '9'</td>
+                            <td>48 - 57</td>
+                        </tr>
+                        <tr>
+                            <td>'A' - 'Z'</td>
+                            <td>65 - 90</td>
+                        </tr>
+                        <tr>
+                            <td>'a' - 'z'</td>
+                            <td>97 - 122</td>
+                        </tr>
+                        <tr>
+                            <td>'А' - 'Я'</td>
+                            <td>128 - 159</td>
+                        </tr>
+                        <tr>
+                            <td>'а' - 'п'</td>
+                            <td>160 - 175</td>
+                        </tr>
+                        <tr>
+                            <td>'р' - 'я'</td>
+                            <td>224 - 239</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h3>Примеры использования кодов символов</h3>
+                    <blockquote>
+                        Например, для получения символа десятичной цифры из значения целой переменной, лежащей в диапазоне 0…9, 
+                        а также значения целой переменной из символа десятичной цифры можно:
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int n = 5;
+char c;
+c = n + '0';    // получаем из числа символ
+if (c >= '0' && c <= '9')
+    n = c - '0';    // получаем из символа чисало
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Примеры использования кодов символов 2</h3>
+                    <blockquote>
+                        Для преобразования строчной латинской буквы в прописную необходимо:
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+char c;
+
+if (c >= 'a' && c <='z')
+    c = c - 'a' + 'A';
+                        </code>
+                    </pre>
+                </section>
+            </section>
+
+            </div>
+        </div>
+	<aside id="presentable-icon" class="cpp">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x"></i>
+		</a>
+	</aside>
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

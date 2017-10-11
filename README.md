@@ -37,6 +37,11 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Pointers/index.html "Лекция") 
 
+###  Тема 8. Строки
+Встроенный строковый тип. Функции работы со строками
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Strings/index.html "Лекция")
+
 > Записки ламера
 >
 > [Ссылка](https://tgjmjgj.github.io/Clecture/dist/completed/hints_of_lammer.pdf "Советы для ламера")
