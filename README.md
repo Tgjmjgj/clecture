@@ -56,7 +56,13 @@
 	[***Решение***](https://tgjmjgj.github.io/Clecture/dist/completed/Task_4/Index.html "Решение задания 4")
 
 * Пятое задание
-	[_Пятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_5/Task_5.pdf "Задание 2")
+	[_Пятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_5/Task_5.pdf "Задание 5")
 
 * Шестое задание
-	[_Шестое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_6/Task_6.pdf "Задание 2")
+	[_Шестое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_6/Task_6.pdf "Задание 6")
+
+* Седьмое задание
+	[_Седьмое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_7/Task_7.pdf "Задание 7")
+
+* Восьмое задание
+	[_Восьмое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_8/Task_8.pdf "Задание 8")
