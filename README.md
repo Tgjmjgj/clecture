@@ -39,7 +39,7 @@
 
 > Записки ламера
 >
-> [Ссылка](https://tgjmjgj.github.io/Clecture/dist/completed/hint_of_lamer.pdf "Советы для ламера")
+> [Ссылка](https://tgjmjgj.github.io/Clecture/dist/completed/hints_of_lammer.pdf "Советы для ламера")
 
 ##  Задания
 * Первое задание
@@ -49,7 +49,7 @@
 	[_Второе_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_2/Task_2.pdf "Задание 2")
 
 * Третье задание
-	_Потерялось_
+	[_Третье_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_3/Task_3.pdf "Задание 3")
 
 * Четвёртое задание
 	[_Четвёртое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_4/Task_4.pdf "Задание 4")
