@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Files</title>
+	<meta name="description" content="files">
+	<meta name="keywords" content="files">
+	<meta name="author" content="Edward & Albert">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Работа с файлами</h3>
+                    <p>
+                        <small>Edward &amp; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
+                    </p>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <h1>Файловый ввод/вывод</h1>
+                <blockquote>
+                    Файловый ввод/вывод, как и консольный, бывает двух видов:
+                </blockquote>
+                <ul>
+                    <li>Функциональный ввод/вывод (из C)</li>
+                    <li>Потоковый ввод/вывод (C++)</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <h1>Файл - что за фрукт</h1>
+                    <blockquote>
+                        <i>Файл</i> - это именованный объект, хранящий данные (программа или любая другая информация) на каком-либо
+                        носителе (винчестер, CD). Файл, как и массив, - это совокупность данных, потому они немного похожи.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Отличия файла от массива</h2>
+                    <ul>
+                        <li>Файлы хранятся не в оперативной памяти, а на внутреннем или внешнем носителе (как правило)</li>
+                        <li>Файл не имеет фиксированной длины, т.е. может увеличиваться и уменьшаться сколько угодно</li>
+                        <li>Перед работой с файлом его необходимо открыть, а в конце - закрыть</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Тексторые и бинарные файлы</h3>
+                    <blockquote>
+                        Грубо говоря, файлы можно разделить на две категории:
+                    </blockquote>
+                    <ul>
+                        <li>Текстовые файлы могут быть просмотрены и отредактированы с клавиатуры любым текстовым редакторов и 
+                        имеют простую структуру: последовательность ASCII-символов. </li>
+                        <li>Бинарные файлы – это файлы, которые не имеют  структуры текстовых файлов и хранят последовательность бит. 
+                        Каждая программа для своих бинарных файлов определяет собственную структуру, т.е. чтение таких файлов
+                        может оказаться весьма затруднительным.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Файлы в C</h2>
+                    <blockquote>
+                        Все файлы в С рассматриваются как неструктурированная последовательность байтов. Каждый файл
+                        завершается маркером конца файла (end-of-file, EOF).
+                    </blockquote>
+                    <blockquote>
+                        Когда файл открывается, то создается программный объект и с этим объектом связывается поток. 
+                        Поток – это файл вместе с предоставленными средствами буферизации. Потоки можно открывать и 
+                        закрывать (связывать указатели на поток с конкретными файлами); вводить и выводить строку, символ, 
+                        форматированные данные, порцию данных произвольной длины; анализировать ошибки ввода/вывода и достижения конца файла; 
+                        управлять буферизацией потока и размером буфера; получать и устанавливать указатель текущей позиции в файле.
+                    </blockquote>
+                </section>
+            </section>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+	<aside id="presentable-icon" class="cpp">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x"></i>
+		</a>
+	</aside>
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

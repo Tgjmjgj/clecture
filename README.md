@@ -42,6 +42,11 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Strings/index.html "Лекция")
 
+###  Тема 9. Файлы
+Файлы. Работа с файлами средствами C и средствами C++.
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Files/index.html "Лекция")
+
 > Записки ламера
 >
 > [Ссылка](https://tgjmjgj.github.io/Clecture/dist/completed/hints_of_lammer.pdf "Советы для ламера")
