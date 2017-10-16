@@ -23,7 +23,7 @@
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Operations/index.html "Лекция") 
 
 ###  Тема 5. Сложные конструкции: условия, циклы
-Условный оператор if. Оператор выбора switch. Циклы for, while и do...while
+Условный оператор if. Оператор выбора switch. Циклы for, while и do-while
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Complex_Constructs/index.html "Лекция") 
 
@@ -43,9 +43,14 @@
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Strings/index.html "Лекция")
 
 ###  Тема 9. Файлы
-Файлы. Работа с файлами средствами C и средствами C++.
+Файлы. Работа с файлами средствами C и средствами C++
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Files/index.html "Лекция")
+
+###  Тема 10. Динамические структуры данных
+Стек. Дек. Очередь. Односвязные, двусвязные и циклические списки. Библиотека STL
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Dynamic_Structures/index.html "Лекция")
 
 > Записки ламера
 >
