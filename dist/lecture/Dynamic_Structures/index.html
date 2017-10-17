@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="ru">
-
 <head>
 	<meta charset="utf-8">
 	<title>Dynamic structures</title>
@@ -375,6 +374,261 @@ for( p = ph; p != NULL; p = p->next)    // Обход списка
                             <li><i>&lt;set&gt;</i> - множество</li>
                             <li><i>&lt;bitset&gt;</i> - битовый массив</li>
                         </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Подключение библиотек</h2>
+                    <blockquote>
+                        Для использования какого-либо контейнера необходимо подключить его библиотеку через команду <i>include</i>
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+#include &lt;deque&gt;
+#include &lt;list&gt;
+#include &lt;vector&gt;
+                        </code>
+                    </pre>
+                    <section>
+                        Также все классы STL располагаются в пространстве имён <i>std</i>.
+                    </section>
+                </section>
+            </section>
+            <section>
+                <h1>Шаблоны</h1>
+                <blockquote>
+                    Все основные контейнеры библиотеки STL являются классами шаблонов. Это значит, что для описания
+                    контейнера должен явно определяться тип его элементов:
+                </blockquote>
+                <code class="cpp">
+                    контейнер&lt;тип_элементов&gt; идентификатор;
+                </code>
+                <blockquote>
+                    Например:
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+stack&lt;int&gt; st1;
+queue&lt;double&gt; qu1;
+vector&lt;string&gt; vc1;
+
+struct {
+    int id;
+    double mass;
+    double charge;
+    short float spin;
+     } corpuscle;
+
+list&lt;corpuscle&gt; li1;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа со стеком</h1>
+                    Основные операции в классе <i>stack</i>:
+                    <blockquote>
+                        <ul>
+                            <li><i>push</i></li>
+                            <li><i>pop</i></li>
+                            <li><i>top</i></li>
+                            <li><i>empty</i></li>
+                            <li><i>size</i></li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>stack: push</h2>
+                    <blockquote>
+                        Стандартная операция для стека - добавление элемента на вершину.
+                    </blockquote>
+                    <code class="cpp">
+                        void std::stack.push(const типа &Val);
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);        // s: 123
+s.push(-3578);      // s: 123, -3578
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: pop</h2>
+                    <blockquote>
+                        Вторая стандартная операция для стека - удаление элемента с вершины стека.
+                    </blockquote>
+                    <code class="cpp">
+                        void std::stack.pop();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);        // s: 123
+s.push(-3578);      // s: 123, -3578
+s.pop();            // s: 123
+s.pop();            // s:
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: top</h2>
+                    <blockquote>
+                        Для просмотра верхнего элемента предусмотрена отдельный метод - <i>top</i>
+                    </blockquote>
+                    <code class="cpp">
+                        const тип& std::stack.top();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);
+cout << s.top() << endl;    // 123
+s.push(-3578);     
+cout << s.top() << endl;    // -3578
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: empty</h2>
+                    <blockquote>
+                        Функция <i>empty</i> используется для проверки пустоты стека.
+                    </blockquote>
+                    <code class="cpp">
+                        bool std::stack.empty();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+if (s.empty())                      // true
+    cout << "стек пуст\n";   
+s.push(123); 
+s.push(-3578);     
+s.pop();      
+if (s.empty())                      // false
+    cout << "стек пуст\n";
+s.pop();     
+if (s.empty())                      // true
+    cout << "стек пуст\n";
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: size</h2>
+                    <blockquote>
+                        Функция <i>size</i> позволяет получить текущий размер стека.
+                    </blockquote>
+                    <code class="cpp">
+                        size_t std::stack.size();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+int sz = s.size();      // sz = 0
+s.push(123); 
+s.push(-3578);     
+sz = s.size();          // sz = 2
+s.pop();
+sz = s.size();          // sz = 1     
+s.pop();     
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа с очередью</h1>
+                    Очередь <i>queue</i> в библиотеке шаблонов STL имеет следующие операции:
+                    <blockquote>
+                        <ul>
+                            <li>push</li>
+                            <li>pop</li>
+                            <li>front</li>
+                            <li>back</li>
+                            <li>empty</li>
+                            <li>size</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над очередью</h2>
+                    <blockquote>
+                        По своему виду, функции очереди мало чем отличаются от функций стека.
+                        Главное различие между ними заключается в том, что метод <i>pop()</i> извлекает не последний добавленный
+                        элемент, как в стеке, а первый.
+                    </blockquote>
+                    <blockquote>
+                        Получить значение первого элемента очереди можно при помощь метода <i>front()</i>, а последнего - <i>back()</i>.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Пример использования очереди</h2>
+                    <pre>
+                        <code class="cpp">
+queue&lt;char&gt; q;
+q.push('A');            // q: 'A'         
+q.push('B');            // q: 'A', 'B'
+char fr = q.front();    // fr = 'A'         
+q.push('C');            // q: 'A', 'B', 'C'
+q.pop();                // q: 'B', 'C'
+char bk = q.back();     // bk = 'C'
+q.pop();                // q: 'C'
+q.empty();              // false
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа с деком</h1>
+                    Для дека перечень функций в STL значительно расширен. Ниже указаны лишь некоторые из них:
+                    <blockquote>
+                        <ul>
+                            <li>push_front</li>
+                            <li>push_back</li>
+                            <li>pop_front</li>
+                            <li>pop_back</li>
+                            <li>insert</li>
+                            <li>erase</li>
+                            <li>clear</li>
+                            <li>size</li>
+                            <li>empty</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Добавление и удаление элементов дека</h2>
+                    <blockquote>
+                        Поскольку удалять и добавлять элементы дека можно с обеих сторон, то и функций для этого дела
+                        представлено не мало:
+                    </blockquote>
+                    <blockquote>
+                        <i>push_back</i> и <i>pop_back</i> для добавления и удаления элементов в начало дека.
+                    </blockquote>
+                    <blockquote>
+                        <i>push_front</i> и <i>pop_front</i> для добавления и удаления элементов, соответственно,в конец дека.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>deque: insert</h2>
+                    <blockquote>
+                        Метод <i>insert</i> позволяет гибким образом вставлять элементы в дек: в любое место и в любом количестве.
                     </blockquote>
                 </section>
             </section>
