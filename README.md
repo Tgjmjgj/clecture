@@ -52,6 +52,11 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Dynamic_Structures/index.html "Лекция")
 
+###  Тема 11. Введение в многопоточность
+Процессы и потоки. Параллельные вычисления. Потоки Win API и C++ 11. Блокировки: критические секции, семафоры, мьютекс
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/Threads/index.html "Лекция")
+
 > Записки ламера
 >
 > [Ссылка](https://tgjmjgj.github.io/Clecture/dist/completed/hints_of_lammer.pdf "Советы для ламера")
