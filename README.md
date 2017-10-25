@@ -89,3 +89,6 @@
 
 * Девятое задание
 	[_Девятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_9/Task_9.pdf "Задание 9")
+
+* Десятое задание
+	[_Десятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_10/Task_10.pdf "Задание 10")
