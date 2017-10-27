@@ -92,3 +92,6 @@
 
 * Десятое задание
 	[_Десятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_10/Task_10.pdf "Задание 10")
+
+* Одиннадцатое задание
+	[_Одиннадцатое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/Task_11/Task_11.pdf "Задание 11")
