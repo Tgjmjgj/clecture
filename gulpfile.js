@@ -5,18 +5,15 @@ const gulp = require('gulp'),
     gulpSequence = require('gulp-sequence'),
     autoprefixer = require('gulp-autoprefixer'),
     browserSync = require('browser-sync'),
-    concat = require('gulp-concat'),
     cleanCSS = require('gulp-clean-css'),
     csslint = require('gulp-csslint'),
     csslintReporter = require('gulp-csslint-report'),
     del = require('del'),
     imagemin = require('gulp-imagemin'),
     newer = require('gulp-newer'),
-    rename = require('gulp-rename'),
     pipe = require('multipipe'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint'),
-    jshintReporter = require('gulp-jshint-html-reporter'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
     watch = require('gulp-watch');
@@ -99,8 +96,7 @@ gulp.task('css', () => {
 
 gulp.task('css:lint', () => {
     return gulp.src(srcPath.cssLint)
-        .pipe(csslint('.csslintrc'))
-        .pipe(csslintReporter(pluginSettings.csslint));
+        .pipe(csslint('.csslintrc'));
 });
 
 gulp.task('js', () => {
@@ -110,8 +106,7 @@ gulp.task('js', () => {
 
 gulp.task('js:lint', () => {
     return gulp.src(srcPath.jsLint)
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter(jshintReporter, pluginSettings.jshint));
+        .pipe(jshint('.jshintrc'));
 });
 
 gulp.task('img', () => {

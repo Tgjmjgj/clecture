@@ -1,0 +1,646 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Dynamic structures</title>
+	<meta name="description" content="dynamic structures">
+	<meta name="keywords" content="stack, deq, queue, list">
+	<meta name="author" content="Edward & Albert">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Динамические структуры данных</h3>
+                    <p>
+                        <small>Edward &amp; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
+                    </p>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <h1>Динамические структуры</h1>
+                <blockquote>
+                    <i>Динамические структуры данных</i> - это структуры данных, память под которые выделяется и освобождается по мере необходимости.
+                </blockquote>
+                <blockquote>
+                    Динамические структуры характеризуются отсутствием физической смежности элементов структуры в памяти, 
+                    непостоянством и непредсказуемостью размера (числа элементов) структуры в процессе ее обработки.
+                </blockquote>
+            </section>
+            <section>
+                <h2>Классификация динамических структур данных</h2>
+                <ul>
+                    <li>Стек</li>
+                    <li>Очередь</li>
+                    <li>Дек</li>
+                    <li>Списки: односвязные, двусвязные, циклические</li>
+                    <li>Деревья</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <h2>Элемент динамической структуры</h2>
+                    <blockquote>
+                        Каждый элемент динамической структуры представляет собой запись, содержащую, как минимум, два поля: данные и указатель.
+                    </blockquote>
+                    <blockquote>
+                        <ul>
+                            <li>В поле данных хранится значение текущего элемента структуры</li>
+                            <li>В поле указателя содержится один или несколько указателей, связывающих данный элемент с другими элементами структуры</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Объявление элемента</h2>
+                    <blockquote>
+                        Объявление элемента динамической структуры данных выглядит следующим образом:
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+struct имя_типа {
+        информационное_поле;
+        адресное_поле;
+                };
+                        </code>
+                    </pre>
+                    Например:
+                    <pre>
+                        <code class="cpp">
+struct TNode {
+        int Data;       // целочисленные данные
+        TNode *Next;    // адресное поле
+                };
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Пример структуры</h2>
+                <blockquote>
+                    Рассмотрим в качестве примера следующую динамическую структуру:
+                </blockquote>
+                <img src="img/abstruct.jpg" />
+            </section>
+            <section>
+                <section>
+                    <h1>Понятие стека</h1>
+                    <blockquote>
+                        Стеком называется одномерная структура данных, загрузка или увеличение элементов для которой осуществляется
+                        с помощью указателя стека в соответствии с правилом LIFO ("last-in, first-out" "последним введен,
+                        первым выведен"), т.е. включение и исключение элементов производится только с одного конца.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Проще говоря</h3>
+                    <img src="img/stack_of_books.jpg" />
+                    <blockquote>
+                        Положить или снять книгу можно только на вершине стопки
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над стеком</h2>
+                    <blockquote>
+                        Переменная, которая указывает на последний элемент последовательности в вершине стека - указатель стека.
+                    </blockquote>
+                    <blockquote>
+                        Для стека определены две базовые операции:
+                    </blockquote>
+                    <blockquote>
+                        <ul>
+                            <li><i>PUSH</i> - добавление нового элемента на вершину стека</li>
+                            <li><i>POP</i> - удаление элемента из вершины стека</li>
+                        </ul>
+                    </blockquote>
+                    <img src="img/stack_scheme.jpg" />
+                </section>
+                <section>
+                    <h2>Пример работы стека</h2>
+                    <img src="img/stack_scheme-2.jpg" />
+                </section>
+                <section>
+                    <h3>Организация целочисленного стека</h3>
+                    <blockquote>
+                        Рассмотрим пример организации полустатического стека через обыкновенный массив
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+#define SIZE 100            // Максимальный размер
+int Stack[SIZE];            // Массив для хранения стека
+int SP;                     // Указатель стека
+void Init()                 // Функция очистки стека
+{
+    SP = -1;                // Стек пуст                            
+}
+void Push(int val)          // Запись в стек
+{
+    SP++;                   // Указатель к следующему
+    Stack[SP] = val;        // Запись по указателю стека
+}
+int Pop()                   // Исключение из стека
+{
+    if (SP < 0)
+        return 0;           // Стек пуст
+    return (Stack[SP--]);   // Вернуть элемент по указателю и уменьшить указатель
+}
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Очередь</h1>
+                    <img src="img/older_queue.jpg" />
+                </section>
+                <section>
+                    <h1>Понятие очереди</h1>
+                    <blockquote>
+                        Очередь - одномерная структура данных, для которой загрузка или извлечение элементов осуществляется с
+                        помощью указателей начала извлечения (head) и конца (tail) очереди в соответствии с правилом FIFO ("first-in,
+                        first-out" - "первым введен, первым выведен"), другими словами включение производится с одного, а исключение – с другого конца.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над очередью</h2>
+                    <blockquote>
+                        У очереди имеется два указателя - указатель на начало очереди (<i>start</i>) и указатель на конец очереди (<i>end</i>).
+                    </blockquote>
+                    <blockquote>
+                        Для очереди определены такие же операции как и для стека - <i>PUSH</i> и <i>POP</i>, но со своими особенностями.
+                    </blockquote>
+                    <blockquote>
+                        <ul>
+                            <li><i>PUSH</i> - добавление нового элемента в конец очереди</li>
+                            <li><i>POP</i> - удаление элемента из начала очереди</li>
+                        </ul>
+                    </blockquote>
+                    <img src="img/queue_scheme.jpg" />
+                </section>
+                <section>
+                    <h2>Пример работы очереди</h2>
+                    <img src="img/queue_scheme-2.jpg" />
+                </section>
+                <section>
+                    <h2>Очереди с приоритетом</h2>
+                    <blockquote>
+                        В реальных задачах иногда возникает необходимость в формировании очередей,
+                        где порядок выборки элементов определяется приоритетами элементов.
+                    </blockquote>
+                    <blockquote>
+                        Приоритет в общем случае может быть представлен числовым значением, которое 
+                        вычисляется либо на основании значений каких-либо полей элемента, либо на основании внешних факторов. 
+                    </blockquote>
+                    <blockquote>
+                        Так, и FIFO, и LIFO-очереди могут трактоваться как приоритетные очереди, в которых приоритет элемента зависит от времени его включения в очередь. 
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Понятие приоритетной очереди</h2>
+                    <blockquote>
+                        Приоритетная очередь — это абстрактный тип данных, предназначенный для представления взвешенных множеств. Множество называется взвешенным, 
+                        если каждому его элементу однозначно соответствует число, называемое ключом или весом. При выборке элемента всякий раз выбирается 
+                        элемент с наибольшим приоритетом., т.е. "первым включается - с высшим приоритетом исключается". 
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Понятие дека</h1>
+                    <blockquote>
+                        Дек - особый вид очереди. Дек (от англ. deq - double ended queue,т.е очередь с двумя концами) - это такой составной тип данных, 
+                        в котором как включение, так и исключение элементов может осуществляться с любого из двух концов списка. 
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над деком</h2>
+                    <blockquote>
+                        Структура дека поддерживает следующие операции:
+                    </blockquote>
+                    <blockquote>
+                        <ul>
+                            <li><i>PUSH</i> - добавление нового элемента на вершину дека</li>
+                            <li><i>POP</i> - удаление элемента на вершине дека</li>
+                            <li><i>PUSH_BACK</i> - добавление нового элемента в конец дека</li>
+                            <li><i>POP_BACK</i> - удаление элемента с конца дека</li>
+                        </ul>
+                    </blockquote>
+                    <img src="img/deq_scheme.jpg" />
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Списки</h1>
+                    <img src="img/notebook.jpg" />
+                </section>
+                <section>
+                    <h2>Понятие списка</h2>
+                    <blockquote>
+                        Список представляет собой линейную последовательность переменных, каждая из которых связана указателями со своими соседями.
+                    </blockquote>
+                    Списки бывают следующих видов:
+                    <blockquote>
+                        <ul>
+                            <li>Односвязные</li>
+                            <li>Дусвязные</li>
+                            <li>Циклические</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Свойства списков</h2>
+                    <blockquote>
+                        Список - как массив, только неограниченного размера и без последовательного размещения элементов в памяти.
+                    </blockquote>
+                    <blockquote>
+                        Последовательность обхода списка зависит не от физического размещения элементов списка в памяти, 
+                        а от последовательности их связывания указателями. Точно так же определяется нумерация элементов списка - 
+                        логический номер элемента в списке - это номер, получаемый им в процессе движения по списку.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Односвязные списки</h2>
+                    <blockquote>
+                        Односвязные списки являются наиболее простыми. Основным их недостатком является возможность просмотра только в 
+                        одном направлении - от начала к концу. Для односвязного списка наиболее простыми являются операции включения и 
+                        исключения элементов в начале и конце списка, соответственно они используются для моделирования таких структур данных, как стеки и очереди.
+                    </blockquote>
+                    <img src="img/simply_linked_list.jpg" />
+                </section>
+                <section>
+                    <h2>Двусвязные списки</h2>
+                    <blockquote>
+                        Двусвязные списки дают возможность просмотра элементов в обоих направлениях и являются наиболее универсальными. 
+                        Операции включения и исключения элементов в различные части такого списка имеют примерно одинаковый уровень сложности. 
+                        Двусвязные списки используются для создания цепочек элементов, которые допускают частые операции включения, исключения, упорядочения, замены и пр..
+                    </blockquote>
+                    <img src="img/double_linked_list.jpg" />
+                </section>
+                <section>
+                    <h2>Циклические списки</h2>
+                    <blockquote>
+                        В односвязных и двусвязных списках последний элемент содержит указатель NULL для обозначения факта окончания последовательности. 
+                        Аналогично первый элемент двусвязного списка содержит указатель NULL на предыдущий элемент. В качестве альтернативы может быть 
+                        предложен циклический список, у которого последний элемент ссылается на первый, а первый - на последний.
+                    </blockquote>
+                    <img src="img/cyclic_list.jpg" />
+                </section>
+                <section>
+                    <h2>Работа со списками</h2>
+                    <pre>
+                        <code class="cpp">
+struct list
+{
+    list* next;
+    int val;
+} *ph;              // Указатель на начало списка
+
+list *p;
+p = ph;             // Текущий указатель - на первый
+
+p->next ...         // Указатель на следующий элемент
+
+p = p->next         // Переход к следующему элементу
+
+p != NULL ...       // Проверка на конец списка
+
+p->next == NULL     // Проверка на последний элемент
+
+for( p = ph; p != NULL; p = p->next)    // Обход списка
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Слияние двух списков</h2>
+                    <blockquote>
+                        Операция слияния заключается в формировании из двух списков одного - она аналогична операции сцепления строк.
+                    </blockquote>
+                    <blockquote>
+                        Последний элемент первого списка содержит пустой указатель на следующий элемент, этот указатель служит признаком конца списка. 
+                        Вместо этого пустого указатель в последний элемент первого списка заносится указатель на начало второго списка. Таким образом, второй список становится продолжением первого.
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>STL</h1>
+                    <blockquote>
+                        Все сложные структуры данных уже реализованы в Стандартной библиотеке шаблонов C++ (STL)
+                    </blockquote>
+                    <img src="img/holy_stl.jpg" />
+                </section>
+                <section>
+                    <h2>Содержание STL</h2>
+                    <blockquote>
+                        Сложные структуры данных принято называть коллекциями. STL содержит подборку классов коллекций для различных целей,
+                        а также поддерживает ряд алгоритмов для работы с этими коллекциями.
+                    </blockquote>
+                    Библиотека содержит пять видов компонентов:
+                    <blockquote>
+                        <ul>
+                            <li>Алгоритм (algorithm)</li>
+                            <li>Контейнер (container)</li>
+                            <li>Итератор (iterator)</li>
+                            <li>Функциональный объект (function object)</li>
+                            <li>Адаптер (adapter)</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Контейнеры STL</h2>
+                    <blockquote>
+                        В библиотеке STL реализованы следующие контейнеры:
+                    </blockquote>
+                    <blockquote>
+                        <ul>
+                            <li><i>&lt;stack&gt;</i> - стек</li>
+                            <li><i>&lt;queue&gt;</i> - очередь</li>
+                            <li><i>&lt;deque&gt;</i> - дек</li>
+                            <li><i>&lt;list&gt;</i> - двусвязный список</li>
+                            <li><i>&lt;vector&gt;</i> - динамический массив</li>
+                            <li><i>&lt;map&gt;</i> - ассоциативный массив</li>
+                            <li><i>&lt;set&gt;</i> - множество</li>
+                            <li><i>&lt;bitset&gt;</i> - битовый массив</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Подключение библиотек</h2>
+                    <blockquote>
+                        Для использования какого-либо контейнера необходимо подключить его библиотеку через команду <i>include</i>
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+#include &lt;deque&gt;
+#include &lt;list&gt;
+#include &lt;vector&gt;
+                        </code>
+                    </pre>
+                    <section>
+                        Также все классы STL располагаются в пространстве имён <i>std</i>.
+                    </section>
+                </section>
+            </section>
+            <section>
+                <h1>Шаблоны</h1>
+                <blockquote>
+                    Все основные контейнеры библиотеки STL являются классами шаблонов. Это значит, что для описания
+                    контейнера должен явно определяться тип его элементов:
+                </blockquote>
+                <code class="cpp">
+                    контейнер&lt;тип_элементов&gt; идентификатор;
+                </code>
+                <blockquote>
+                    Например:
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+stack&lt;int&gt; st1;
+queue&lt;double&gt; qu1;
+vector&lt;string&gt; vc1;
+
+struct {
+    int id;
+    double mass;
+    double charge;
+    short float spin;
+     } corpuscle;
+
+list&lt;corpuscle&gt; li1;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа со стеком</h1>
+                    Основные операции в классе <i>stack</i>:
+                    <blockquote>
+                        <ul>
+                            <li><i>push</i></li>
+                            <li><i>pop</i></li>
+                            <li><i>top</i></li>
+                            <li><i>empty</i></li>
+                            <li><i>size</i></li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>stack: push</h2>
+                    <blockquote>
+                        Стандартная операция для стека - добавление элемента на вершину.
+                    </blockquote>
+                    <code class="cpp">
+                        void std::stack.push(const типа &Val);
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);        // s: 123
+s.push(-3578);      // s: 123, -3578
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: pop</h2>
+                    <blockquote>
+                        Вторая стандартная операция для стека - удаление элемента с вершины стека.
+                    </blockquote>
+                    <code class="cpp">
+                        void std::stack.pop();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);        // s: 123
+s.push(-3578);      // s: 123, -3578
+s.pop();            // s: 123
+s.pop();            // s:
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: top</h2>
+                    <blockquote>
+                        Для просмотра верхнего элемента предусмотрена отдельный метод - <i>top</i>
+                    </blockquote>
+                    <code class="cpp">
+                        const тип& std::stack.top();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);
+cout << s.top() << endl;    // 123
+s.push(-3578);     
+cout << s.top() << endl;    // -3578
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: empty</h2>
+                    <blockquote>
+                        Функция <i>empty</i> используется для проверки пустоты стека.
+                    </blockquote>
+                    <code class="cpp">
+                        bool std::stack.empty();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+if (s.empty())                      // true
+    cout << "стек пуст\n";   
+s.push(123); 
+s.push(-3578);     
+s.pop();      
+if (s.empty())                      // false
+    cout << "стек пуст\n";
+s.pop();     
+if (s.empty())                      // true
+    cout << "стек пуст\n";
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>stack: size</h2>
+                    <blockquote>
+                        Функция <i>size</i> позволяет получить текущий размер стека.
+                    </blockquote>
+                    <code class="cpp">
+                        size_t std::stack.size();
+                    </code>
+                    <blockquote>
+                        Пример:
+                    </blockquote>
+                    <pre>
+                    <code class="cpp">
+stack&lt;int&gt; s;
+int sz = s.size();      // sz = 0
+s.push(123); 
+s.push(-3578);     
+sz = s.size();          // sz = 2
+s.pop();
+sz = s.size();          // sz = 1     
+s.pop();     
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа с очередью</h1>
+                    Очередь <i>queue</i> в библиотеке шаблонов STL имеет следующие операции:
+                    <blockquote>
+                        <ul>
+                            <li>push</li>
+                            <li>pop</li>
+                            <li>front</li>
+                            <li>back</li>
+                            <li>empty</li>
+                            <li>size</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над очередью</h2>
+                    <blockquote>
+                        По своему виду, функции очереди мало чем отличаются от функций стека.
+                        Главное различие между ними заключается в том, что метод <i>pop()</i> извлекает не последний добавленный
+                        элемент, как в стеке, а первый.
+                    </blockquote>
+                    <blockquote>
+                        Получить значение первого элемента очереди можно при помощь метода <i>front()</i>, а последнего - <i>back()</i>.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Пример использования очереди</h2>
+                    <pre>
+                        <code class="cpp">
+queue&lt;char&gt; q;
+q.push('A');            // q: 'A'         
+q.push('B');            // q: 'A', 'B'
+char fr = q.front();    // fr = 'A'         
+q.push('C');            // q: 'A', 'B', 'C'
+q.pop();                // q: 'B', 'C'
+char bk = q.back();     // bk = 'C'
+q.pop();                // q: 'C'
+q.empty();              // false
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа с деком</h1>
+                    Для дека перечень функций в STL значительно расширен. Ниже указаны лишь некоторые из них:
+                    <blockquote>
+                        <ul>
+                            <li>push_front</li>
+                            <li>push_back</li>
+                            <li>pop_front</li>
+                            <li>pop_back</li>
+                            <li>insert</li>
+                            <li>erase</li>
+                            <li>clear</li>
+                            <li>size</li>
+                            <li>empty</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Добавление и удаление элементов дека</h2>
+                    <blockquote>
+                        Поскольку удалять и добавлять элементы дека можно с обеих сторон, то и функций для этого дела
+                        представлено не мало:
+                    </blockquote>
+                    <blockquote>
+                        <i>push_back</i> и <i>pop_back</i> для добавления и удаления элементов в начало дека.
+                    </blockquote>
+                    <blockquote>
+                        <i>push_front</i> и <i>pop_front</i> для добавления и удаления элементов, соответственно,в конец дека.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>deque: insert</h2>
+                    <blockquote>
+                        Метод <i>insert</i> позволяет гибким образом вставлять элементы в дек: в любое место и в любом количестве.
+                    </blockquote>
+                </section>
+            </section>
+
+            </div>
+        </div>
+	<aside id="presentable-icon" class="cpp">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x"></i>
+		</a>
+	</aside>
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,684 @@
+﻿<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Files</title>
+	<meta name="description" content="files">
+	<meta name="keywords" content="files">
+	<meta name="author" content="Edward & Albert">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Работа с файлами</h3>
+                    <p>
+                        <small>Edward &amp; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
+                    </p>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <h1>Файловый ввод/вывод</h1>
+                <blockquote>
+                    Файловый ввод/вывод, как и консольный, бывает двух видов:
+                </blockquote>
+                <ul>
+                    <li>Функциональный ввод/вывод (из C)</li>
+                    <li>Потоковый ввод/вывод (C++)</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <h1>Файл - что за фрукт</h1>
+                    <blockquote>
+                        <i>Файл</i> - это именованный объект, хранящий данные (программа или любая другая информация) на каком-либо
+                        носителе (винчестер, CD). Файл, как и массив, - это совокупность данных, потому они немного похожи.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Отличия файла от массива</h2>
+                    <ul>
+                        <li>Файлы хранятся не в оперативной памяти, а на внутреннем или внешнем носителе (как правило)</li>
+                        <li>Файл не имеет фиксированной длины, т.е. может увеличиваться и уменьшаться сколько угодно</li>
+                        <li>Перед работой с файлом его необходимо открыть, а в конце - закрыть</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Тексторые и бинарные файлы</h3>
+                    <blockquote>
+                        Грубо говоря, файлы можно разделить на две категории:
+                    </blockquote>
+                    <ul>
+                        <li>Текстовые файлы могут быть просмотрены и отредактированы с клавиатуры любым текстовым редакторов и 
+                        имеют простую структуру: последовательность ASCII-символов. </li>
+                        <li>Бинарные файлы – это файлы, которые не имеют  структуры текстовых файлов и хранят последовательность бит. 
+                        Каждая программа для своих бинарных файлов определяет собственную структуру, т.е. чтение таких файлов
+                        может оказаться весьма затруднительным.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Файлы в C</h2>
+                    <blockquote>
+                        Все файлы в С рассматриваются как неструктурированная последовательность байтов. Каждый файл
+                        завершается маркером конца файла (end-of-file, EOF).
+                    </blockquote>
+                    <blockquote>
+                        Когда файл открывается, то создается программный объект и с этим объектом связывается поток. 
+                        Поток – это файл вместе с предоставленными средствами буферизации. Потоки можно открывать и 
+                        закрывать (связывать указатели на поток с конкретными файлами); вводить и выводить строку, символ, 
+                        форматированные данные, порцию данных произвольной длины; анализировать ошибки ввода/вывода и достижения конца файла; 
+                        управлять буферизацией потока и размером буфера; получать и устанавливать указатель текущей позиции в файле.
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Файловый ввод/вывод С</h1>
+                    <blockquote>
+                        Функции файлового ввода/вывода С содержатся в той же библиотеке, где и функции для консольного ввода/вывода - <i>stdio.h</i>
+                    </blockquote>
+                    <blockquote>
+                        Также определенный набор функция для работы с файлами находится в библиотеке <i>io.h</i>.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Функции для работы с файлами</h3>
+                    <img src="img/stdio.h.jpg" />
+                </section>
+                <section>
+                    <h3>Функции для работы с файлами 2</h3>
+                    <img src="img/stdio.h-2.jpg" />
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Начало работы с файлом</h1>
+                    <blockquote>
+                        Прежде чем начать работать с файлом, надо инициировать (открыть) поток. При этом поток связывается со структурой предопределенного типа FILE, 
+                        который описан в библиотечном файле &lt;stdio.h&gt;. Объект этой структуры часто называют дескриптором файла.
+                    </blockquote>
+                    <blockquote>
+                        В конце работы с файлом, тот же поток необходимо будет закрыть.
+                    </blockquote>
+                </section>
+                <section>
+                    <h1>Открытие файла</h1>
+                    <blockquote>
+                        Для открытия файла используется функция <i>fopen</i>.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+FILE* fopen(char* filename, char* mode);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        При успешном открытии возвращает указатель на структуру типа FILE - указатель на файл. Эта структура 
+                        связана с физическим файлом и используется для всех последующих операций над этим файлом.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Имя файла</h2>
+                    <blockquote>
+                        Первый параметр функции <i>fopen</i> - <i>filename</i> служит для передачи имени файла, например
+                        "D:\\Work\gifts\shared\нажми_меня.bat".
+                    </blockquote>
+                    <h3>Замечание!</h3>
+                    <blockquote>
+                        Поскольку символ обратного слеша \ в языках C/C++ используется для описания спец.символов ('\0','\n','\r'),
+                        для записи конкретно обратного слеша используется конструкция из двух знаков: \\.
+                        Это нужно учитывать при написании пути к файлу.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Режимы открытия файла</h2>
+                    <table>
+                        <tr>
+                            <td>Режим</td>
+                            <td>Описание</td>
+                        </tr>
+                        <tr>
+                            <td>"w"</td>
+                            <td>Открыть файл для записи, если файл существует, то он стирается</td>
+                        </tr>
+                        <tr>
+                            <td>"r"</td>
+                            <td>Открыть файл для чтения</td>
+                        </tr>
+                        <tr>
+                            <td>"a"</td>
+                            <td>Открыть файл для добавления в конец, если файла нет, то он создается</td>
+                        </tr>
+                        <tr>
+                            <td>"w+"</td>
+                            <td>Открыть файл для записи, чтения, исправления. Если файл существует, он стирается</td>
+                        </tr>
+                        <tr>
+                            <td>"r+"</td>
+                            <td>Открыть файл для чтения и исправления, однако нельзя увеличивать размер файла</td>
+                        </tr>
+                        <tr>
+                            <td>"a+"</td>
+                            <td>Открыть файл для добавления. Как режим "w+", только существующий файл не стирается</td>
+                        </tr>
+                        <tr>
+                            <td>"t"</td>
+                            <td>Файл открывается в текстовом режиме (по умолчанию)</td>
+                        </tr>
+                        <tr>
+                            <td>"b"</td>
+                            <td>Файл открывается в бинарном режиме</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <ul>
+                        <li>
+                            Режимы с <i>"w"</i> - создается пустой новый файл. Старый удаляется.
+                        </li>
+                        <li>
+                            Режимы с <i>"r"</i> - индикатор позиции на начало файла, если файл не существует - неудача.
+                        </li>
+                        <li>
+                            Режимы с <i>"a"</i> - индикатор позиции на конец файла, если файл не сущестует - создается новый.
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример открытия файла</h3>
+                    <pre>
+                        <code class="cpp">
+FILE* f;
+f = fopen("D:\\programs\explos\init.txt", "tr+");
+FILE *fl = fopen("C:\\pagefile.sys", "bw");
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <h1>Закрытие файла</h1>
+                <blockquote>
+                    После работы с файлом он должен быть закрыт. Для закрытия файла используется функция <i>fclose</i>
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+                        int fclose(FILE* file);
+                    </code>
+                </pre>
+                <blockquote>
+                    Функции <i>fclose</i> передается дескриптор файла, который необходимо закрыть.
+                </blockquote>
+                <blockquote>
+                    Если файл не был закрыт в программном коде, система автоматически закроет его при заверщении работы программы.
+                </blockquote>
+            </section>
+            <section>
+                <h2>Закрытие всех файлов</h2>
+                <blockquote>
+                    Для закрытия всех ранее открытых файлов используется функция <i>fcloseall</i>
+                </blockquote>
+                <pre>
+                    <code>
+int fcloseall(void);            
+                    </code>
+                </pre>
+                <blockquote>
+                    При успешном завершении возвращает количество закрытых потоков.
+                </blockquote>
+            </section>
+            <section>
+                <h2>Пример обращения к файлу</h2>
+                <pre>
+                    <code class="cpp">
+FILE *fp;
+if ((fp = fopen("file.txt", "w")) == NULL)
+{
+    perror("\nОшибка при открытии файла");  // Выведет сообщение об ошибке
+    exit(0);
+}
+...
+fclose(fp);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Функция перенаправления потока</h2>
+                <blockquote>
+                    Если требуется изменить режим доступа к файлу, то для этого сначала необходимо закрыть данный файл, 
+                    а затем вновь его открыть, но с другими правами доступа. Для этого уже существует стандартная функция:
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+FILE* freopen(char* filename, char* mode, FILE* handle);
+                    </code>
+                </pre>
+                <blockquote>
+                    Эта функция сначала закрывает файл, связанный с дескриптором <i>handle</i>, а затем открывает файл с 
+                    именем файла <i>filename</i> и правами доступа <i>mode</i>.
+                </blockquote>
+            </section>
+            <section>
+                <h1>Индикатор конца файла</h1>
+                <blockquote>
+                    Структура <i>FILE</i> содержит индикатор конца файла, который имеет значение 0, пока конец файла не достигнут.
+                    Индикатор конца файла перепроверяется после каждой операции чтения.
+                </blockquote>
+                <blockquote>
+                    Состояние конца файла можно получить используя функцию <i>feof</i>.
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+int feof(FILE *f);
+                    </code>
+                </pre>
+                <blockquote>
+                    Эта функция возвращает ненулевое значение, если индикатор конца файла установлен, в противном случае возвращается 0.
+                </blockquote>
+            </section>
+            <section>
+                <h1>Чтение/запись из файла</h1>
+                    Операции по чтению/записи данных из файла можно разделить на три группы:
+                <blockquote>
+                    <ul>
+                        <li>Посимвольный ввод/вывод</li>
+                        <li>Построчный ввод/вывод</li>
+                        <li>Блочный ввод/вывод</li>
+                    </ul>
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h1>Посимвольный ввод/вывод</h1>
+                    <blockquote>
+                        В функциях посимвольного ввода/вывода происходит прием одного символа (байта)
+                        из файла или передача одного символа в файл.
+                    </blockquote>
+                    <blockquote>
+                        Функция считывания символа из файла:
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int fgetc(FILE* f);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция записи символа в файл:
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int fputc(int ch, FILE* f);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        После чтения или записи данными функциями индикатор текущей позиции продвигается на следующий символ.
+                        При успешном выполнении функции возвращают код символа, иначе - EOF.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Применение посимвольных функций</h3>
+                    <pre>
+                        <code class="cpp">
+FILE* out;
+char str[80];
+int n = 0;
+out = fopen("text.txt", "w");
+printf("Input a string:\n");
+gets(str);
+while(str[n])
+{
+    fputc(str[n++], out);       // посимвольно записываем строку в файл                            
+}
+fclose(out);
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Построчный ввод/вывод</h1>
+                    <pre>
+                        <code class="cpp">
+int fgets(char* str, int size, FILE* f);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция <i>fgets</i> выполняет чтение из файла <i>f</i> в строку <i>str</i>
+                        <i>size</i> символов. Чтение заканчивается, если встречается символ конца файла или конца строки.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int fputs(char* str, FILE* f);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Запись в файл <i>f</i> строки <i>str</i> до тех пор, пока не встретится символ '\0', который в файл
+                        не переносится и не заменяется на '\n'.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Применение построчных функций</h3>
+                    <pre>
+                        <code>
+FILE* f;
+char str[80];
+f = fopen("text.txt", "w");
+printf("Press Ctrl+Z to exit.\n");
+printf("Input a string:\n");
+gets(str);
+while (!feof(stdin))
+{
+    fputs(str, f);        // Записываем строку в файл
+    putc('\n', f);        // Вручную добавляем символ конца строки
+    gets(str);
+}
+freopen("text.txt", "r", f);                            
+if (f == NULL)
+{
+    printf("Open file failed.\n");
+    exit(0);
+}
+while (fgets(str, 80, in))  // Чтение строк из файла
+{
+    fputs(str, stdout);     // Вывод строку на консоль                            
+}
+fclose(f);
+
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Блочный ввод/вывод</h1>
+                    <blockquote>
+                        Функции блочного ввода/вывода позволяют читать и писать в файл содержимое любой структуры.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int fread(void* p, int size, int n, FILE* f);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция <i>fread</i> считывает <i>n</i> блоков размера <i>size</i> байт каждый, из файла
+                        <i>f</i> в область памяти по указателю <i>p</i>.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int fwrite(void* p, int size, int n, FILE* f);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция <i>fwrite</i> записывает <i>n</i> блоков по <i>size</i> байт каждый, из области
+                        памяти по указателю <i>p</i> в файл <i>f</i>.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Применение блочных функций</h3>
+                    <pre>
+                        <code class="cpp">
+typedef struct emp{
+     int code;
+     char name;
+     double salary; } W;
+int n, i;
+FILE* out;
+W s;
+out = fopen("employee.bin", "wb");
+printf("Input a number of records to write:");
+scanf("%d", &n);
+if (n <= 0)
+{
+    exit(0);                            
+}
+printf("Input code, name and salary.\n");
+for (i = 0; i < n; ++i)
+{
+    printf("%d> ", i + 1);
+    scanf("%d%s%lf", &s.code, &s.name, &s.salary);
+    fwrite(&s, sizeof(emp), 1, out);    // Записываем в файл объект структуры emp
+}
+fclose(out);
+FILE* in;
+if (!(in = fopen("employee.bin", "rb")))
+{
+    printf("Open file failed.\n");
+    exit(0);
+}
+int num = 1;
+while (fread(&s, sizeof(W), 1, in))
+{
+    if (feof(in))
+    {
+        break;
+    }
+    printf("\n nam &d code=%d name=%s salary=%f\n", num++, s.code, s.name. s.salary);
+}
+fclose(in);
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Позиционирование в файле</h1>
+                    <blockquote>
+                        С открытым файлом связано понятие «текущей позиции» (позиционера). 
+                        Текущая позиция – номер байта, начиная с которого производится очередная операция чтения/записи.
+                    </blockquote>
+                    <blockquote>
+                        При каждом выполнении функции чтения или записи, указатель смещается на количество прочитанных или записанных байт, 
+                        то есть устанавливается сразу за прочитанным или записанным блоком данных в файле. Это так называемый последовательный доступ к данным.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Функции для взаимодействия с позицией</h2>
+                    <blockquote>
+                        Текущая позиция представляется в программе переменной типа <i>long</i>. Для работы с ней в стандартной библиотеке имеются три функции: <i>ftell</i>, <i>fseek</i> и <i>rewind</i>.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Функция ftell</h3>
+                    <pre>
+                    <code class="cpp">
+long ftell(FILE* fp);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Эта функция возвращает текущую позицию в файле. Если по каким-то причинам текущая позиция не определена, функция возвращает -1L.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Функция fseek</h3>
+                    <pre>
+                    <code class="cpp">
+int fseek(FILE* fp, long pos, int mode);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Данная функция позволяет сдвинуть текущую позицию на <i>pos</i> байтов.
+                    </blockquote>
+                    <blockquote>
+                        Третий параметр функции <i>fseek, mode</i>, определяет стартовую точку для изменения позиции в файле. Он может принимать три значения:
+                    </blockquote>
+                    <ul>
+                        <li><i>SEEK_SET</i> - от начала файла, <i>pos</i> всегда &lt;0</li>
+                        <li><i>SEEK_CUR</i> - от текущей позиции, <i>pos</i> &gt;0 - вперед, &lt;0 назад</li>
+                        <li><i>SEEK_SET</i> - от конца файла, <i>pos</i> всегда &gt;0</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Функция rewind</h3>
+                    <pre>
+                        <code class="cpp">
+void rewind(FILE* fp);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция <i>rewind</i> просто перемещает указатель текущей позиции на начало файла.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Пример управления позицией</h3>
+                    <pre>
+                        <code class="cpp">
+FILE *fl = fopen("text.txt", "ta+");
+long fsize;
+fseek(fl, 0L, SEEK_END);        // Устанавливаем позицию на конец файла
+fsize = ftell(fd);              // Получаем значение текущей позиции
+printf("Длина файла: %dl байт.\n", fsize);  
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <h2>Дополнительный функции</h2>
+                <blockquote>
+                    Существует также и другие функции для файлов, например:
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+int fileno(FILE* fp);
+                    </code>
+                </pre>
+                <blockquote>
+                    Функция <i>fileno</i> определяет и возвращает числовой дескриптор файла <i>fp</i>.
+                </blockquote>
+                <pre>
+                <code class="cpp">
+int filelength(int fd);
+                    </code>
+                </pre>
+                <blockquote>
+                    Функция <i>filelength</i> возвращает длину файла в байтах, по его числовому дескриптору <i>fd</i>.
+                </blockquote>
+                <pre>
+                <code class="cpp">
+int ferror(FILE* fp);
+                    </code>
+                </pre>
+                <blockquote>
+                    Функция <i>ferror</i> отслеживает появление ошибок, связанных с потоком <i>fp</i>.
+                </blockquote>
+            </section>
+            <section>
+                <h2>Переименование файла</h2>
+                <blockquote>
+                    Для изменения имени файла используется функция <i>rename</i> из библиотеки <i>io.h</i>
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+int rename(const char* oldname, const char* newname);
+                    </code>
+                </pre>
+                <blockquote>
+                    В случае успешного переименования функция возвращает 0, иначе - ненулевое значение.
+                </blockquote>
+            </section>
+            <section>
+                <h2>Удаление файла</h2>
+                <blockquote>
+                    Для удаления файла используется функция <i>remove</i>
+                </blockquote>
+                <pre>
+                    <code class="cpp">
+int remove(const char* filename);
+                    </code>
+                </pre>
+                <blockquote>
+                    Если на момент удаления файл <i>filename</i> был открыт, то работа функции зависит от конкретной реализации.
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h1>Файловый ввод/вывод C++</h1>
+                    <blockquote>
+                        Для обработки файлов в C++ должны быть включены заголовочные файлы <i>&lt;iostream&gt;</i> и <i>&lt;fstream&gt;</i>.
+                    </blockquote>
+                    <blockquote>
+                        Файл <i>fstream</i> содержит определения классов:
+                    </blockquote>
+                    <ul>
+                        <li><i>ifstream</i> - класс для ввода в файл</li>
+                        <li><i>ofstream</i> - класс для вывода из файла</li>
+                        <li><i>fstream</i> - класс для ввода/вывода</li>
+                    </ul>
+                    <blockquote>
+                        Файлы открываются путем создания объектов этих классов потоков.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Иерархия классов ввода/вывода</h2>
+                    <img src="img/Ios_classes_hierarchy.jpg" />
+                    <blockquote>
+                        Таким образом, функции-члены, операции и манипуляторы для работы с потоками, используемые для консольного ввода/вывода, могут быть также применены и к потокам файлов. 
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Пространство имён</h3>
+                    <blockquote>
+                        При  использовании поточных классов языка С++ в  программе требуется использовать стандартное пространство имен (<i>using namespace::std</i>).
+                    </blockquote>
+                    <blockquote>
+                        Файловый ввод/вывод организован с помощью переопределенных в поточных классах операций включения (&lt;&lt;) и извлечения (&gt;&gt;).
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Состояние потока</h1>
+                    <blockquote>
+                        Каждый поток имеет связанное с ним состояние. Состояния потока описываются в классе <i>ios</i> в виде перечисления <i>enum</i>:
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+enum io_state{
+        goodbit,        // Нет ошибки 0x00
+        eofbit,         // Конец файла 0x01
+        failbit,        // Последняя операция не выполнилась 0x02
+        badbit,         // Попытка использования недопустимой операции 0x04
+        hardfail        // Фатальная ошибка 0x08
+             };
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Получение состояния потока</h2>
+                    <blockquote>
+                        Получить значение состояния потока можно с помощью функции <i>int rdstate()</i>.
+                        <p>
+                            Кроме того, проверить состояние потока можно следующими функциями:
+                        </p>
+                    </blockquote>
+                    <ul>
+                        <li><i>int bad();</i> - возвращает 1, если <i>badbit</i> или <i>hardfail</i></li>
+                        <li><i>int eof();</i> - возвращает 1, если <i>eofbit</i></li>
+                        <li><i>int fail();</i> - возвращает 1, если <i>failbit</i>, <i>badbit</i> или <i>hardfail</i></li>
+                        <li><i>int good();</i> - возвращает 1, если <i>goodbit</i></li>
+                    </ul>
+                </section>
+            </section>
+            </div>
+        </div>
+	<aside id="presentable-icon" class="cpp">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x"></i>
+		</a>
+	</aside>
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>
