@@ -1,0 +1,2 @@
+/src/books/* filter=lfs diff=lfs merge=lfs -text
+/dist/books/* filter=lfs diff=lfs merge=lfs -text
