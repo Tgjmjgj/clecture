@@ -34,8 +34,7 @@ const srcPath = {
     'font': './src/font/**/*.*',
     'analysis': './code-analysis/',
     'task': './src/task/**/*.pdf',
-    'cmpl': './src/completed/**/*.*',
-    'book': './src/books/*.pdf'
+    'cmpl': './src/completed/**/*.*'
 };
 
 const distPath = {
@@ -46,8 +45,7 @@ const distPath = {
     'js': './dist/',
     'font': './dist/font/',
     'task': './dist/task/',
-    'cmpl': './dist/completed/',
-    'book': './dist/books/'
+    'cmpl': './dist/completed/'
 };
 
 const pluginSettings = {
@@ -145,11 +143,6 @@ gulp.task('cmpl', () => {
         .pipe(gulp.dest(distPath.cmpl));
 });
 
-gulp.task('book', () => {
-    return gulp.src(srcPath.book)
-        .pipe(gulp.dest(distPath.book));
-});
-
 gulp.task('build', gulpSequence('clean', ['js:lint', 'css:lint'], [
     'html',
     'img',
@@ -157,8 +150,7 @@ gulp.task('build', gulpSequence('clean', ['js:lint', 'css:lint'], [
     'css',
     'font',
     'task',
-    'cmpl',
-    'book'
+    'cmpl'
 ]));
 
 gulp.task('watch', () => {
@@ -169,7 +161,6 @@ gulp.task('watch', () => {
     watch(srcPath.font, () => gulp.start('font'));
     watch(srcPath.task, () => gulp.start('task'));
     watch(srcPath.cmpl, () => gulp.start('cmpl'));
-    watch(srcPath.book, () => gulp.start('book'));
 });
 
 gulp.task('default', gulpSequence('build', ['watch', 'serve']));
