@@ -22,7 +22,7 @@
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/4_operations/index.html "Лекция") 
 
-###  Тема 5. Сложные конструкции: условия, циклы
+###  Тема 5. Условия и циклы
 Условный оператор if. Оператор выбора switch. Циклы for, while и do-while
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/5_complex_constructs/index.html "Лекция") 
