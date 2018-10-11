@@ -136,6 +136,54 @@ printf("Число Пи равно %f\n", pi);
                 <img src="img/escape_sequences.jpg" />
             </section>
             <section>
+                <section>
+                    <h3>Примеры форматированного ввода</h3>
+                    <pre>
+                        <code class="cpp">
+printf("Эта строка будет выведена на консоль");
+printf("Но почему они слиплись?");
+printf("\n А\n вот\n чего\n то\n не\n хватало\n");                 
+                        </code>
+                    </pre>
+                    <img src="img/format_output_1.jpg">
+                </section>
+                <section>
+                    <h3>Пример 2</h3>
+                    <pre>
+                        <code class="cpp">
+int a = 136;
+printf("Вот так можно вывести %d внутри текста\n", a);
+
+char symbol = '#';
+printf("%c\n", symbol);
+
+float e = 2.7182818;
+printf("Дробное число: %f\n", e);
+printf("Ничто не мешает вывести сразу %d и %f, а потом снова %e\n", a, e, e);
+                        </code>
+                    </pre>
+                    <img src="img/format_output_2.jpg">
+                </section>
+                <section>
+                    <h3>Пример 3</h3>
+                    <pre>
+                        <code class="cpp">
+int num = 300;
+printf("В восьмеричной сс %d это %o\n", num, num);
+printf("А в шестнадцатеричной: %x", num);
+
+float trum = 1536.3;
+printf("%10.5f\n", trum);
+trum = 1234.1234567891234;
+printf("%f\n", trum);
+printf("%10.2f\n", trum);
+printf("%4.2f\n", trum);
+                        </code>
+                    </pre>
+                    <img src="img/format_output_3.jpg">
+                </section>
+            </section>
+            <section>
                 <h2>Функция scanf()</h2>
                 <blockquote>
                     Функция <i>scanf()</i> является многоцелевой функцией, дающей возможность вводить в компьютер данные любых типов. 
@@ -167,7 +215,7 @@ scanf(&quot; %s &quot;, mas);
                     <p>Можно использовать и стандартные версии функций, для чего в файле &quot;stdafx.h&quot; необходимо добавить макрос:</p>
                     <pre>
                         <code class="cpp">
-#define _USE_CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
                         </code>
                     </pre>
                 </blockquote>
@@ -349,7 +397,6 @@ cin &gt;&gt; hex &gt;&gt; x; // ввести шестнадцатеричное 
             </section>
             <section>
                 <h2>Что почитать дополнительно?</h2>
-                
 				<ul>
                         <li>
                             <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=46">
@@ -371,7 +418,7 @@ cin &gt;&gt; hex &gt;&gt; x; // ввести шестнадцатеричное 
 		</a>
 	</aside>
     <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="/">
+        <a title="К списку материалов" href="../../index.html">
             <i class="fa fa-times fa-2x"></i>
         </a>
     </aside>
