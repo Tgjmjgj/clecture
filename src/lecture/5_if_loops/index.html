@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 
 <head>
@@ -608,7 +608,70 @@ for (a = 1, b = 0; a &lt; 100; b += a, a++)
             <section>
                 <section>
                     <h2>Запрещённый оператор goto</h2>
+                    <blockquote>
+                        Использование оператора безусловного перехода goto затрудняет понимание программы и возможность 
+                        её модификации.
+                    </blockquote>
+                    <p>
+                        Формат оператора:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+goto имя_метки;
+    ...
+имя_метки :
+    ...
+                        </code>
+                    </pre>
+                    <p>
+                        Оператор goto передает управление на оператор, помеченный меткой имя-метки. 
+                        Помеченный оператор должен находиться в той же функции, что и оператор goto, 
+                        а используемая метка должна быть уникальной.
+                    </p>
                 </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre>
+                        <code class="cpp">
+int i = 1, sum = 0;
+const int max = 10;
+
+loop:
+    sum += i;
+    if (++i &lt;= max)
+        goto loop;
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Не используй goto</h2>
+                    <blockquote>
+                        Любая программа может быть написана без goto. Однако существуют ситуации (их немного), 
+                        когда goto рекомендуется использовать. Например, выход из многократно вложенных циклов 
+                        (поскольку оператор break осуществляет выход только из того цикла, где он использован).
+                    </blockquote>
+                    <blockquote>
+                        В остальных случаях использовать goto не следует.
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <h2>Что почитать дополнительно?</h2>
+				<ul>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=115">
+                                <b>Главы 11-17</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=142">
+                                <b>Глава 4.4</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
+                            </a>
+                        </li>
+                        <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=197">
+                            <b>Глава 4-5</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                        </a>
+				</ul>
             </section>
 
 

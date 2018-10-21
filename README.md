@@ -25,37 +25,42 @@
 ###  Тема 5. Условия и циклы
 Условный оператор if. Оператор выбора switch. Циклы for, while и do-while
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/5_complex_constructs/index.html "Лекция") 
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/5_if_loops/index.html "Лекция") 
 
-###  Тема 6. Статические массивы
+###  Тема 6. Графическое представление алгоритмов
+Стандарты графического представления алгоритмов. Основные элементы блок-схем. UML.
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/6_flowcharts/index.html "Лекция") 
+
+###  Тема 7. Статические массивы
 Статические массивы. Инициализация. Многомерные массивы. Генерация случайных чисел
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/6_arrays/index.html "Лекция") 
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/7_arrays/index.html "Лекция") 
 
-###  Тема 7. Указатели
+###  Тема 8. Указатели
 Указатели. Разыменование и получение адреса. Динамическое выделение памяти
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/7_pointers/index.html "Лекция") 
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/8_pointers/index.html "Лекция") 
 
-###  Тема 8. Строки
+###  Тема 9. Строки
 Встроенный строковый тип. Функции работы со строками
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/8_strings/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/9_strings/index.html "Лекция")
 
-###  Тема 9. Файлы
+###  Тема 10. Файлы
 Файлы. Работа с файлами средствами C и средствами C++
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/9_files/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/10_files/index.html "Лекция")
 
-###  Тема 10. Динамические структуры данных
+###  Тема 11. Динамические структуры данных
 Стек. Дек. Очередь. Односвязные, двусвязные и циклические списки. Библиотека STL
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/10_dynamic_structures/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/11_dynamic_structures/index.html "Лекция")
 
-###  Тема 11. Введение в многопоточность
+###  Тема 12. Введение в многопоточность
 Процессы и потоки. Параллельные вычисления. Потоки Win API и C++ 11. Блокировки: критические секции, семафоры, мьютекс
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/11_threads/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/12_threads/index.html "Лекция")
 
 > Записки ламера
 >
