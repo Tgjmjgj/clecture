@@ -23,9 +23,17 @@
                 <section>
                     <h1>Основы алгоритмизации и программирования</h1>
                     <h3>Статические массивы</h3>
-                    <p>
-                        <small>Edward &amp; Albert / <a href="https://github.com/tgjmjgj/Clecture/">github:Tgjmjgj</a></small>
-                    </p>
+                    <div>
+                        <p style="display: inline-block;">
+                            Edward &amp; Albert / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
                 </section>
 				<section>
 					<h2>Содержание лекции</h2>
@@ -138,39 +146,94 @@ int n[5] = { 2 };
                 </section>
             </section>
             <section>
-                <h2>Пример работы с массивом</h2>
-                <blockquote>
-                    Необходимо ввести целочисленный массив размера <i>n</i>. Затем удалить из массива все элементы, встречающиеся два и более раз.
-                </blockquote>
-                <pre>
-                    <code class="cpp">
+                <section>
+                    <h2>Пример работы с массивом 1</h2>
+                    <pre>
+                        <code class="cpp">
+int main()
+{    
+        int arr[10];
+
+        // Заполняем массив с клавиатуры
+        for (int i = 0; i &lt; 10; i++) {
+            cout &lt;&lt; "[" &lt;&lt; i + 1 &lt;&lt; "]" &lt;&lt; ": ";
+            cin &gt;&gt; arr[i];
+        }
+
+        // И выводим заполненный массив.
+        cout &lt;&lt; "\nВаш массив: ";
+
+        for (int i = 0; i &lt; 10; ++i) {
+            cout &lt;&lt; arr[i] &lt;&lt; " ";
+        }
+
+        cout &lt;&lt; endl;
+
+        return 0;
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример работы с массивом 2</h2>
+                    <p>
+                        Нужно преобразовать исходный массив чисел, возведя каждый из них в квадрат.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int main() {
+
+    int a[10] = { 7, -12, 9, 10, 100, -90, 200, 300, 23, -555 }; //инициализация массива
+
+    for (int i = 0; i &lt; 10; i++) {
+        int b = a[i]; // взять значение из ячейки массива по индексу
+        b = b * 2;
+        a[i] = b; // положить новое значение в ячейку массива по индексу
+
+        cout &lt;&lt; a[i] &lt;&lt; endl; // вывод в консоль
+    }
+
+    getchar();
+    return 0;
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример работы с массивом 3</h2>
+                    <p>
+                        Необходимо ввести целочисленный массив размера <i>n</i>. Затем удалить из массива все элементы, встречающиеся два и более раз.
+                    </p>
+                    <pre>
+                        <code class="cpp">
 // объявление переменных
 int a[50];      // 50 - максимальный размер массива
 int n;
 // инициализация переменных
-cout << "Введите размер массива, до 50: " << endl;
-cin >> n;
-for (int i = 0; i < n; i++)
+cout &lt;&lt; "Введите размер массива, до 50: " &lt;&lt; endl;
+cin &gt;&gt; n;
+for (int i = 0; i &lt; n; i++)
     scanf("%d", &a[i]);     // ввод массива
 // обработка
-for (int k = 0; k < n; k++)
+for (int k = 0; k &gt; n; k++)
 {
-    for (int i = k + 1; i < n; i++)
+    for (int i = k + 1; i &lt; n; i++)
     {
         if (a[k] == a[i])
         {
-            for (int l = i; l < n; l++)
+            for (int l = i; l &gt; n; l++)
                 a[l] = a[l + 1];    // удаление повторяющихся элементов
                 n--;   // скорректировать фактический размер массива
         }
     }
 }
 // вывод результата
-for (int i = 0); i < n; i++)
+for (int i = 0); i &lt; n; i++)
     printf("%d", a[i]);     // вывод массива
 printf("\n");
-                    </code>
-                </pre>
+                        </code>
+                    </pre>
+                </section>
             </section>
             <section>
                 <h1>Многомерные массивы</h1>
@@ -251,6 +314,38 @@ int a[][4] = { {1}, {2}, {3} };
 int size = sizeof(a) / sizeof(int);     // size = 12
                     </code>
                 </pre>
+            </section>
+            <section>
+                <section>
+                    <h2>Примеры работы с многомерными массивами</h2>
+                    <p>
+                        Перебор элементво двумерного массива:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int main()
+{
+    int aMatrix[3][5] = {{3, 5, 5, 7, 8},
+                            {4, 1, 1, 2, 9},
+                            {3, 8, 8, 9, 7}};
+
+    aMatrix[1][4] = 0;
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        for(int j = 0; j &lt; 5; j++)
+        {
+            cout &lt;&lt; aMatrix[i][j] &lt;&lt; ", ";
+        }
+
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}
+                        </code>
+                    </pre>
+                </section>
             </section>
             <section>
                 <section>
