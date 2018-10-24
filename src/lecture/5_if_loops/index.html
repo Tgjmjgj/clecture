@@ -432,6 +432,7 @@ char string[100], temp;
 for (top = 0, bot = 100; top &lt; bot; top++, bot--)
 {
     temp = string[top];
+    string[top] = string[bot];
     string[bot] = temp;
 }
                         </code>
