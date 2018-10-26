@@ -26,7 +26,7 @@ const yaspellerDictionary = 'yadict.json';
 const srcPath = {
     'src': './src',
     'html': './src/**/*.html',
-    'img': './src/**/*.+(jpg|jpeg|png|svg)',
+    'img': './src/**/*.+(jpg|jpeg|png|svg|gif)',
     'css': ['./src/!(css|js)*/**/*.css'],
     'cssLint': './src/**/*.css',
     'js': './src/!(js)*/**/*.js',

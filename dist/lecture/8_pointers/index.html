@@ -22,6 +22,7 @@
 			<section>
                 <section>
                     <h1>Основы алгоритмизации и программирования</h1>
+                    <h2>Квантовая механика мира программирования, или</h2>
                     <h3>Работа с указателями</h3>
                     <div>
                         <p style="display: inline-block;">
@@ -509,6 +510,32 @@ int main()
                     <img style="float: right;" src="img/memory5.jpg">
                 </section>
                 <section>
+                    <h2>Указатели на указатели на указатели на указатели...</h2>
+                    <p>
+                        Раз у указателя есть адрес, то можно сделать указатель на указатель.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+float e = 2.7182;
+float* pe = &amp;e;
+float** ppe = &amp;pe;
+float*** pppe = &amp;ppe;
+
+printf("Вещественное число e: %f", e);
+printf("Через указатель : %f", *pe);
+printf("Через указатель на указатель : %f", **pe);
+printf("Через указатель на указатель на указатель : %f", ***pe);
+                        </code>
+                    </pre>
+                    <p>
+                        Как правило, такие конструкции применяются при работе с многомерными массивами.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пояснение</h3>
+                    <img src="img/pointers_to_pointers.jpg">
+                </section>
+                <section>
                     <h2>Операции сравнения</h2>
                     <p>
                         Указатели можно сравнивать между собой всеми доступными
@@ -578,6 +605,139 @@ else
                     <p>
                         При прибавлении адрес увеличивается, при вычитании уменьшается.
                     </p>
+                </section>
+                <section>
+                    <h2>Типы указателей</h2>
+                    <p>
+                        Если указатель указывает на тип <span class="blue">int</span>, то 
+                        прибавление к адресу 1 увеличт его на <span class="blue">4 байта</span>
+                    </p>
+                    <p>
+                        Для типа <span class="blue">char</span> адрес увеличится на <span class="blue">1 байт</span>.
+                    </p>
+                    <p>
+                        Для типа <span class="blue">double</span> на <span class="blue">8</span>.
+                    </p>
+                    <p>
+                        И т.д.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример адресной арифметики</h3>
+                    <pre>
+                        <code class="cpp">
+int eps = 1243;
+
+int* pp = &amp;eps;		// 00E1F442
+pp += 1;			// 00E1F442 + 4 = 00E1F446
+pp += 3;			// 00E1F446 + C = 00E1F452
+
+char ch = 'F';
+
+char* pch = &amp;ch;	// 00E1F320
+++pch;				// 00E1F320 + 1 = 00E1F321
+
+short int shi = 874;
+
+short int* pshi = &amp;shi;		// 00E1F2F4
+pshi = pshi - 4;			// 00E1F2F4 - 8 = 00E1F2EC
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Схема смещения указателя на int</h2>
+                    <div style="display: inline-block; ">
+                        <pre>
+                            <code class="cpp">
+int a = 423;
+int *pa = &amp;a;
+
+for (int i = 0; i &lt; 6; ++i)
+{
+    cout &lt;&lt; pa &lt;&lt; endl;
+    ++pa;
+
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <iframe style="float: right;" src="https://giphy.com/embed/5QTIpRZ6JlOLOoU27F" width="480" height="339" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                </section>
+                <section>
+                    <h2>Схема смещения указателя на double</h2>
+                    <div style="display: inline-block; ">
+                        <pre>
+                            <code class="cpp">
+int num = 7;
+
+double db_val = 5e+8;
+double *pd = &amp;db_val;
+
+for (int i = 0; i &lt; 4; ++i)
+{
+    cout &lt;&lt; pd &lt;&lt; endl;
+    ++pd;
+
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <iframe style="float: right;" src="https://giphy.com/embed/lVBMMwVmNZwRudXGcj" width="480" height="339" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Будьте осторожны!</h1>
+                    <img src="img/pointers_not_for_games.jpg">
+                </section>
+                <section>
+                    <h3>Лезвие ножа</h3>
+                    <p>
+                        С одной стороны, указатели - невероятно мощный механизм, позволяющий 
+                        <ins>при правильной эксплуатации</ins>
+                        эффективно использовать память компьютера и вытворять с ней такие 
+                        хитрые выкрутасы, что производительность вырастает в разы. 
+                    </p>
+                    <p>
+                        Но вместе с тем использование указателей значительно увеличивает шансы 
+                        "выстрелить себе в колено".
+                    </p>
+                    <p>
+                        Любой неверный шаг в сторону - обращение не по тому адресу в памяти, 
+                        может привести к поломке программы.
+                    </p>
+                </section>
+                <section>
+                    <h3>Ломаем программу</h3>
+                    <p>
+                        Универсальный способ сломать программу с помощью указателей - 
+                        записать значение туда, где ему быть не положено.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int eps = 1243;
+
+int* pp = &amp;eps;
+
+for (int i = 0; i &lt; 2000; ++i)
+{
+    cout &lt;&lt; *pp-- &lt;&lt; endl;
+    if (!(i % 100))
+    {
+        *pp = 781;
+    }
+}
+                        </code>
+                    </pre>
+                    <p>
+                        Итого, стек вызова повреждён:
+                    </p>
+                    <img src="img/stack_corrupted.jpg">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Указатели опасны</h2>
                 </section>
             </section>
 
