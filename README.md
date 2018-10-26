@@ -78,7 +78,7 @@
 
 * Четвёртое задание
 	[_Четвёртое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/task_4/task_4.pdf "Задание 4")
-	[***Решение***](https://tgjmjgj.github.io/Clecture/dist/completed/task_4/tndex.html "Решение задания 4")
+	[***Решение***](https://tgjmjgj.github.io/Clecture/dist/completed/task_4/Index.html "Решение задания 4")
 
 * Пятое задание
 	[_Пятое_ _задание_](https://tgjmjgj.github.io/Clecture/dist/task/task_5/task_5.pdf "Задание 5")

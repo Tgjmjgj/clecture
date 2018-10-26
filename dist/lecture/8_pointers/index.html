@@ -108,10 +108,6 @@ int main()
                 </section>
                 <section>
                     <h2>Переменная в памяти</h2>
-                    <p>
-                        Память компьютера состоит из огромного количества байт.
-                        У каждого байта в памяти есть свой уникальный адрес (номер).
-                    </p>
                     <div style="display: inline-block;">
                         <pre>
                             <code class="cpp">
@@ -132,10 +128,6 @@ int main()
                 </section>
                 <section>
                     <h2>Вторая переменная</h2>
-                    <p>
-                        Память компьютера состоит из огромного количества байт.
-                        У каждого байта в памяти есть свой уникальный адрес (номер).
-                    </p>
                     <div style="display: inline-block;">
                         <pre>
                             <code class="cpp">
@@ -147,7 +139,7 @@ int main()
 
     float big = 12.562;
     char* p2 = &amp;big;
-    // 0133FDA2
+    // 0133FDB2
 
     return 0;
 }
@@ -158,10 +150,6 @@ int main()
                 </section>
                 <section>
                     <h2>И еще массив</h2>
-                    <p>
-                        Память компьютера состоит из огромного количества байт.
-                        У каждого байта в памяти есть свой уникальный адрес (номер).
-                    </p>
                     <div style="display: inline-block;">
                         <pre>
                             <code class="cpp">
@@ -345,9 +333,253 @@ if (pm == nullptr)
                 </section>
             </section>
             <section>
-                <h1>Операции над указателями</h1>
+                <section>
+                    <h2>Ссылки</h2>
+                    <p>
+                        Ссылка - объект, ссылающийся на другую переменную.
+                    </p>
+                    <blockquote>
+                        Формат объявления ссылки:
+                            <p><span class="blue">спецификатор_типа</span>& идентификатор</p>
+                    </blockquote>
+                    <p>
+                        При изменении ссылки изменения будут отражаться и на исходной переменной.
+                    </p>
+                    <blockquote>
+                        Переменная и ссылки на неё - два имени одного и того же объекта в памяти.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Ссылки</h2>
+                    <p>
+                        Ссылка всегда должна ссылаться на существующую переменную.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+short int g = 13;
+
+short int * pointer = &amp;g;   // Указатель на g
+short int & reference = g;      // Ссылка на g
+short int b = g;                // Копия g
+
+cout &lt;&lt; "Переменная: " &lt;&lt; g &lt;&lt; endl;          // 13
+cout &lt;&lt; "Указатель: " &lt;&lt; pointer &lt;&lt; endl;     // 043D3EA2
+cout &lt;&lt; "Ссылка: " &lt;&lt; reference &lt;&lt; endl;      // 13
+cout &lt;&lt; "Копия: " &lt;&lt; b &lt;&lt; endl;               // 13
+
+++g;
+cout &lt;&lt; "Переменная: " &lt;&lt; g &lt;&lt; endl;                          // 14
+cout &lt;&lt; "Разыменованный указатель: " &lt;&lt; pointer &lt;&lt; endl;      // 14
+cout &lt;&lt; "Ссылка: " &lt;&lt; reference &lt;&lt; endl;                      // 14
+cout &lt;&lt; "Копия: " &lt;&lt; b &lt;&lt; endl;                               // 13
+
+++reference;
+cout &lt;&lt; "Переменная: " &lt;&lt; g &lt;&lt; endl;                          // 15
+cout &lt;&lt; "Разыменованный указатель: " &lt;&lt; pointer &lt;&lt; endl;      // 15
+cout &lt;&lt; "Ссылка: " &lt;&lt; reference &lt;&lt; endl;                      // 15
+cout &lt;&lt; "Копия: " &lt;&lt; b &lt;&lt; endl;                               // 13
+
+++*pointer;
+cout &lt;&lt; "Переменная: " &lt;&lt; g &lt;&lt; endl;                          // 16
+cout &lt;&lt; "Разыменованный указатель: " &lt;&lt; pointer &lt;&lt; endl;      // 16
+cout &lt;&lt; "Ссылка: " &lt;&lt; reference &lt;&lt; endl;                      // 16
+cout &lt;&lt; "Копия: " &lt;&lt; b &lt;&lt; endl;                               // 13
+
+g = nullptr;                // ошибка
+pointer = nullptr;          // pointer больше не указывает на g
+reference = nullptr;        // ошибка
+b = nullptr;                // ошибка
+
+                        </code>
+                    </pre>
+                </section>
             </section>
-            
+            <section>
+                <section>
+                    <h1>Операции над указателями</h1>
+                    <p>
+                        Указатели можно использовать в следующих операциях:
+                    </p>
+                    <ul>
+                        <li>Присваивание (=)</li>
+                        <li>Разыменование (*)</li>
+                        <li>Взятие адреса (&)</li>
+                        <li>Сравнения (==, !=, &lt;, &gt;, &lt;=, &gt;=)</li>
+                        <li>Некоторая арифметика (+, -, ++, --)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Присваивание</h2>
+                    <p>
+                        Указателю можно присвоить адрес любого объекта в памяти, или 
+                        специальные адреса <span class="blue">nullptr</span> и <span class="blue">NULL</span>.
+                    </p>
+                    <p>
+                        Числа присваивать нельзя (без явного приведения к типу указателя).
+                    </p>
+                    <pre>
+                        <code class="cpp">
+char symb = '=';
+char t;
+int kk = -13;
+
+char* pc = &amp;symb;
+pc = &amp;t;
+pc = &amp;kk;                   // ошибка
+
+printf("%p", &kk);              // 006FFB90
+
+int *ptr_i = 0x006FFB90;        // ошибка
+ptr_i = (int*)0x006FFB90;
+
+printf("%d", *ptr_i);           // -13
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Разыменование</h2>
+                    <p>
+                        Разыменование - специальная операция, применимая только к указателям.
+                    </p>
+                    <br/>
+                    <p>
+                        Её примеров мы уже насмотрелись.
+                    </p>
+                </section>
+                <section>
+                    <h2>Взятие адреса</h2>
+                    <p>
+                        Да-да. У указателя тоже есть адрес.
+                    </p>
+                    <p>
+                        Указатель хранит адрес переменной. Хранит. Значит хранит где-то, а где же 
+                        еще, кроме как в памяти.
+                    </p>
+                    <blockquote>
+                        Указатель на переменную занимает в памяти 2, 4 или 8 байтов.
+                        2 байта на 16 битных системах, 4 на 32 битных и 8 на 64 битных.
+                    </blockquote>
+                    <p>
+                        Размер указателя на функцию может достигать 24 байт.
+                    </p>
+                </section>
+                <section>
+                    <h3>Адрес указателя</h3>
+                    <pre>
+                        <code class="cpp">
+int num = 888;
+int* pn = &amp;num;
+
+printf("%d", *pn);          // Значение переменной
+printf("%p", pn);           // Указатель - адрес переменной
+printf("%p", &amp;pn);          // Адрес указателя
+
+printf("%p", &amp;&amp;num);    // Ошибка - у адреса нет адреса
+
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Дополним пример с памятью</h3>
+                    <div style="display: inline-block;">
+                        <pre>
+                            <code class="cpp">
+int main()
+{
+    int num;
+    int* p1 = &amp;num;
+    // &amp;num = 0133FDBD
+    // &amp;p1 = 0133FDB9
+
+    float big = 12.562;
+    float* p2 = &amp;big;
+    // &amp;big = 0133FDB1
+    // &amp;p2 = 0133FDAD
+
+    char str[10] = "avial";
+    char* p3 = str;
+    // &amp;str = 0133FDA3
+    // &amp;p3 = 0133FD9F
+
+    return 0;
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <img style="float: right;" src="img/memory5.jpg">
+                </section>
+                <section>
+                    <h2>Операции сравнения</h2>
+                    <p>
+                        Указатели можно сравнивать между собой всеми доступными
+                        операторами сравнения (==, !=, &lt;, &gt;, &lt;=, &gt;=).
+                    </p>
+                    <p>
+                        Сравниваться будут значения адресов, записанных в указателях, 
+                        как простые числа.
+                    </p>
+                    <p>
+                        Сравнение указателей бывает полезно при работе с массивами.
+                    </p>
+                </section>
+                <section>
+                    <h3>Примеры сравнений</h3>
+                    <pre>
+                        <code class="cpp">
+int a = 3;
+int b = 17;
+
+int* pa = &amp;a;           //  003FF47A
+int* pb = &amp;b;           //  003FF471
+
+bool b1 = (a &lt; b);               // true
+bool b2 = (pa &lt; pb);             // false
+
+int mas[2] = { 14, -234 };
+pa = &mas[0];
+pb = &mas[1];
+if (pa > pb)
+{
+    printf("%d идёт после %d", *pa, *pb);
+}
+else
+{
+    printf("%d идёт после %d", *pb, *pa);
+}
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Арифметика указателей</h2>
+                    <p>
+                        К указателям можно прибавлять значения, и отнимать значения.
+                        Т.е. доступны операции + и -, а также их сокращённые формы +=, -=, ++ и --.
+                    </p>
+                    <p>
+                        В качестве вторых операндов могут выступать целые числа и другие указатели.
+                    </p>
+                    <blockquote>
+                        В результате операций изменяется адрес, на который указывает указатель.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Особенности вычислений</h2>
+                    <p>
+                        Но эти операции выполняются по особенному, не так как с обычными числами.
+                    </p>
+                    <blockquote>
+                        <span class="red">
+                            При добавлении к указателю числа N, адрес смещается 
+                            на расстояние в N элементов <ins>типа указателя</ins>.
+                        </span>
+                    </blockquote>
+                    <p>
+                        При прибавлении адрес увеличивается, при вычитании уменьшается.
+                    </p>
+                </section>
+            </section>
 
             <section>
                 <h2>Что почитать дополнительно?</h2>
