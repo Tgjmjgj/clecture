@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Arrays</title>
+	<meta name="description" content="memory, stack and heap, static and dynamic memory">
+	<meta name="keywords" content="c, c++, memory, stack, heap, dynamic memory, new, delete">
+	<meta name="author" content="Edward & Albert">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h2>Управление памятью</h2>
+                    <div>
+                        <p style="display: inline-block;">
+                            Edward &amp; Albert / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+            </section>
+            <section>
+                <section>
+                    <h2>Устройство памяти</h2>
+                    <p>
+                        Память компьютера для программы на C/C++ разделяется на несколько разделов.
+                    </p>
+                    <p>
+                        Основные из них, это
+                    </p>
+                    <ul>
+                        <li><span class="blue">Стек вызова</span></li>
+                        <li><span class="blue">Куча</span></li>
+                    </ul>
+                    <br />
+                    <img src="img/stack_and_heap.jpg" />
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Стек вызова</h2>
+                    <blockquote>
+                        Стек - упорядоченная и структурированная область памяти, используемая для
+                        быстрого доступа к временным локальным переменным.
+                    </blockquote>
+                    <p>
+                        Стек имеет ограниченный размер, по умолчанию в Visual Studio он составляет 1 МБ.
+                    </p>
+                    <p>
+                        У каждого потока выполнения свой собственный стек вызова.
+                    </p>
+                </section>
+                <section>
+                    <h2>Кадры (фреймы)</h2>
+                    <p>
+                        Стек состоит из кадров.
+                    </p>
+                    <img src="img/stack_frames.jpg" />
+                    <blockquote>
+                        Кадр (фрейм) - это специальная структура, связанная с вызовом функции, в которой 
+                        хранятся все локальные переменные функции и дополнительная служебная информация.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Кадры</h2>
+                    <p>
+                        Кадры напрямую связаны с вызовами функций. При каждом вызове функции на вершину 
+                        стека добавляется новый кадр с локальными переменными этой функции. После выхода 
+                        из функции этот кадр удаляется из стека, вместе с ним удаляются из памяти и все локальные 
+                        переменные этой функции.
+                    </p>
+                    <blockquote>
+                        Первый кадр стека всегда относится к функции main.
+                    </blockquote>
+                    <p>
+                        Структура стека вызова динамически изменяется во время работы программы.
+                    </p>
+                </section>
+                <section>
+                    <h2>Стек 1</h2>
+                    <img src="img/stack1_code.jpg" />
+                    <img style="float: right;" src="img/stack1.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 2</h2>
+                    <img src="img/stack2_code.jpg" />
+                    <img style="float: right;" src="img/stack2.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 3</h2>
+                    <img src="img/stack3_code.jpg" />
+                    <img style="float: right;" src="img/stack3.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 4</h2>
+                    <img src="img/stack4_code.jpg" />
+                    <img style="float: right;" src="img/stack2.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 5</h2>
+                    <img src="img/stack5_code.jpg" />
+                    <img style="float: right;" src="img/stack5.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 6</h2>
+                    <img src="img/stack6_code.jpg" />
+                    <img style="float: right;" src="img/stack2.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 7</h2>
+                    <img src="img/stack7_code.jpg" />
+                    <img style="float: right;" src="img/stack1.jpg" />
+                </section>
+            </section>
+            <section>
+                <h2>Особенности стековой памяти</h2>
+                <ul>
+                    <li>Стек расширяется когда в функциях создаются локальные переменные</li>
+                    <li>Память в стеке автоматически очищается, когда из него удаляется кадр</li>
+                    <li>Размер стека ограничен</li>
+                    <li>Переменные стека существуют только во время выполнения функции</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Локальные переменные</h2>
+                <p>
+                    Все переменные (и массивы, и указатели), которые мы использовали ранее, 
+                    сохранялись в стеке. Это всё были локальные переменные.
+                </p>
+                <p>
+                    Объявленные в функции main, в собственных функциях, все они существуют
+                    временно, пока выполняется их функция и в памяти стека хранится её кадр.
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Статическое выделение памяти</h2>
+                    <p>
+                        Выделение памяти в стеке называется статическим выделением памяти.
+                    </p>
+                    <p>
+                        Его особенность заключается в том, что объём занимаемой 
+                        программой памяти расчитывается <ins>во время компиляции</ins> программы,
+                        а не во время выполнения.
+                    </p>
+                    <p>Это значит, что размеры кадров стека имеют статический размер и не могут изменяться.</p>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre>
+                        <code class="cpp">
+int func(double e)
+{
+    int k = (int)(e / 3.1415);
+    int ost = k % 42;
+    int q = ost * ost;
+    return q;
+}
+
+int main()
+{
+    int a;
+    double teta = 454.213, dzeta = -0.2781;
+    char str[20] = "Teta or dzeta";
+    cin >> a;
+    if (a == 2)
+    {
+        a = func(teta);
+    }
+    else
+    {
+        a = func(dzeta);
+    }
+    cout &lt;&lt; a &lt;&lt; endl;
+    return 0;
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Разбор примера</h3>
+                    <p>
+                        Посмотрев на то, какие переменные создаются в данных функциях, даже 
+                        мы можем посчитать, сколько для них потребуется памяти.
+                    </p>
+                    <p>
+                        В main создаётся 1 переменная типа int, 2 переменные типа double и массив 
+                        из 20 элементов типа char. В сумме это даст 40 байт.
+                    </p>
+                    <p>
+                        Значит, еще на этапе компиляции будет подсчитано это число, и под кадр стека для
+                        функции main будет выделяться ровно 40 байт (грубо говоря), и ни сколько больше.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Куча (Хип)</h2>
+                    <blockquote>
+                        Куча (хип) -- неупорядоченная и неструктурированная область памяти, вся 
+                        оставшаяся память компьютера.
+                    </blockquote>
+                    <p>
+                        Соответственно, не имеет ограничения по размеру, кроме установленного
+                        физическим объёмом свободной памяти.
+                    </p>
+                    <p>
+                        Память в куче общая для всех потоков выполнения программы.
+                    </p>
+                </section>
+                <section>
+                    <h3>Структура кучи</h3>
+                    <p>
+                        Куча это куча. У неё нет какой бы то ни было структуры, это просто 
+                        набор ячеек памяти.
+                    </p>
+                    <p>
+                        <span class="red">
+                            Доступ к памяти кучи может быть получен только по адресу ячейки.
+                        </span>
+                        Т.е. только по указателю.
+                    </p>
+                </section>
+                <section>
+                    <h2>Особенности памяти в куче</h2>
+                    <ul>
+                        <li>Значения могут быть получены из любого места программы (если есть адрес)</li>
+                        <li>Куча не ограничена по размеру</li>
+                        <li>Слегка медленне доступ (т.к. не напрямую, а только через указатели)</li>
+                        <li>Неэффективное и неупорядоченное расположение в памяти, приводящее к фрагментации</li>
+                        <li>Нужно самостоятельно выделять и освобождать память</li>
+                        <li>Размер созданных переменных можно менять</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Динамическое выделение памяти</h2>
+                    <blockquote>
+                        Выделение памяти в куче называется динамическим выделением памяти, и производится
+                        с помощью спецйиализированных команд.
+                    </blockquote>
+                    <p>
+                        В отличие от стека, где необходимый объём памяти определяется заранее на этапе 
+                        компиляции программы, память в куче выделяется динамически по ходу работы программы.
+                    </p>
+                    <p>
+                        Объём выделяемой динамически памяти определяется во время выполнения, например, на 
+                        основании пользовательского ввода, или других событий. Может быть и прописан заранее
+                        в коде, как при статическом выделении. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Выделение и освобождение памяти</h2>
+                    <p>
+                        В стеке память выделяется и очищается автоматически при добавлении или удалении кадра
+                        из памяти.
+                    </p>
+                    <p>
+                        Куча же требует ручного обращения с памятью. Это значит, что нужно явно прописывать не
+                        только команды по выделению памяти, но и по её освобождению.
+                    </p>
+                    <p><ins><span class="red">
+                        Для каждого динамического выделения памяти должна быть прописана команда по её освобождению.
+                    </span></ins></p>
+                </section>
+                <section>
+                    <h2>Утечки памяти</h2>
+                    <p>
+                        Несоблюдение этого правила влечёт за собой так называемые "Утечки памяти".
+                    </p>
+                </section>
+            </section>
+
+
+
+
+            <section>
+                <h2>Что почитать дополнительно?</h2>
+                <ul>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=115">
+                                <b>Главы 11-17</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=142">
+                                <b>Глава 4.4</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
+                            </a>
+                        </li>
+                        <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=197">
+                            <b>Глава 4-5</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                        </a>
+                </ul>
+            </section>
+            
+        </div>
+    </div>
+    <aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x"></i>
+        </a>
+    </aside>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html">
+            <i class="fa fa-times fa-2x"></i>
+        </a>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

@@ -38,29 +38,34 @@
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/7_arrays/index.html "Лекция") 
 
 ###  Тема 8. Указатели
-Указатели. Разыменование и получение адреса. Динамическое выделение памяти
+Указатели. Разыменование и получение адреса. Арифметика указателей. Указатели и массивы
 
 [Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/8_pointers/index.html "Лекция") 
 
-###  Тема 9. Строки
+###  Тема 9. Память
+Структура памяти программы. Статическое и динамическое выделение. Контроль динамической памяти
+
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/9_memory/index.html "Лекция") 
+
+###  Тема 10. Строки
 Встроенный строковый тип. Функции работы со строками
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/9_strings/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/10_strings/index.html "Лекция")
 
-###  Тема 10. Файлы
+###  Тема 11. Файлы
 Файлы. Работа с файлами средствами C и средствами C++
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/10_files/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/11_files/index.html "Лекция")
 
-###  Тема 11. Динамические структуры данных
+###  Тема 12. Динамические структуры данных
 Стек. Дек. Очередь. Односвязные, двусвязные и циклические списки. Библиотека STL
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/11_dynamic_structures/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/12_dynamic_structures/index.html "Лекция")
 
-###  Тема 12. Введение в многопоточность
+###  Тема 13. Введение в многопоточность
 Процессы и потоки. Параллельные вычисления. Потоки Win API и C++ 11. Блокировки: критические секции, семафоры, мьютекс
 
-[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/12_threads/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/Clecture/dist/lecture/13_threads/index.html "Лекция")
 
 > Записки ламера
 >
