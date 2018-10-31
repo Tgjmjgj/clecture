@@ -290,9 +290,189 @@ int main()
                     <p>
                         Несоблюдение этого правила влечёт за собой так называемые "Утечки памяти".
                     </p>
+                    <blockquote>
+                        Утечка памяти - это процесс неконтролируемого уменьшения объёма памяти компьютера
+                        из-за ошибок программиста по освобождению памяти.
+                    </blockquote>
                 </section>
             </section>
+            <section>
+                <section>
+                    <h2>Функции динамического выделения памяти в C</h2>
+                    <p>
+                        В C для управления динамической памятью используется 4 функции:
+                    </p>
+                    <table>
+                        <tr>
+                            <td>malloc</td>
+                            <td>Выделение памяти для переменной</td>
+                        </tr>
+                        <tr>
+                            <td>calloc</td>
+                            <td>Выделение памяти для массива</td>
+                        </tr>
+                        <tr>
+                            <td>realloc</td>
+                            <td>Изменение размера выделенной памяти</td>
+                        </tr>
+                        <tr>
+                            <td>free</td>
+                            <td>Освобождение памяти</td>
+                        </tr>
+                    </table>    
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Указатель на void</h2>
+                    <p>
+                        Все эти функции работают с указателями на void.
+                    </p>
+                    <p>
+                        Указатель на void - это универсальная запись указателя на какую-то
+                        память без привязки к типу расположенного в ней элемента.
+                    </p>
+                </section>
+                <section>
+                    <h2>Использование указателя на void</h2>
+                    <p>
+                        Указатель на void не является полным типом объекта, поэтому с ним нельзя
+                        проводить никаких операций: нельзя получить значение, нельзя выполнять 
+                        арифметические действия.
+                    </p>
+                    <p>
+                        Чтобы из указателя на void получить полноценный указатель, нужно
+                        преобразовать его тип.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int iu = 4;
+void* pv = &amp;iu;
+*pv = 3;                // нельзя
+iu = *pv;               // нельзя
+pv++;                   // нельзя
+int* pi = (int*)pv;     // преобразование в указатель на int
+*pi = 3;                // можно
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Функция malloc</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+void* malloc(unsigned size);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция возвращает указатель на начало области выделенной динамической памяти 
+                        длиной в size байт, при неудачном завершении возвращает NULL.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int* a = (int*)malloc(4);
 
+double* d = (double*)malloc(sizeof(double));
+
+void* pv = malloc(sizeof(short int));
+short int* ps = (short int*)pv;
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Функция free</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+void free(void* ptr);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция освобождает память, выделенную ранее функциями malloc, calloc или realloc,
+                        делая её доступной для последующих повторных выделений.
+                    </blockquote>
+                    <p><span><ins>
+                        Для каждого вызова malloc, calloc или realloc в программе должен быть вызов free.
+                    </ins></span></p>
+                    <pre>
+                        <code class="cpp">
+free(a);
+free(d);
+free(ps);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Функция calloc</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+void* calloc(unsigned num, unsigned size);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция возвращает указатель на начало области динамической памяти 
+                        для размещения num элементов длиной по size байт каждый, 
+                        при неудачном завершении возвращает NULL.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+char* mas = (char*)calloc(10, sizeof(char));
+
+float* arr = (float*)calloc(4, sizeof(float));
+
+
+free(mas);
+free(arr);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Функция realloc</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+void* realloc(void* ptr, unsigned new_size);
+                        </code>
+                    </pre>
+                    <blockquote>
+                        Функция изменяет размер блока ранее выделенной динамической памяти 
+                        до размера new_size байт, параметр рtr - это адрес начала изменяемого 
+                        блока, при неудачном завершении возвращает NULL.
+                    </blockquote>
+                    <pre>
+                        <code class="cpp">
+int* pa = (int*)calloc(4, sizeof(int));
+*(pa) = 1;
+*(pa + 1) = 2;
+*(pa + 2) = 3;
+*(pa + 3) = 4;
+pa = (int*)realloc(pa, 2 * sizeof(int));
+cout &lt;&lt; pa[0] &lt;&lt; endl &lt;&lt; pa[1] &lt;&lt; endl &lt;&lt; pa[2] &lt;&lt; endl &lt;&lt; pa[3] &lt;&lt; endl;
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Операторы динамического выделения памяти в C++</h2>
+                    <ul>
+                        <li>new</li>
+                        <li>delete</li>
+                    </ul>
+                </section>
+
+            </section>
 
 
 
