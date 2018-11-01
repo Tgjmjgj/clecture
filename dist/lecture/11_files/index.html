@@ -679,6 +679,230 @@ enum io_state{
                     </ul>
                 </section>
             </section>
+            <section>
+                <section>
+                    <h2>Работа с fstream</h2>
+                    <p>
+                        Класс fstream используется для открытия файла, чтения и записи, а также перемещения 
+                        указателя позиционирования.
+                    </p>
+                    <p>
+                        Чтобы начать работать с ним, нужно создать объект типа fstream:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+fstream some_name;
+                        </code>
+                    </pre>
+                    <p>
+                        И дальше, для открытия файла вызвать функцию open.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+void fstream::open(const char* name, int mode, int p = filebuf::openprot);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Например</h3>
+                    <pre>
+                        <code class="cpp">
+fstream inoutFile;
+inoutFile.open(("a.txt", ios_base::out));
+if (inoutFile)
+{
+    // Работа с файлом
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Режими открытия файла</h2>
+                    <ul>
+                        <li>ios_base::app - Дозапись в конец</li>
+                        <li>ios_base::binary - Бинарный режим</li>
+                        <li>ios_base::in - Для чтения</li>
+                        <li>ios_base::out - Для записи</li>
+                        <li>ios_base::trunc - Очистить файл</li>
+                        <li>ios_base::ate - Установить указатель позиционирования на конец файла</li>
+                    </ul>
+                    <p>
+                        Для задания нескольких режимов используется оператор побитового ИЛИ (|).  
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Закрытие файла</h2>
+                    <p>
+                        Для сброса буфера потока, отсоединения  потока от файла и закрытия файла используется функция:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+void fstream::close();
+                        </code>
+                    </pre>
+                    <p>
+                        Эту функцию необходимо явно вызвать при изменении режима работы с потоком, и в конце 
+                        работы с файлом.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Позиционирование</h2>
+                    <p>
+                        Для позиционирования в fstream есть 4 функции:
+                    </p>
+                    <ul>
+                        <li>fstream::seekg() - установка позиции для чтения</li>
+                        <li>fstream::seekp() - установка позиции для записи</li>
+                        <li>fstream::tellg() - получение текущей позиции для чтения</li>
+                        <li>fstream::tellp() - получения текущей позиции для записи</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Установка позиции</h2>
+                    <p>
+                        Функции позиционирования seekg и seekp имеют следующий формат:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+fstream::seekg(int offset_position, ios_base::seekdir dir);
+fstream::seekp(int offset_position, ios_base::seekdir dir);
+                        </code>
+                    </pre>
+                    <p>
+                        Первым параметров offset_position идёт число байт, на которое нужно сдвинуть позицию.
+                    </p>
+                    <p>
+                        Второй параметр dir определяет исходную точку сдвига. Может иметь одно из 3 значений:
+                    </p>
+                    <ul>
+                        <li>ios_base::beg - от начала файла</li>
+                        <li>ios_base::cur - от текущей позиции</li>
+                        <li>ios_base::end - от конца файла</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Получение позиций</h2>
+                    <p>
+                        Получение позиций чтения и записи осуществляется при помощи функций 
+                        tellg и tellp соответственно.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int fstream::tellg();
+int fstream::tellp();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre class="cpp">
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+
+int main()
+{
+    using namespace std;
+
+    char p[100];
+    fstream file;
+    // Создание двунаправленного потока
+    file.open("a.txt", ios_base::in | ios_base::out | ios_base::trunc);
+    file &lt;&lt; "This is string" &lt;&lt; endl;       // Вывод в файл
+    // Установка позиции на начало
+    file.seekg(0, ios_base::beg);
+    // Чтение строки из файла
+    file.getline(p, 50);
+    file.seekg(0, ios_base::beg);
+    // Вывод содержимого потока на экран
+    cout &lt;&lt; endl &lt;&lt; file.rdbuf();
+    inout.close(); // Закрыть поток
+}
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Работа с ofsteram</h2>
+                    <p>
+                        Если файл будет использоваться только для записи, лучше использовать ofstream.
+                    </p>
+                    <pre>
+                        <code class="cpp">
+ofstream outfile("copy.out", ios_base::out);
+ofstream outfile3("copy.out");  // Одно и то же
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Функции записи через ofstream</h2>
+                    <p>
+                        Для записи одного символа в поток есть функция:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+ofstream&amp; ofstream::put(char symb);
+                        </code>
+                    </pre>
+                    <p>
+                        Для записи строки, как массива символов, существует функция:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+ofstream&amp; ofstream::write(const char* buffer, int size);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример использования ofstream</h3>
+                    <pre>
+                        <code class="cpp">
+ofstream out;
+
+out.open("a.txt");
+if (out == NULL)
+{
+    return 0;
+}
+for (int i = 0; i &lt; 2; ++i)
+{
+    out &lt;&lt; "string" &lt;&lt; i &lt;&lt; endl;
+}
+out.close();
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Работа с ifsteram</h2>
+                    <p>
+                        Если файл будет использоваться только для чтения, лучше использовать ifstream.
+                    </p>
+                </section>
+                <section>
+                    <h2>Функции ifstream</h2>
+                    <p>
+                        Для считывания строки:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+ifstream&amp; ifstream::getline(char* buffer, int size, char delimiter='\n');
+                        </code>
+                    </pre>
+                    <p>
+                        Для считывания определённого количества символов:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+ifstream&amp; ifstream::read(char* buffer, int size);
+                        </code>
+                    </pre>
+                </section>
+            </section>
             </div>
         </div>
 	<aside id="presentable-icon" class="cpp">
