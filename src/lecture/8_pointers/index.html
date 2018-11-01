@@ -138,9 +138,9 @@ int main()
     int* p1 = &amp;num;
     // 0133FDBD
 
-    float big = 12.562;
-    char* p2 = &amp;big;
-    // 0133FDB2
+    double big = 12.562;
+    double* p2 = &amp;big;
+    // 0133FDB5
 
     return 0;
 }
@@ -160,13 +160,13 @@ int main()
     int* p1 = &amp;num;
     // 0133FDBD
 
-    float big = 12.562;
-    float* p2 = &amp;big;
-    // 0133FDA2
+    double big = 12.562;
+    double* p2 = &amp;big;
+    // 0133FDB5
 
     char str[10] = "avial";
     char* p3 = str;
-    // 0133FDAC
+    // 0133FDAB
 
     return 0;
 }
@@ -492,8 +492,8 @@ int main()
     // &amp;num = 0133FDBD
     // &amp;p1 = 0133FDB9
 
-    float big = 12.562;
-    float* p2 = &amp;big;
+    double big = 12.562;
+    double* p2 = &amp;big;
     // &amp;big = 0133FDB1
     // &amp;p2 = 0133FDAD
 
@@ -705,11 +705,11 @@ int* pet = &amp;et;
 cout &lt;&lt; pek - pet &lt;&lt; endl;      // 4
 
 double dy = 54.3;   // 00FFAA10
-double do;          // 00FFAA20
+double dx;          // 00FFAA20
 double* pdy = &amp;dy;
-double* pdo = &amp;do;
+double* pdx = &amp;dx;
 
-cout &lt;&lt; pdy - pdo &lt;&lt; endl;      // 2
+cout &lt;&lt; pdy - pdx &lt;&lt; endl;      // 2
 
                         </code>
                     </pre>
@@ -1104,11 +1104,11 @@ char* pa = &amp;a;
 pa += 3;
 *pa = 2;
                         </code>
-                        <p>
-                            Итого, стек вызова повреждён:
-                        </p>
-                        <img src="img/stack_corrupted.jpg">
                     </pre>
+                    <p>
+                        Итого, стек вызова повреждён:
+                    </p>
+                    <img src="img/stack_corrupted.jpg">
                 </section>
             </section>
 
