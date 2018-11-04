@@ -869,18 +869,23 @@ ofstream&amp; ofstream::write(const char* buffer, int size);
                     <h3>Пример использования ofstream</h3>
                     <pre>
                         <code class="cpp">
-ofstream out;
+#include &lt;fstream&gt;
 
-out.open("a.txt");
-if (out == NULL)
+int main()
 {
-    return 0;
+    ofstream out;           // Создаём объект типа ofstream
+
+    out.open("a.txt");      // Открытие файла
+    if (out == nullptr)        // Если файл не удалось открыть
+    {
+        return 0;
+    }
+    for (int i = 0; i &lt; 2; ++i)     
+    {
+        out &lt;&lt; "string" &lt;&lt; i &lt;&lt; endl;         // Вывод в файл
+    }
+    out.close();            // Закрытие файла
 }
-for (int i = 0; i &lt; 2; ++i)
-{
-    out &lt;&lt; "string" &lt;&lt; i &lt;&lt; endl;
-}
-out.close();
                         </code>
                     </pre>
                 </section>
@@ -911,9 +916,59 @@ ifstream&amp; ifstream::read(char* buffer, int size);
                         </code>
                     </pre>
                 </section>
+                <section>
+                    <h3>Пример работы с ifstream</h3>
+                    <pre>
+                        <code class="cpp">
+#include &lt;ifstream&gt;
+
+int main()
+{
+    ifstream in;        // Создаём объект типа ifstream
+    char c;
+
+    in.open("C:\\b.txt");           // Открытие файла
+    while (!in.eof())           // Пока не конец файла
+    {
+        c = in.peek();      // Считываем символ из файла без смещения позиции
+        
+        if (c == 'A')           // Если символ A
+        {
+            in.seekg(in.tellg() + 1);       // Передвигаем позиционер на один
+            continue;
+        }
+        in.get(c);              // Считывание одного символа
+        cout &lt;&lt; c;
+    }
+    in.close();         // Закрытие файла
+}
+                        </code>
+                    </pre>
+                </section>
             </section>
-            </div>
+
+            <section>
+                <h2>Что почитать дополнительно?</h2>
+                <ul>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=299">
+                                <b>Главы 28-29</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=393">
+                                <b>Глава 10</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=987">
+                                <b>Глава 17</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                            </a>
+                        </li>
+                </ul>
+            </section>
         </div>
+    </div>
 	<aside id="presentable-icon" class="cpp">
 		<a title="Содержание лекции" href="#/0/1">
 			<i class="fa fa-list-ul fa-2x"></i>

@@ -465,25 +465,201 @@ cout &lt;&lt; pa[0] &lt;&lt; endl &lt;&lt; pa[1] &lt;&lt; endl &lt;&lt; pa[2] &l
             </section>
             <section>
                 <section>
+                    <h2>Примеры</h2>
+                    <pre>
+                        <code class="cpp">
+// Так нельзя
+int* create_static_arr()
+{
+    const int n = 10;
+    int arr[n];
+    
+    for (int i = 0; i &lt; n; ++i)
+    {
+        arr[i] = rand() % 10;
+    }
+    return arr;
+}
+
+// Так можно
+int* create_arr(int n)
+{
+    int* arr;
+    arr = (int*)malloc(n*sizeof(int));
+    
+    for (int i = 0; i &lt; n; ++i)
+    {
+        arr[i] = rand() % 10;
+    }
+    return arr;
+}
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
                     <h2>Операторы динамического выделения памяти в C++</h2>
                     <ul>
-                        <li>new</li>
-                        <li>delete</li>
+                        <li><span class="blue">new</span></li>
+                        <li><span class="blue">delete</span></li>
                     </ul>
                 </section>
+                <section>
+                    <h2>new</h2>
+                    <p>
+                        Для одного значения:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+тип* имя = new тип;
+тип* имя = new тип(начальное_значение);
+                        </code>
+                    </pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int* a = new int;
+float* b;
+b = new float;
+char* c = new char('f');
+double* d = new double(3.14);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>new для массивов</h2>
+                    <blockquote>
+                        Динамическое выделение памяти позволяет создавать массивы
+                        размера, заданного значением переменной.
+                    </blockquote>
+                    <p>
+                        Для выделения памяти под несколько элементов:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+тип* имя = new тип[количество];
+тип* имя = new тип[количество] { список_инициализации };
+                        </code>
+                    </pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+int size = 10;
+int* arr = new int[size];
+float* mas = new mas[4] { 1.6f, 0.75f, 4.2f, 1.0f };
+int* arr2 = new int[2] { 5, 2 };
+char* mas2 = new char[arr2[1]];
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>delete</h2>
+                    <blockquote>
+                        <span class="red">
+                            Всё, что создаётся в программе с помощью new, должно быть освобождено через delete.
+                        </span>
+                    </blockquote>
+                    <p>
+                        Также как и с new, delete имеет 2 формы записи, для одиночных
+                        значений и для массивов:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+delete имя;
+delete имя1, имя2, имяN;
 
+delete[] имя_массива;
+delete[] имя_массива1, имя_массива2, имя_массиваN;
+                        </code>
+                    </pre>
+                    <pre>
+                        <code class="cpp">
+delete a, b, c, d;
+
+delete arr, mas, arr2, mas2;
+                        </code>
+                    </pre>
+                </section>
             </section>
+            <section>
+                <section>
+                    <h2>Двумерные массивы через указатели</h2>
+                    <p>
+                        Для формирования динамического двумерного массива сначала выделяется
+                        память для массива указателей, а затем для каждого из этих указателей
+                        выделяется память под массив значений.
+                    </p>
+                    <p>
+                        При удалении такого массива, важно сначала в цикле освободить память внутренних
+                        массивов, а только после этого освободить память внешнего массива указателей.
+                    </p>
+                </section>
+                <section>
+                    <h3>Матрица</h3>
+                    <pre>
+                        <code class="cpp">
+int** matr;         // Адрес адресов - массив указателей
+int i, j;
+int* n = new int;
+printf("Введите порядок матрицы:");
+scanf("%d", n);
+matr = new int*[*n];    // Выделить память под массив из n указателей
 
+for (i = 0; i &lt; *n; ++i)          // Для каждого указателя из массива указателей
+{
+    matr[i] = new int[*n];          // Выделить память под n int-ов
+    for (j = 0; j &lt; *n; ++j)          // Для каждого элемента i-ого массива
+    {
+        matr[i][j] = rand() % 10;       // Присвоить рандомное значение
+    }
+}
+                        </code>
+                    </pre>
+                    <pre>
+                        <code class="cpp">
+for (int k = 0; k &lt; *n; ++k)     // Для каждого указателя из массива указателей
+{
+    delete[] matr[k];           // Освободить память по этому указателю
+}
+delete[] matr;          // Освободить память массива указателей
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Константы</h2>
+                    <p>
+                        Для создания константного динамического объекта перед оператором new
+                        необходимо записать слово const:
+                    </p>
+                    <pre>
+                        <code class="cpp">
+const int *pci = new const int(1024);
 
+const char* str = new const char[6] { "text." };
+                        </code>
+                    </pre>
+                    <p>
+                        Выделение памяти под константный объект обязательно должно
+                        сопровождаться инициализацией начального значения.
+                    </p>
+                </section>
+            </section>
 
             <section>
                 <h2>Что почитать дополнительно?</h2>
                 <ul>
-                        <li>
-                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=271">
-                                <b>Глава 26</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
-                            </a>
-                        </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=271">
+                            <b>Глава 26</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                        </a>
+                    </li>
                 </ul>
             </section>
             

@@ -94,3 +94,10 @@
 .red {
 	color: rgb(211, 76, 76);
 }
+.dark {
+	color: #1e1e1e;
+}
+.code_back {
+	background: #3f3f3f;
+	padding: 4px;
+}
