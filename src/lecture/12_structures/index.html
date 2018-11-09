@@ -139,7 +139,7 @@ int main()
         srand(time(0));
 
         PL2 arr_user = new L2[n_user];
-        PL2 arr_10 = new L2[n_10]{ 0.0 };
+        PL2 arr_10 = new L2[n_10]{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
         L2 sum = 0.0;
         for (index i = 0; i &lt; n_user; ++i)
@@ -161,7 +161,7 @@ int main()
                 arr_10[i] += arr_user[j] * cur_r;
                 prev_part -= cur_r;
                 cur_r = 0.0;
-                if (prev_part == 0.0)
+                if (prev_part &lt; PRECISION)
                 {
                     ++j;
                 }
@@ -639,14 +639,18 @@ cout &lt;&lt; B->x &lt;&lt; "  " &lt;&lt; B->y &lt;&lt; endl;
                     <pre>
                         <code class="cpp">
 StudentData student1;
-student1.name = "John Doe";
+student1.name = new char[20];
+strcpy(student1.name, "John Doe");
 student1.record = 423478123;
-student1.phone = "+375 (88) 987-65-43"
+student1.phone = new char[20];
+strcpy(student1.name, "+375 (88) 987-65-43");
 
 StudentData* student2 = new StudentData;
-student2->name = "John Smith";
+student2->name = new char[20];
+strcpy(student2->name, "John Smith");
 student2->record = 478234234;
-student2->phone = "+375 (77) 123-45-67";
+student2->phone = new char[20];
+strcpy(student2->phone, "+375 (77) 123-45-67");
                         </code>
                     </pre>
                 </section>
@@ -963,6 +967,7 @@ open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", 1);
                         А лучше сделать так:
                     </p>
                     <pre>
+                        <code class="cpp">
 enum OPEN_MODE 
 {
     READ_ONLY = 1,
@@ -974,6 +979,7 @@ bool open_document(char* name, char* security_token, OPEN_MODE mode);
 
 open_document("docs.dts", "z7fsjf73jhmc011ncd8sjf", READ_WRITE);
 open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", READ_ONLY);
+                        </code>
                     </pre>
                 </section>
                 <section>
@@ -1844,6 +1850,7 @@ for (list_element* p = phead; p != nullptr; p = p->next)    // Обход спи
                             <li><i>&lt;deque&gt;</i> - дек</li>
                             <li><i>&lt;list&gt;</i> - двусвязный список</li>
                             <li><i>&lt;vector&gt;</i> - динамический массив</li>
+                            <li><i>&lt;string&gt;</i> - динамические строки</li>
                             <li><i>&lt;map&gt;</i> - ассоциативный массив</li>
                             <li><i>&lt;set&gt;</i> - множество</li>
                             <li><i>&lt;bitset&gt;</i> - битовый массив</li>
@@ -1888,14 +1895,15 @@ stack&lt;int&gt; st1;
 queue&lt;double&gt; qu1;
 vector&lt;string&gt; vc1;
 
-struct {
+struct Corpuscle
+{
     int id;
     double mass;
     double charge;
     short float spin;
-     } corpuscle;
+};
 
-list&lt;corpuscle&gt; li1;
+list&lt;Corpuscle&gt; li1;
                     </code>
                 </pre>
             </section>
