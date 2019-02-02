@@ -138,13 +138,13 @@ const translate = gulp.parallel(parseHtml, parseCss, copyJs, parseImages, copyFo
 const build = gulp.series(cleanDist, lint, translate);
 
 const watchServ = function() {
-    watch(srcPath.css, () => parseCss());
-    watch(srcPath.html, () => parseHtml());
-    watch(srcPath.js, () => copyJs());
-    watch(srcPath.img, () => parseImages());
-    watch(srcPath.font, () => copyFonts());
-    watch(srcPath.task, () => copyTaskFiles());
-    watch(srcPath.cmpl, () => copyCompletedFiles());
+    watch(srcPath.css, parseCss);
+    watch(srcPath.html, parseHtml);
+    watch(srcPath.js, copyJs);
+    watch(srcPath.img, parseImages);
+    watch(srcPath.font, copyFonts);
+    watch(srcPath.task, copyTaskFiles);
+    watch(srcPath.cmpl, copyCompletedFiles);
 }
 
 const serveDir = function() {
