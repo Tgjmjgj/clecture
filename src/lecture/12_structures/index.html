@@ -1,21 +1,33 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
 	<meta charset="utf-8">
 	<title>Dynamic structures</title>
 	<meta name="description" content="dynamic structures">
 	<meta name="keywords" content="stack, deq, queue, list">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -24,7 +36,7 @@
                     <h3>Cтруктуры данных</h3>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -92,29 +104,24 @@
                     <p>
                         Опредеяются с помощью ключевого слова <span class="blue">typedef</span>:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 typedef новое_имя тип_данных;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Например:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 typedef unsigned long double ULD;
 typedef int * poINTer;
 typedef char INT8;
 typedef short int INT16;
 typedef int INT32;
 typedef long int INT64;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Дикий пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #define PRECISION 1e-4
 
 typedef short int length;
@@ -195,8 +202,7 @@ int main()
         cout &lt;&lt; "=  " &lt;&lt; sum &lt;&lt; endl;
     }
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -220,8 +226,7 @@ int main()
                     <p>
                         Вместо того, чтобы везде писать так: 
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int ax;
 int ay;
 int az;
@@ -229,17 +234,14 @@ int bx;
 int by;
 int bz;
 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Гораздо лаконичнее и понятнее будет:    
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 Point A;
 Point B;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <p>
@@ -248,28 +250,24 @@ Point B;
                     <p>
                         Вместо такого описания функции скалярного произведения
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int vec_sum(int v1_x, int v1_y, int v2_x, int v2_y)
 {
     int scal = v1_x * v2_x + v1_y * v2_y;
     return scal;
 
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Достаточно было бы написать вот так:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int vec_sum(Vector v1, Vector v2)
 {
     int scal = v1 * v2;
     return scal;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <p>А что если взять функцию вектороного произведения векторов?</p>
@@ -278,27 +276,23 @@ int vec_sum(Vector v1, Vector v2)
                         функции нужно вернуть вектор? 2 int-а сразу не вернешь, придётся
                         добавлять параметры-указатели.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void vec_mult(int v1_x, int v1_y, int v2_x, int v2_y, int* vres_x, int* vres_y)
 {
     *vres_x = v1_x * v2_y;
     *vres_y = v1_y * v2_x;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Добавив же пользовательский тип данных:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 Vector* vec_mult(Vector a, Vector b)
 {
     Vector* res = a * b;
     return res;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <p>
@@ -309,24 +303,20 @@ Vector* vec_mult(Vector a, Vector b)
                         Огромное число характеристик холодильника можно было бы не
                         прописывать целым зоопарком переменных:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char* construction_type = "Sized with freezer";
 char* model = "Samsung RL52TEBSL1/BWT";
 int color = 0x0313FD;
 int power_usage = 315;
 float freezing_pow = 14.4;
 short min_t = -24;
-                        </code>
-                    </pre>              
+                    </code></pre>              
                     <p>
                         А описать всего одним объектом:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 Fridge_propertys samsungRL52T;                            
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -335,8 +325,7 @@ Fridge_propertys samsungRL52T;
                     <p>
                         Описание структуры имеет следующий синтаксис:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct название_типа 
 {
     тип имя1;
@@ -346,13 +335,11 @@ struct название_типа
 };
 
 название_типа имя; 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Например:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct Point 
 {
     int x;
@@ -361,8 +348,7 @@ struct Point
 
 Point A;
 Point B;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Использование объектов</h2>
@@ -399,8 +385,7 @@ Point B;
             <section>
                 <section>
                     <h3>Пример использования</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct PassportInfo
 {
     short series;
@@ -409,24 +394,19 @@ struct PassportInfo
     char* id;
     char* authority;
 };
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 PassportInfo pass1;             // Объект структуры PassportInfo по имени pass1
 PassportInfo* ptrPas = new PassportInfo;
 
 PassportInfo arrOfPass[24]; 
 
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 // Функция принимает два объекта структуры PassportInfo
 // и возвращает указатель на объект структуры PassportInfo
 PassportInfo* functionName(PassportInfo pi1, PassportInfo pi2);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Еще одна структура</h3>
@@ -444,16 +424,14 @@ struct Date
     int day;
 };
      
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Вложенные структуры</h3>
                     <p>
                         Тогда можно дополнить предыдущий пример:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct PassportInfo
 {
     short series;
@@ -465,8 +443,7 @@ struct PassportInfo
     Date issue;         // Объекты одной структуры в качестве полей другой структуры
     Date validity;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Ещё один пример</h3>
@@ -478,8 +455,7 @@ struct PassportInfo
                     <p>
                         Вас бы устроил такой код?
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char* st1_name;
 long st1_record;
 char* st1_phone;
@@ -559,18 +535,15 @@ char* st19_phone;
 char* st20_name;
 long st20_record;
 char* st20_phone;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Добавить массивы</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char** st_names;
 long* st_records;
 char** st_phones;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Выглядит уже неплохо.
                     </p>
@@ -582,8 +555,7 @@ char** st_phones;
                 </section>
                 <section>
                     <h3>Разбавить структурами</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct StudentData
 {
     char* name;
@@ -593,8 +565,7 @@ struct StudentData
 
 
 StudentData* students;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Теперь всё красиво. И со стороны логики, и со стороны внешнего вида.
                     </p>
@@ -612,32 +583,27 @@ StudentData* students;
                         <ins>объявленного статически</ins> объекта
                         используется оператор <span class="blue">. </span>(точка):
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 Point A;
 A.x = 15;
 A.y = -2;
 cout &lt;&lt; A.x &lt;&lt; "  " &lt;&lt; A.y &lt;&lt; endl; 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Для обращения ко внутреннему содержимому
                          объекта <ins>через указатель</ins>
                         используется оператор <span class="blue">-> </span>(стрелка):
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 Point* B = new Point;
 B->x = 15;
 B->y = -2;
 cout &lt;&lt; B->x &lt;&lt; "  " &lt;&lt; B->y &lt;&lt; endl; 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример со студентами</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 StudentData student1;
 student1.name = new char[20];
 strcpy(student1.name, "John Doe");
@@ -651,13 +617,11 @@ strcpy(student2->name, "John Smith");
 student2->record = 478234234;
 student2->phone = new char[20];
 strcpy(student2->phone, "+375 (77) 123-45-67");
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>В поисках Немо</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int number_of_stud = 19;
 const char* sought = "Nemo";
 StudentData* students = new StudentData[n];
@@ -674,13 +638,11 @@ for (int i = 0; i &lt; number_of_stud; ++i)
 }
 
 delete[] students;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Считываем данные из файла</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct StudentData
 {
     char* name;
@@ -727,8 +689,7 @@ int main()
     fclose(file);
     delete[] students;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         В этом коде есть ошибка, найдите её. В итоговом массиве студентов поля 
                         name и phone всех объектов будут равны "", а record будет правильный.
@@ -763,25 +724,21 @@ int main()
                         Функция strtok разбивает buffer на три строки, и возвращает
                         указатели на начало каждой из них.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char* first = strtok(buffer, ",\n");        // Указатель на адрес 0034AFC7
 char* second = strtok(nullptr, ",\n");      // Указатель на адрес 0034AFCC
 char* third = strtok(nullptr, "\n");        // Указатель на адрес 0034AFCF
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/strtok_1.jpg" />
                 </section>
                 <section>
                     <h3>Сохранение адреса</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 students[stud_index]->name = first;         // В name записали адрес 0034AFC7
 long record = atol(second);                 // Создали переменную record = 14
 students[stud_index]->record = record;      // В record записали число 14
 students[stud_index]->phone = third;        // В phone записали адрес 0034AFCF
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/student_1.jpg" />
                 </section>
                 <section>
@@ -794,14 +751,12 @@ students[stud_index]->phone = third;        // В phone записали адр�
                 </section>
                 <section>
                     <h3>Те же адреса</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 students[stud_index]->name = first;         // В name записали адрес 0034AFC7
 long record = atol(second);                 // Создали переменную record = 275378
 students[stud_index]->record = record;      // В record записали число 275378
 students[stud_index]->phone = third;        // В phone записали адрес 0034AFD2
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/student_2.jpg" />
                 </section>
                 <section>
@@ -819,16 +774,14 @@ students[stud_index]->phone = third;        // В phone записали адр�
                 <p>
                     Структура может содеражать указатель на объект такой же структуры:
                 </p>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 struct Element
 {
     char* name;
     int value;
     Element* next;
 };
-                    </code>
-                </pre>
+                </code></pre>
                 <p>
                     Это свойство позволяет создавать по-настоящему динамические структуры данных
                     с переменным числом элементов.
@@ -848,8 +801,7 @@ struct Element
                     <p>
                         Объявляются перечисления при помощь ключевого слова <span class="blue">enum</span>:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum Enum_name
 {
     name1,
@@ -857,8 +809,7 @@ enum Enum_name
     // ...
     nameN
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Объекты перечисления</h2>
@@ -866,8 +817,7 @@ enum Enum_name
                         Можно создать объект перечисления. Такому объекту возможно 
                         присвоить только одно из перечисленных в нём значений.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum Languages
 {
     C,
@@ -881,8 +831,7 @@ enum Languages
 Language Lang_to_use;
 Lang_to_use = Lisp;
 Lang_to_use = Haskell;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Целочисленная интерпретация</h3>
@@ -895,8 +844,7 @@ Lang_to_use = Haskell;
                         константой типа int. Значения для этих констант присваиваются неявно от 0
                         и по возрастанию;
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum KEYBOARD_KEYS
 {
     ENTER,          // Неявно const int Enter = 0
@@ -906,16 +854,14 @@ enum KEYBOARD_KEYS
     ALT,            // const int Alt = 4
     BACKSPACE       // const int Backspce = 5
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Явное назначение</h2>
                     <p>
                         Можно также присваивать значения элементам перечисления и самостоятельно:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum Units
 {
     Bits = 1,
@@ -923,8 +869,7 @@ enum Units
     KB = 1000;
     MB = 1000000;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Перечисления и числа</h3>
@@ -948,14 +893,12 @@ enum Units
                     <p>
                         Можно сделать это так:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 bool open_document(char* name, char* security_token, int open_mode);
 
 open_document("docs.dts", "z7fsjf73jhmc011ncd8sjf", 3);
 open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", 1);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Где при передаче в open_mode единицы будет подразумеваться режим только для чтения,
                         при передаче 2 режим только для записи, 3 - режим для чтения и записи.
@@ -966,8 +909,7 @@ open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", 1);
                     <p>
                         А лучше сделать так:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum OPEN_MODE 
 {
     READ_ONLY = 1,
@@ -979,16 +921,14 @@ bool open_document(char* name, char* security_token, OPEN_MODE mode);
 
 open_document("docs.dts", "z7fsjf73jhmc011ncd8sjf", READ_WRITE);
 open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", READ_ONLY);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Еще один пример</h3>
                     <p>
                         Вместо того, чтобы писать вот так, с непонятными числами:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 bool draw_circle(unsigned int radius, int color, unsigned short thickness)
 {
     bool ret_val = false;
@@ -1032,16 +972,14 @@ bool draw_circle(unsigned int radius, int color, unsigned short thickness)
     }
     return ret_val;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Например:</h3>
                     <p>
                         Можно написать вот так:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum COLORS
 {
     NO_COLOR = 0,
@@ -1095,8 +1033,7 @@ bool draw_circle(unsigned int radius, COLORS color, unsigned short thickness)
     }
     return ret_val;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1110,15 +1047,13 @@ bool draw_circle(unsigned int radius, COLORS color, unsigned short thickness)
                         Объединения описываются также как и структуры, только вместо слова
                         struct используется ключевое слово <span class="blue">union</span>.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 union Base
 {
     int i;
     float f;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Структуры vs объединения</h2>
@@ -1129,29 +1064,25 @@ union Base
                     <p>
                         Внутри структуры одновременно находятся И i, И f, И pchar.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct A
 {
     int i;
     double d;
     char* pchar;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Внутри объединения одновременно находятся ИЛИ i, ИЛИ f, ИЛИ pchar.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 union B
 {
     int i;
     double d;
     char* pchar;
 };              
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Объединения в памяти</h2>
@@ -1175,8 +1106,7 @@ union B
                     <p>
                         И у n.index, и у n.name, и у n.delta один и тот же адрес в памяти.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 union Bucket
 {
     int index;
@@ -1205,8 +1135,7 @@ int main()
 
     return 0;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1238,8 +1167,7 @@ int main()
                     <p>
                         Имеет такую форму определения:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct/union имя_типа 
 {
     тип имя1 : размер1;
@@ -1247,8 +1175,7 @@ struct/union имя_типа
     // ...
     тип имяN : размерM;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>А как же байты?</h2>
@@ -1269,8 +1196,7 @@ struct/union имя_типа
                     <p>
                         Обычная структура:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct StudentRecord
 {
     int faculty;
@@ -1278,8 +1204,7 @@ struct StudentRecord
     int course;
     int group;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Со стороны, обычная структура. Представляет запись группы студентов университета в программе,
                         и содержит код факультета, код кафедры, номер курса и номер группы.
@@ -1290,8 +1215,7 @@ struct StudentRecord
                 </section>
                 <section>
                     <h3>..или нет</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct StudentRecord
 {
     unsigned short faculty : 5;
@@ -1299,8 +1223,7 @@ struct StudentRecord
     unsigned short course : 2;
     unsigned short group : 3;
 };                            
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Теперь объект структуры занимает 2 байта. Это почти <span class="red">в 8 раз меньше</span>.
                     </p>
@@ -1311,8 +1234,7 @@ struct StudentRecord
                 </section>
                 <section>
                     <h3>Пример использования</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct StudentRecord
 {
     unsigned short faculty : 5;
@@ -1338,8 +1260,7 @@ int main()
 
     return 0;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1351,8 +1272,7 @@ int main()
                     <p>
                         Указатели, float, double, и тем более пользовательские типы, не допускаются.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct test_bf
 {
     unsigned char first : 1;            // Okay
@@ -1366,16 +1286,14 @@ struct test_bf
     char* oops : 8;                     // Not okay
     test_bf mmgh: 9;                    // Not okay
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Особенности 1</h2>
                     <p>
                         Размер битового поля может составлять от 1 бита до размера типа данных этого поля.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct bit_fields
 {
     char a : 1;         // Okay
@@ -1384,8 +1302,7 @@ struct bit_fields
     int  d : 10;        // Okay
     int  e : 33;        // Error  
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Особенности 2</h2>
@@ -1393,8 +1310,7 @@ struct bit_fields
                         Битовые поля типов данных разного размера между собой никак не пересекаются
                         (bool и char можно комбинировать - оба 1 байт).
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 // sizeof(no_bits) == 8
 struct no_bits
 {
@@ -1402,10 +1318,8 @@ struct no_bits
     short s;
     int i;
 };
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 // sizeof(with_bits) == 8 
 struct with_bits
 {
@@ -1413,8 +1327,7 @@ struct with_bits
     short s : 1;
     int i : 1;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Особенности 3</h2>
@@ -1429,8 +1342,7 @@ struct with_bits
                     <p>
                         Если 17 бит типа short, то выделено будет уже 4 байта - под 2 элемента типа short.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 // sizeof(another_test_struct) == 4
 struct another_test_struct
 {
@@ -1439,10 +1351,8 @@ struct another_test_struct
     int bit3 : 8;
     int bit4 : 8;
 };
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 // sizeof(yet_another_one) == 8
 struct yet_another_one
 {
@@ -1451,8 +1361,7 @@ struct yet_another_one
     int bit3 : 8;
     int bit4 : 8;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
 
@@ -1518,25 +1427,21 @@ struct yet_another_one
                     <blockquote>
                         Объявление элемента динамической структуры данных выглядит следующим образом:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct имя_типа 
 {
     информационное_поле;
     адресное_поле;
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                     Например:
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct TNode 
 {
     int Data;       // целочисленные данные
     TNode *Next;    // адресное поле
 };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1587,8 +1492,7 @@ struct TNode
                     <blockquote>
                         Рассмотрим пример организации полустатического стека через обыкновенный массив
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #define SIZE 100            // Максимальный размер
 int Stack[SIZE];            // Массив для хранения стека
 int SP;                     // Указатель стека
@@ -1607,8 +1511,7 @@ int Pop()                   // Исключение из стека
         return 0;           // Стек пуст
     return (Stack[SP--]);   // Вернуть элемент по указателю и уменьшить указатель
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1773,8 +1676,7 @@ int Pop()                   // Исключение из стека
                 </section>
                 <section>
                     <h2>Работа со списками</h2>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 struct list_element
 {
     list_element* next;
@@ -1794,8 +1696,7 @@ p != nullptr                // Проверка "пока не конец спи
 p->next == nullptr          // Проверка на последний элемент
 
 for (list_element* p = phead; p != nullptr; p = p->next)    // Обход списка
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Слияние двух списков</h2>
@@ -1863,15 +1764,13 @@ for (list_element* p = phead; p != nullptr; p = p->next)    // Обход спи
                         Для использования какого-либо контейнера необходимо подключить 
                         его библиотеку через команду <i>include</i>
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #include &lt;stack&gt;
 #include &lt;queue&gt;
 #include &lt;deque&gt;
 #include &lt;list&gt;
 #include &lt;vector&gt;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Также стоит отметить, что все классы STL находятся в пространстве имён <i>std</i>.
                     </p>
@@ -1889,8 +1788,7 @@ for (list_element* p = phead; p != nullptr; p = p->next)    // Обход спи
                 <p>
                     Например:
                 </p>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 stack&lt;int&gt; st1;
 queue&lt;double&gt; qu1;
 vector&lt;string&gt; vc1;
@@ -1904,8 +1802,7 @@ struct Corpuscle
 };
 
 list&lt;Corpuscle&gt; li1;
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -1932,13 +1829,11 @@ list&lt;Corpuscle&gt; li1;
                     <p>
                         Пример:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 stack&lt;int&gt; s;
 s.push(123);            // s == { 123 }
 s.push(-3578);          // s == { 123, -3578 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>stack: pop</h2>
@@ -1951,15 +1846,13 @@ s.push(-3578);          // s == { 123, -3578 }
                     <p>
                         Пример:
                     </p>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 stack&lt;int&gt; s;
 s.push(123);                // s == { 123 }
 s.push(-3578);              // s == { 123, -3578 }
 s.pop();                    // s == { 123 }
 s.pop();                    // s == { }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>stack: top</h2>
@@ -1973,15 +1866,13 @@ s.pop();                    // s == { }
                     <p>
                         Пример:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 stack&lt;int&gt; s;
 s.push(123);
 cout &lt;&lt; s.top() &lt;&lt; endl;        // 123
 s.push(-3578);     
 cout &lt;&lt; s.top() &lt;&lt; endl;        // -3578
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>stack: empty</h2>
@@ -1994,8 +1885,7 @@ cout &lt;&lt; s.top() &lt;&lt; endl;        // -3578
                     <p>
                         Пример:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 stack&lt;int&gt; s;
 if (s.empty())                      // true
 {
@@ -2013,8 +1903,7 @@ if (s.empty())                      // true
 {
     cout &lt;&lt; "стек пуст\n";
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>stack: size</h2>
@@ -2027,8 +1916,7 @@ if (s.empty())                      // true
                     <p>
                         Пример:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 stack&lt;int&gt; s;
 int sz = s.size();      // sz = 0
 s.push(123); 
@@ -2037,8 +1925,7 @@ sz = s.size();          // sz = 2
 s.pop();
 sz = s.size();          // sz = 1     
 s.pop();     
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -2072,8 +1959,7 @@ s.pop();
                 </section>
                 <section>
                     <h2>Пример использования очереди</h2>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 queue&lt;char&gt; q;
 q.push('A');                // q == { 'A' }         
 q.push('B');                // q ==  { 'A', 'B' }
@@ -2083,8 +1969,7 @@ q.pop();                    // q == { 'B', 'C' }
 char bk = q.back();         // bk == 'C'
 q.pop();                    // q == { 'C' }
 q.empty();                  // false
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -2142,16 +2027,34 @@ q.empty();                  // false
         </div>
     </div>
 	<aside id="presentable-icon" class="cpp">
-		<a title="Содержание лекции" href="#/0/1">
-			<i class="fa fa-list-ul fa-2x"></i>
-		</a>
-	</aside>
-    <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
-	<script src="../../js/bundle.min.js"></script>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,64 +1,64 @@
 //modules
 
-const browserSync = require("browser-sync"),
-    del = require("del"),
-    gulp = require("gulp"),
-    autoprefixer = require("gulp-autoprefixer"),
-    cleanCSS = require("gulp-clean-css"),
-    csslint = require("gulp-csslint"),
-    gulpif = require("gulp-if"),
-    imagemin = require("gulp-imagemin"),
-    jshint = require("gulp-jshint"),
-    newer = require("gulp-newer"),
-    run = require("gulp-run"),
-    sourcemaps = require("gulp-sourcemaps"),
-    uglify = require("gulp-uglify"),
-    useref = require("gulp-useref"),
-    watch = require("gulp-watch"),
-    pipe = require("multipipe");
+const browserSync = require('browser-sync'),
+    del = require('del'),
+    gulp = require('gulp'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cleanCSS = require('gulp-clean-css'),
+    csslint = require('gulp-csslint'),
+    gulpif = require('gulp-if'),
+    imagemin = require('gulp-imagemin'),
+    jshint = require('gulp-jshint'),
+    newer = require('gulp-newer'),
+    run = require('gulp-run'),
+    sourcemaps = require('gulp-sourcemaps'),
+    uglify = require('gulp-uglify-es').default,
+    useref = require('gulp-useref'),
+    watch = require('gulp-watch'),
+    pipe = require('multipipe');
 
 //variables
 
-const yaspellerDictionary = "yadict.json";
-
 const srcPath = {
-    "src": "./src",
-    "html": "./src/**/*.html",
-    "img": "./src/**/*.+(jpg|jpeg|png|svg|gif)",
-    "css": ["./src/!(css|js)*/**/*.css"],
-    "cssLint": "./src/**/*.css",
-    "js": "./src/!(js)*/**/*.js",
-    "jsLint": ["./src/**/*.js", "!./src/**/*.min.js"],
-    "font": "./src/font/**/*.*",
-    "analysis": "./code-analysis/",
-    "task": "./src/task/**/*.pdf",
-    "cmpl": "./src/completed/**/*.*"
+    'src': './src',
+    'html': './src/**/*.html',
+    'img': './src/**/*.+(jpg|jpeg|png|svg|gif)',
+    'css': ['./src/!(css|js)*/**/*.css'],
+    'cssLint': './src/**/*.css',
+    'js': './src/!(js|completed)*/**/*.js',
+    'jsLint': ['./src/**/*.js', '!./**/node_modules/**', '!./src/**/*.min.js'],
+    'font': './src/font/**/*.*',
+    'analysis': './code-analysis/',
+    'task': './src/task/**/*.+(pdf|тых|html|css)',
+    'cmpl': ['./src/completed/**/*.*', '!./**/node_modules/**'],
+    'print': './src/css/print/*.css'
 };
 
 const distPath = {
-    "dist": "./dist/",
-    "html": "./dist/",
-    "img": "./dist/",
-    "css": "./dist/css/",
-    "js": "./dist/",
-    "font": "./dist/font/",
-    "task": "./dist/task/",
-    "cmpl": "./dist/completed/"
+    'dist': './dist/',
+    'html': './dist/',
+    'img': './dist/',
+    'css': './dist/css/',
+    'print': './dist/css/print',
+    'js': './dist/',
+    'font': './dist/font/',
+    'task': './dist/task/',
+    'cmpl': './dist/completed/'
 };
 
 const pluginSettings = {
     autoprefixer: {
-        browsers: ["last 2 versions", "ie 9", "ie 10"]
+        browsers: ['last 2 versions', 'ie 9', 'ie 10']
     },
     cleanCSS: {
-        compatibility: "*"
+        compatibility: '*'
     },
     csslint: {
-        filename: "index.html",
-        directory: srcPath.analysis + "/css/"
+        filename: 'index.html',
+        directory: srcPath.analysis + '/css/'
     },
     jshint: {
-        filename: srcPath.analysis + "/js/index.html",
+        filename: srcPath.analysis + '/js/index.html',
         createMissingFolders: true
     }
 };
@@ -132,12 +132,33 @@ const copyCompletedFiles = function() {
         .pipe(gulp.dest(distPath.cmpl));
 }
 
+const copyPrintJsFiles = function() {
+    return gulp.src(srcPath.print)
+        .pipe(gulp.dest(distPath.print));
+}
+
+const copyThemeCssFiles = function() {
+    return gulp.src('./src/css/theme/*.css')
+        .pipe(gulp.dest('./dist/css/theme/'));
+}
+
+const copyHlJsFiles = function() {
+    return gulp.src('./src/js/highlight/*.js')
+        .pipe(gulp.dest('./dist/js/'));
+}
+
+const copyCustomCss = function() {
+    return gulp.src('./src/css/custom.css')
+        .pipe(gulp.dest('./dist/css/'));
+}
+
 const lint = gulp.parallel(lintJs, lintCss);
-const translate = gulp.parallel(parseHtml, parseCss, copyJs, parseImages, copyFonts, copyTaskFiles, copyCompletedFiles);
+const translate = gulp.parallel(parseHtml, parseCss, copyJs, parseImages, copyFonts, copyCustomCss, copyTaskFiles, copyCompletedFiles, copyPrintJsFiles, copyThemeCssFiles, copyHlJsFiles);
 
 const build = gulp.series(cleanDist, lint, translate);
 
 const watchServ = function() {
+
     watch(srcPath.css, parseCss);
     watch(srcPath.html, parseHtml);
     watch(srcPath.js, copyJs);
@@ -145,6 +166,10 @@ const watchServ = function() {
     watch(srcPath.font, copyFonts);
     watch(srcPath.task, copyTaskFiles);
     watch(srcPath.cmpl, copyCompletedFiles);
+    watch(srcPath.print, copyPrintJsFiles);
+    watch('./src/js/highlight/*.js', copyHlJsFiles);
+    watch('./src/css/custom.css', copyCustomCss);
+
 }
 
 const serveDir = function() {
@@ -159,7 +184,7 @@ const serverWatch = gulp.parallel(watchServ, serveDir);
 const default_task = gulp.series(build, serverWatch);
 
 const ya = function(cb) {
-    run(`npx yaspeller --dictionary ${yaspellerDictionary} -e ".md,.html" .\\`).exec()
+    run(`npx yaspeller .\\`).exec()
         .on("error", function(err) {
             console.error(err.message);
             cb();

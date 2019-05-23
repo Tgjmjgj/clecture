@@ -6,17 +6,29 @@
 	<title>Базовые операции ввода/вывода</title>
 	<meta name="description" content="ввод/вывод">
 	<meta name="keywords" content="ввод/вывод">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -25,7 +37,7 @@
 					<h3>Базовые операции ввода/вывода</h3>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -89,11 +101,9 @@
                 <blockquote>
                     Обмен данными реализуется с помощью библиотеки функций ввода-вывода:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 #include &lt;stdio.h&gt;
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -101,19 +111,15 @@
                     <blockquote>
                         Функция <i>printf()</i> позволяет выводить на дисплей данные всех типов, работать со списком из нескольких аргументов и определять способ форматирования данных:
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 printf ( &quot;форматная_строка&quot;, список_аргументов );
-                    </code>
-                </pre>
+                </code></pre>
                     <blockquote>
                         <i>форматная_строка</i> – строка символов, заключенных в кавычки, которая показывает, как должны быть напечатаны аргументы. Например:
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 printf("Число Пи равно %f\n", pi);
-                    </code>
-                </pre>
+                </code></pre>
                 </section>
                 <section>
                     <h2>Форматирование</h2>
@@ -146,19 +152,16 @@ printf("Число Пи равно %f\n", pi);
             <section>
                 <section>
                     <h3>Примеры форматированного ввода</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 printf("Эта строка будет выведена на консоль");
 printf("Но почему они слиплись?");
 printf("\n А\n вот\n чего\n то\n не\n хватало\n");                 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/format_output_1.jpg">
                 </section>
                 <section>
                     <h3>Пример 2</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int a = 136;
 printf("Вот так можно вывести %d внутри текста\n", a);
 
@@ -168,14 +171,12 @@ printf("%c\n", symbol);
 float e = 2.7182818;
 printf("Дробное число: %f\n", e);
 printf("Ничто не мешает вывести сразу %d и %f, а потом снова %e\n", a, e, e);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/format_output_2.jpg">
                 </section>
                 <section>
                     <h3>Пример 3</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int num = 300;
 printf("В восьмеричной сс %d это %o\n", num, num);
 printf("А в шестнадцатеричной: %x", num);
@@ -186,8 +187,7 @@ trum = 1234.1234567891234;
 printf("%f\n", trum);
 printf("%10.2f\n", trum);
 printf("%4.2f\n", trum);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/format_output_3.jpg">
                 </section>
             </section>
@@ -197,23 +197,19 @@ printf("%4.2f\n", trum);
                     Функция <i>scanf()</i> является многоцелевой функцией, дающей возможность вводить в компьютер данные любых типов. 
                     Указатели формата аналогичны тем, которые используются функцией <i>printf()</i>.
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 scanf ( &quot;форматная_строка&quot;, список_аргументов );
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     В качестве аргументов используются указатели объектов  &amp;. Например:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 int x;
 double y;
 scanf(&quot; %d%f &quot;, &amp;x, &amp;y);
 char mas[20];
 scanf(&quot; %s &quot;, mas);
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <h3>Scanf и char</h3>
@@ -226,15 +222,13 @@ scanf(&quot; %s &quot;, mas);
                     Для избежания проблем при работе функции scanf с char-ами, нужно в форматной строке перед 
                     знаком процента ставить пробел:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 // Не правильно
 scanf_s("%c", &symb, sizeof(symb));
 
 // Правильно
 scanf_s(" %c", &symb, sizeof(symb));
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <h2>Ограничения форматированного ввода</h2>
@@ -242,11 +236,9 @@ scanf_s(" %c", &symb, sizeof(symb));
                     В современных версиях языка C++ использование функций форматированного и строкового ввода считается устаревшим и небезопасным.
                     Существуют расширенные безопасные варианты этих функций с добавлением суффикса _s: <i>scanf_s(), gets_s()</i>.
                     <p>Можно использовать и стандартные версии функций, для чего в файле &quot;stdafx.h&quot; необходимо добавить макрос:</p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #define _CRT_SECURE_NO_WARNINGS
-                        </code>
-                    </pre>
+                    </code></pre>
                 </blockquote>
             </section>
             <section>
@@ -258,8 +250,7 @@ scanf_s(" %c", &symb, sizeof(symb));
                     <blockquote>
                         Функция <i>puts()</i> осуществляет вывод информации на экран. Параметром функции должна быть строка:
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 puts(&quot;Эй ты,а ну иди сюда!&quot;); // строковый литерал
 
 #define MESSAGE &quot;Эй, не слышишь что-ли?&quot;
@@ -267,16 +258,14 @@ puts(MESSAGE); // строковая константа
 
 char str[] = &quot;Оглох или как, э?!&quot;;  // строковая переменнная
 puts(str);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Функция <i>putchar()</i></h3>
                     <blockquote>
                         Функция <i>putchar()</i> предназначена для вывода единичного символа на экран. Параметром функции должен быть символ в том или ином виде.
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 putchar('g'); // символьный литерал
 
 #define SYMBOL 'ж'
@@ -284,22 +273,19 @@ putchar(SYMBOL); // символьная константа
 
 char letter = 'R';
 putchar(letter);  // символьная переменная
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Функция <i>gets()</i></h3>
                     <blockquote>
                         Функция <i>gets()</i> вводит строку в переменную:
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 char ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR[60];
 printf(&quot;Как вас звать?&quot;);
 gets(ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR);
 printf(&quot;Привет, %s\n&quot;, ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>
@@ -308,12 +294,10 @@ printf(&quot;Привет, %s\n&quot;, ARGDUUWEDOPERLAKSBILPLAMKUNTAKAKUR);
                     <blockquote>
                         Функция <i>getchar()</i> вводит с клавиатуры единичный символ:
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 int code;
 code = getchar();
-                    </code>
-                </pre>
+                </code></pre>
                 </section>
             </section>
             <section>
@@ -331,36 +315,30 @@ code = getchar();
                 <h3>Потоковый вывод</h3>
                 <blockquote>Вывод осуществляется с помощью операции &lt;&lt;, ввод с помощью операции &gt;&gt;.
                 <p>Пример:</p></blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 using std::cout;
 ......................
 cout &lt;&lt; &quot;Пример вывода: &quot; &lt;&lt; 34;
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Выражение напечатает строку &quot; вывода: &quot;, за которой будет выведено число 34.  
                     Используя один стандартный поток вывода <i>cout</i> можно отобразить несколько аргументов. Между собой аргументы разделяются операторами вставки:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 using std::cout;
 ......................
 int age = 103;
 cout &lt;&lt; &quot;Если вам исполнилось : &quot; &lt;&lt; age &lt;&lt; &quot; года, примите мои поздравления.&quot;;
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <h3>Потоковый ввод</h3>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 using std::cin;
 ......................
 int x;
 cin &gt;&gt; x;
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Выражение введет целое число с консоли в переменную <i>x</i> (для того, чтобы ввод произошел, нужно напечатать число и нажать клавишу Enter.)
                 </blockquote>
@@ -381,77 +359,89 @@ cin &gt;&gt; x;
                         Для использования манипуляторов их надо вывести в выходной поток. Кроме того, в символьную строку, 
                         заключенную в двойные кавычки, можно включать управляющие последовательности (escape sequences):
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 using namespace std;
 ......................
 int x = 117;
 cout &lt;&lt; &quot;Десятичный вид: \t &quot; &lt;&lt; dec &lt;&lt; x &lt;&lt; endl
      &lt;&lt; &quot;Восьмеричный вид: \t &quot; &lt;&lt; oct &lt;&lt;; x &lt;&lt; endl
      &lt;&lt; &quot;Шестнадцатеричный вид: \t &quot; &lt;&lt; hex &lt;&lt; x &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Использование манипуляторов 2</h3>
                     <blockquote>
                         Ниже приведен пример использования манипуляторов с параметрами для вывода:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 using namespace std;
 ......................
 double x;   // вывести число в поле общей шириной 6 символов
             // (3 цифры до запятой, десятичная точка и 2 цифры после)
 cout &lt;&lt; setw(6) &lt;&lt; setprecision(2) &lt;&lt; x &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Использование манипуляторов 3</h3>
                     <blockquote>
                         Те же манипуляторы (за исключением <i>endl</i> и <i>ends</i>) могут использоваться и при вводе:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #include &lt;iomanip&gt;
 ......................
 using namespace std;
 ......................
 int x;
 cin &gt;&gt; hex &gt;&gt; x; // ввести шестнадцатеричное число
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
                 <h2>Что почитать дополнительно?</h2>
 				<ul>
-                        <li>
-                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=46">
-                                <b>Главы 4 - 8</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=53">
-                                <b>Глава 3</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
-                            </a>
-                        </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=46">
+                            <b>Главы 4 - 8</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=53">
+                            <b>Глава 3</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
+                        </a>
+                    </li>
 				</ul>
             </section>
 		</div>
 	</div>
 	<aside id="presentable-icon" class="cpp">
-		<a title="Содержание лекции" href="#/0/1">
-			<i class="fa fa-list-ul fa-2x"></i>
-		</a>
-	</aside>
-    <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
-	<script src="../../js/bundle.min.js"></script>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>

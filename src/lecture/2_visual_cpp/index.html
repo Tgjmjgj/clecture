@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 
 <head>
@@ -6,17 +6,29 @@
 	<title>Visual C++</title>
 	<meta name="description" content="процедурное программирование, visual c++, visual c, конструкции c++">
 	<meta name="keywords" content="c, c++">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -25,7 +37,7 @@
                     <h3>Основы C++ и среда разработки Visual Studio</h3>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -141,12 +153,10 @@
                     Размер участка памяти, выделяемой для переменной, и интерпретация содержимого зависят от типа, указанного в определении переменной. 
                     Тип переменной изменить нельзя. Простейшая форма объявления переменных:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 тип_данных имя_переменной;              //объявление переменной
 тип_данных имя_переменной = значение;   //объявление вместе с инициализацией
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -232,11 +242,9 @@
                     <blockquote>
                         Константа с плавающей точкой – десятичное число, представленное в виде действительной величины с десятичной точкой или экспонентой. Формат имеет вид:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 [ цифры ].[ цифры ] [ E [+|-] цифры ]
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Число с плавающей точкой состоит из целой и дробные части и (или) экспоненты. Константы с плавающей точкой представляют положительные величины удвоенной точности (имеют тип double). 
                         Для определения отрицательной величины необходимо сформировать константное выражение, состоящее из знака минуса и положительной константы: <i>115.75, 1.5Е-2, -0.025, .075, -0.85Е2</i>
@@ -281,11 +289,9 @@
                         Ключевое слово const – модификатор типа, указывающий, что переменная является константой. 
                         Описание констант начинается с ключевого слова const, далее указывается тип и значение:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 const int two = 2;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Таким именованным константам нельзя присваивать значения, а также нельзя объявлять без инициализации.
                     </blockquote>
@@ -297,23 +303,19 @@ const int two = 2;
                     Комментарий – это набор символов, которые игнорируются компилятором.
                     Введение комментария начинается с символов /* и заканчивается символами */. Все, что помещено между ними, игнорируется:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 /*  Это у нас
     такой
     многострочный
     комментарий   */
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Доступны также и однострочные комментарии. В С++ используется пара символов //, указывающая начало строки комментария.
                     В этом случае концом комментария считается конец строки, так что нет необходимости отмечать его специальным символом:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 // комментарий на одну строчку
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -362,11 +364,9 @@ const int two = 2;
                 <blockquote>
                     Кроме того, в программе  может быть использована глобальная директива директива <i>using</i>:
                 </blockquote>
-                <pre>
-                <code class="cpp">
+                <pre><code class="cpp">
 using namespace std;
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -420,25 +420,21 @@ using namespace std;
                     <blockquote>
                         Формат директивы определяется как:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #define идентификатор строка_текста
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Отмена <i>define</i></h3>
                     <blockquote>
                         Определения символических констант и макросов могут быть аннулированы при помощи директивы #undef.
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 #define TRI 3
 #define F 5
 #undef TRI              // TRI теперь не определен
 #define F 10            // F переопределен как 10
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Макрос <i>assert</i></h3>
@@ -449,11 +445,9 @@ using namespace std;
                         Макрос удобно использовать при отладке. Например, переменная <i>x</i> в программе не должна принимать значение большее, чем 10. 
                         В этом случае макрос <i>assert</i> можно использовать для проверки значения <i>x</i> и вывода сообщения об ошибке, если значение <i>i</i> вышло из допустимого диапазона:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 assert (x <= 10);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Отмена <i>assert</i></h3>
@@ -461,11 +455,9 @@ assert (x <= 10);
                         Если х будет иметь значение, большее, чем 10, то программа выдаст сообщение об ошибке, содержащее номер строки и имя файла, после чего завершит свою работу.
                         <p>Для отключения всех макросов <i>assert</i> в проекте достаточно в начале программы добавить строку</p>
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 #define NDEBUG
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -507,13 +499,11 @@ assert (x <= 10);
                     <blockquote>
                         Главная функция может выглядеть следующим образом:
                     </blockquote>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 void tmain() { ... }
 
 int _tmain(int argc, char* argv[]) { ... }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Структура программы 3</h3>
@@ -574,17 +564,35 @@ int _tmain(int argc, char* argv[]) { ... }
 
 		</div>
 	</div>
-	<aside id="presentable-icon">
-		<a title="Содержание лекции" href="#/0/1">
-			<i class="fa fa-list-ul fa-2x"></i>
-		</a>
-    </aside>
-    <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+	<aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
-	<script src="../../js/bundle.min.js"></script>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>

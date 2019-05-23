@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 
 <head>
@@ -6,17 +6,29 @@
 	<title>Visual C++</title>
 	<meta name="description" content="процедурное программирование, visual c++, visual c, конструкции c++">
 	<meta name="keywords" content="c, c++">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -25,7 +37,7 @@
                     <h3>Условия и циклы</h3>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -56,19 +68,16 @@
                     <ul>
                         <li>
                             <p>сокращенная:</p>
-                            <pre>
-                                <code class="cpp">
+                            <pre><code class="cpp">
 if (условие)
 {
     выражение_1;
 }
-                                </code>
-                            </pre>
+                            </code></pre>
                         </li>
                         <li>
                             <p>полная:</p>
-                            <pre>
-                                <code class="cpp">
+                            <pre><code class="cpp">
 if (условие)
 {
     выражение_1;
@@ -77,8 +86,7 @@ else
 {
     выражение_2;
 }
-                                </code>
-                            </pre>
+                            </code></pre>
                         </li>
                     </ul>
                 </section>
@@ -99,8 +107,7 @@ else
             <section>
                 <section>
                     <h3>Примеры</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 if (i &lt; j)
 {
     i++;
@@ -122,31 +129,27 @@ else
     cout &lt;&lt; "Проблема, товарищи!" &lt;&lt; endl;
     exit(EXIT_FAILURE);
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 2</h3>
                     <p>
                         Иногда пропуск фигурных скобок может сыграть злую шутку:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 if (time > 18)
     if (at_work)
         salary++;
 else
     go_work();
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 3</h3>
                     <p>
                         Проверить, имеют ли два введённых числа одинаковую чётность.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int a, b;
 cout &lt;&lt; "Введите 2 числа:\n";
 cin &gt;&gt; a &gt;&gt; b;
@@ -154,16 +157,14 @@ if (a % 2 == b % 2)
     cout &lt;&lt; "Всё красиво" &lt;&lt; endl;
 else
     cout &lt;&lt; "Не в этот раз" &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 4</h3>
                     <p>
                         Определить, есть ли среди первых 5 цифр в дробной части заданного положительного вещественного числа, цифра 9.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 float f = 45.31284284;
 f *= 10;
 int n1 = (int)f % 10;
@@ -199,16 +200,14 @@ if (n5 == 9)
     cout &lt;&lt; "Найдено!\n";
 else
     cout &lt;&lt; "Не-а\n";
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 5</h3>
                     <p>
                         Даны действительные числа X, Y, Z. Поменять значения переменных так, чтобы X &lt; Y &lt; Z.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int x = 42, y = 1, z = 10;
 int tmp;
 
@@ -230,14 +229,12 @@ if (y &lt; x)
     x ^= y;
     y ^= x;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
                 <h3>Выбор одного из вариантов</h3>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 int x = 2, y = 2, z;
 char symb;
 cin &gt;&gt; symb;
@@ -247,8 +244,7 @@ else if (symb == '-') z = x - y;
 else if (symb == '*') z = x * y;
 else if (symb == '/') z = x / y;
 // ...
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -257,8 +253,7 @@ else if (symb == '/') z = x / y;
                         Другим способом организации выбора из множества различных вариантов является использование 
                         специального оператора выбора switch. Формат оператора следующий: 
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 switch (выражение)
 {
     [ case  проверочное_выражение_1]: [ список_операторов_1 ] break;
@@ -270,8 +265,7 @@ switch (выражение)
     [ default: [ список_операторов_N ]]
 
 }                        
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Switch</h2>
@@ -296,8 +290,7 @@ switch (выражение)
                     <blockquote>
                         Без операторов break в конце case, все case, после подходящего, будут выполняться за ним!
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int i = 2;
 
 switch (i)
@@ -308,13 +301,11 @@ switch (i)
     case 4: i -= 5; 
     default:             ;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 2</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int x = 2, y = 2, z;
 char symb;
 cin &gt;&gt; symb;
@@ -327,8 +318,7 @@ switch (symb)
     case '/': y = x / y; break;
     default: cout &lt;&lt; "Пусто";
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -370,14 +360,12 @@ switch (symb)
                     <p>
                         Цикл for имеет следующий формат:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 for ( выражение_1 ; условие_продолжения ; выражение_3)
 {
     тело
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/for_scheme.jpg">
                 </section>
                 <section>
@@ -406,8 +394,7 @@ for ( выражение_1 ; условие_продолжения ; выраж�
                         Проверка условия всегда выполняется в начале цикла. Это значит, что тело цикла 
                         может ни разу не выполниться, если условие выполнения сразу будет ложным. Например:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int i, b;
 
 for (i = 1; i &lt; 10; i++)            // Выполнится
@@ -415,8 +402,7 @@ for (i = 1; i &lt; 10; i++)            // Выполнится
 
 for (int j = 1; j > 10; ++j)        // Не выполнится
     b = i * i;                           
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Несколько переменных цикла</h3>
@@ -424,8 +410,7 @@ for (int j = 1; j > 10; ++j)        // Не выполнится
                         Некоторые варианты использования оператора for повышают его гибкость за 
                         счет возможности использования нескольких переменных, управляющих циклом: 
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int top, bot;
 char string[100], temp;
 
@@ -435,8 +420,7 @@ for (top = 0, bot = 100; top &lt; bot; top++, bot--)
     string[top] = string[bot];
     string[bot] = temp;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Специфические примеры</h3>
@@ -444,19 +428,15 @@ for (top = 0, bot = 100; top &lt; bot; top++, bot--)
                         Т.к. в цикле for ни одно из выражений не является обязательным, его можно записать в разных
                         вариациях:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 for ( ; ; )         // Бесконечный цикл
 {
     // ...
 }
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="css">
+                    </code></pre>
+                    <pre><code class="css">
 for (int i = 0; t[i] &lt; 10; i++) ;    // Поиск элемента по условию
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Обе точки с запятой всегда должны присутствовать независимо от того, 
                         пропущено ли какое-то одно из управляющих выражений или даже все сразу.
@@ -469,20 +449,17 @@ for (int i = 0; t[i] &lt; 10; i++) ;    // Поиск элемента по ус
                     <p>
                         Оператор цикла while называется циклом с предусловием и имеет следующий формат: 
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 while (условие_продолжения)
 {
     тело
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/while_scheme.jpg">
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 double value = 0.0;
 double sum = 0.0;
 int i = 0;
@@ -497,8 +474,7 @@ while (indicator == 'y')
     cout &lt;&lt; endl &lt;&lt; " Хотите продолжить? ";
     cin &gt;&gt; indicator;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Типичной ошибкой программирования является отсутствие в теле структуры while 
                         действия, которое приведет со временем к ложному условию while. 
@@ -514,21 +490,18 @@ while (indicator == 'y')
                         в тех случаях, когда необходимо выполнить тело цикла хотя бы один раз. 
                         Формат оператора имеет следующий вид: 
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 do
 {
     тело
 }    
 while (условие_продолжения);                           
-                        </code>
-                    </pre>
+                    </code></pre>
                     <img src="img/dowhile_scheme.jpg">
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int value, factorial;
 char indicator;
 
@@ -545,8 +518,7 @@ do
     cout &lt;&lt; endl &lt;&lt; "Хотите ввести еще значение (y или n)? ";
     cin &gt;&gt; indicator;
 } while (indicator == 'y' || indicator == 'Y');                    
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -569,8 +541,7 @@ do
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int x, s = 0;
 // ищет сумму чисел до тех пор,
 // пока их не будет введено 100, или значение 0
@@ -581,8 +552,7 @@ for (int i = 1; i &lt; 100; i++)
     // если ввели 0, то суммирование заканчивается
     s += x;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -599,8 +569,7 @@ for (int i = 1; i &lt; 100; i++)
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code>
+                    <pre><code>
 int a, b;
 
 for (a = 1, b = 0; a &lt; 100; b += a, a++)
@@ -610,8 +579,7 @@ for (a = 1, b = 0; a &lt; 100; b += a, a++)
     cout &lt;&lt; b &lt;&lt; endl;
     // ... Обработка чётных сумм
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -624,14 +592,12 @@ for (a = 1, b = 0; a &lt; 100; b += a, a++)
                     <p>
                         Формат оператора:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 goto имя_метки;
     ...
 имя_метки :
     ...
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Оператор goto передает управление на оператор, помеченный меткой имя-метки. 
                         Помеченный оператор должен находиться в той же функции, что и оператор goto, 
@@ -640,8 +606,7 @@ goto имя_метки;
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int i = 1, sum = 0;
 const int max = 10;
 
@@ -649,8 +614,7 @@ loop:
     sum += i;
     if (++i &lt;= max)
         goto loop;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Не используй goto</h2>
@@ -667,38 +631,54 @@ loop:
             <section>
                 <h2>Что почитать дополнительно?</h2>
 				<ul>
-                        <li>
-                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=115">
-                                <b>Главы 11-17</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=142">
-                                <b>Глава 4.4</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=197">
-                                <b>Глава 4-5</b> :<br>Х.М.Дейтейл - Как программировать на C++
-                            </a>
-                        </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=115">
+                            <b>Главы 11-17</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1sGKwDAXw-JRHN2gyV1YOpdkxlosgixQb#page=142">
+                            <b>Глава 4.4</b> :<br>Б.Страуструп - Принципы и практики программирования на C++
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=197">
+                            <b>Глава 4-5</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                        </a>
+                    </li>
 				</ul>
             </section>
-
-
 		</div>
 	</div>
 	<aside id="presentable-icon" class="cpp">
-		<a title="Содержание лекции" href="#/0/1">
-			<i class="fa fa-list-ul fa-2x"></i>
-		</a>
-	</aside>
-    <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
-	<script src="../../js/bundle.min.js"></script>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>

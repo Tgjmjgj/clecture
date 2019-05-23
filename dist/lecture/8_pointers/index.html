@@ -6,17 +6,29 @@
 	<title>Arrays</title>
 	<meta name="description" content="pointers, references, memory addressing">
 	<meta name="keywords" content="c, c++">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -26,7 +38,7 @@
                     <h3>Работа с указателями</h3>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -59,21 +71,18 @@
                             любого основного типа, типа структуры или void. 
                         </p>
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char *pz;               // указатель на char
 int *pk, *pi;           // указатели на int
 float *pf;              // указатель на float
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <p>
                         Тип указателя должен однозначно соответствовать типу значения,
                         на адрес которого он указывает.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int name1 = 555;
 int* pnm1;
 float *pnm2;
@@ -83,8 +92,7 @@ pnm1 = &amp;name1;          // работает
 pnm2 = &amp;name1;          // ошибка
 pnm3 = (char*)&amp;name1;   // работает
 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -95,23 +103,20 @@ pnm3 = (char*)&amp;name1;   // работает
                         У каждого байта в памяти есть свой уникальный адрес (номер).
                     </p>
                     <div style="display: inline-block;">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int main()
 {
 
     return 0;
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <img style="float: right;" src="img/memory.jpg">
                 </section>
                 <section>
                     <h2>Переменная в памяти</h2>
                     <div style="display: inline-block;">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int main()
 {
     int num;
@@ -122,16 +127,14 @@ int main()
 
     return 0;
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <img style="float: right;" src="img/memory2.jpg">
                 </section>
                 <section>
                     <h2>Вторая переменная</h2>
                     <div style="display: inline-block;">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int main()
 {
     int num;
@@ -144,16 +147,14 @@ int main()
 
     return 0;
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <img style="float: right;" src="img/memory3.jpg">
                 </section>
                 <section>
                     <h2>И еще массив</h2>
                     <div style="display: inline-block;">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int main()
 {
     int num;
@@ -170,8 +171,7 @@ int main()
 
     return 0;
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <img style="float: right;" src="img/memory4.jpg">
                 </section>
@@ -184,8 +184,7 @@ int main()
                 <blockquote>
                     Указатели хранят адреса этих значений.
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 char sy = '%';
 cout &lt;&lt; sy &lt;&lt; endl;         // Выведет %
 
@@ -197,8 +196,7 @@ cout &lt;&lt; name &lt;&lt; endl;       // Выведет ответ на гла
 
 int* ptr = &amp;name;
 cout &lt;&lt; ptr &lt;&lt; endl;        // Выведет шестнадцатеричную ерунду
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <section>
@@ -232,8 +230,7 @@ cout &lt;&lt; ptr &lt;&lt; endl;        // Выведет шестнадцате
                 </section>
                 <section>
                     <h3>Использование разыменованного указателя</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int x = 10;
 int *p = &amp;x;
 printf("Address = %p \n", p);
@@ -247,8 +244,7 @@ printf("x = %d \n", x);         // 11
 x /= 2;
 printf("x = %d \n", *p);        // 5
 printf("x = %d \n", x);         // 5
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>* и &amp;</h3>
@@ -256,8 +252,7 @@ printf("x = %d \n", x);         // 5
                         Операция разыменования * в некотором смысле является 
                         обратной операции получения адреса &amp;.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int eger = 27;
 
 int* ptr = &amp;eger;
@@ -268,15 +263,13 @@ int c = *&amp;b;            // c = b = 27
 
 bool isr = &*ptr == &amp;*&amp;eger;    // true
 bool isr = &*ptr == &amp;*&amp;c;       // false
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char c = 'N';
 int d = 10;
 short s = 2;
@@ -289,14 +282,12 @@ printf("Variable c: address=%p \t value=%c \n", pc, *pc);
 printf("Variable d: address=%p \t value=%d \n", pd, *pd);
 printf("Variable s: address=%p \t value=%hd \n", ps, *ps);
 return 0;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 2</h3>
                     <img src="img/multi_pointers.jpg">
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 double dbl = 6273e+25;
 double* p1 = &amp;dbl;
 double* p2 = p1;
@@ -308,8 +299,7 @@ double* p3 = &amp;dbl;
 
 cout &lt;&lt; dbl &lt;&lt; " : " &lt;&lt; *p1 &lt;&lt; " : " 
     &lt;&lt; *p2 &lt;&lt; " : " &lt;&lt; *p3 &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -323,14 +313,12 @@ cout &lt;&lt; dbl &lt;&lt; " : " &lt;&lt; *p1 &lt;&lt; " : "
                         Поэтому в C++ существует специальное ключевое слово <span class="blue">nullptr</span>,
                         для обозначения пустого указателя (или устаревший вариант, <span class="blue">NULL</span>).
                     </p>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 int *pm = nullptr;     // указатель, не указывающий ни на что
 ...
 if (pm == nullptr)
     cout &lt;&lt; endl &lt;&lt; "Нулевой указатель" &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -355,8 +343,7 @@ if (pm == nullptr)
                     <p>
                         Ссылка всегда должна ссылаться на существующую переменную.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 short int g = 13;
 
 short int * pointer = &amp;g;   // Указатель на g
@@ -391,8 +378,7 @@ pointer = nullptr;          // pointer больше не указывает на
 reference = nullptr;        // ошибка
 b = nullptr;                // ошибка
 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -418,8 +404,7 @@ b = nullptr;                // ошибка
                     <p>
                         Числа присваивать нельзя (без явного приведения к типу указателя).
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char symb = '=';
 char t;
 int kk = -13;
@@ -434,8 +419,7 @@ int *ptr_i = 0x006FFB90;        // ошибка
 ptr_i = (int*)0x006FFB90;
 
 printf("%d", *ptr_i);           // -13
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Разыменование</h2>
@@ -466,8 +450,7 @@ printf("%d", *ptr_i);           // -13
                 </section>
                 <section>
                     <h3>Адрес указателя</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int num = 888;
 int* pn = &amp;num;
 
@@ -477,14 +460,12 @@ printf("%p", &amp;pn);          // Адрес указателя
 
 printf("%p", &amp;&amp;num);    // Ошибка - у адреса нет адреса
 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Дополним пример с памятью</h3>
                     <div style="display: inline-block;">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int main()
 {
     int num;
@@ -504,8 +485,7 @@ int main()
 
     return 0;
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <img style="float: right;" src="img/memory5.jpg">
                 </section>
@@ -514,8 +494,7 @@ int main()
                     <p>
                         Раз у указателя есть адрес, то можно сделать указатель на указатель.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 float e = 2.7182;
 float* pe = &amp;e;
 float** ppe = &amp;pe;
@@ -525,8 +504,7 @@ printf("Вещественное число e: %f", e);
 printf("Через указатель : %f", *pe);
 printf("Через указатель на указатель : %f", **pe);
 printf("Через указатель на указатель на указатель : %f", ***pe);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Как правило, такие конструкции применяются при работе с многомерными массивами.
                     </p>
@@ -551,8 +529,7 @@ printf("Через указатель на указатель на указат�
                 </section>
                 <section>
                     <h3>Примеры сравнений</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int a = 3;
 int b = 17;
 
@@ -573,8 +550,7 @@ else
 {
     printf("%d идёт после %d", *pb, *pa);
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -624,8 +600,7 @@ else
                 </section>
                 <section>
                     <h3>Пример адресной арифметики</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int eps = 1243;
 
 int* pp = &amp;eps;		// 00E1F442
@@ -641,14 +616,12 @@ short int shi = 874;
 
 short int* pshi = &amp;shi;		// 00E1F2F4
 pshi = pshi - 4;			// 00E1F2F4 - 8 = 00E1F2EC
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Схема смещения указателя на int</h2>
                     <div style="display: inline-block; ">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int a = 423;
 int *pa = &amp;a;
 
@@ -658,16 +631,14 @@ for (int i = 0; i &lt; 6; ++i)
     ++pa;
 
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <iframe style="float: right;" src="https://giphy.com/embed/5QTIpRZ6JlOLOoU27F" width="480" height="339" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                 </section>
                 <section>
                     <h2>Схема смещения указателя на double</h2>
                     <div style="display: inline-block; ">
-                        <pre>
-                            <code class="cpp">
+                        <pre><code class="cpp">
 int num = 7;
 
 double db_val = 5e+8;
@@ -679,8 +650,7 @@ for (int i = 0; i &lt; 4; ++i)
     ++pd;
 
 }
-                            </code>
-                        </pre>
+                        </code></pre>
                     </div>
                     <iframe style="float: right;" src="https://giphy.com/embed/lVBMMwVmNZwRudXGcj" width="480" height="339" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                 </section>
@@ -695,8 +665,7 @@ for (int i = 0; i &lt; 4; ++i)
                             Разница высчитывается в количестве элементов типа указателя.
                         </ins>
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int ek = 3;     // 00FFAA10
 int et = 45;    // 00FFAA20
 int* pek = &amp;ek;
@@ -711,8 +680,7 @@ double* pdx = &amp;dx;
 
 cout &lt;&lt; pdy - pdx &lt;&lt; endl;      // 2
 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Вычитание указателей</h3>
@@ -722,8 +690,7 @@ cout &lt;&lt; pdy - pdx &lt;&lt; endl;      // 2
                     <p>
                         Можно вычитать только указатели на одинаковые типы.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char chap;
 bool bip;
 char* pach = &amp;chap;
@@ -734,8 +701,7 @@ pach - pub;         // Ошибка
 pub + pub2;         // Ошибка
 
 cout &lt;&lt; Разница в памяти между элементами составляет " &lt;&lt; pub - pub2 &lt;&lt; " байт.\n";
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -745,11 +711,9 @@ cout &lt;&lt; Разница в памяти между элементами с�
                         <span class="red">Элементы массива располагаются в памяти 
                         <ins>строго последовательно</ins>.</span>
                     </p>
-                    <pre>
-                       <code class="cpp">
+                    <pre><code class="cpp">
 int arr[5];
-                       </code> 
-                    </pre>
+                   </code></pre>
                     <img src="img/arr.jpg" />
                 </section>
                 <section>
@@ -760,8 +724,7 @@ int arr[5];
                     <p>
                         Поэтому нельзя получить адрес массива оператором &amp;.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int mas[2] = { 1, 2 };
 cout &lt;&lt; mas &lt;&lt; endl;        // Выведет адрес нулевого элемента массива
 cout &lt;&lt; *mas &lt;&lt; endl;       // Значение нулевого элемент массива - 1
@@ -772,8 +735,7 @@ mas[0] == *mas;
 
 // Тогда как получить доступ к mas[1]?
 mas[1] = ??
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Нулевой элемент</h3>
@@ -785,30 +747,25 @@ mas[1] = ??
                 </section>
                 <section>
                     <h2>Адресация элементов массива</h2>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 double mass[4] = { 4.3, 0.1, -34.2, 6.31, 3.0 };
 
 cout &lt;&lt; "0. Адрес: " &lt;&lt; mass &lt;&lt; "  Значение: " &lt;&lt; *mass &lt;&lt; endl;
 cout &lt;&lt; "1. Адрес: " &lt;&lt; mass + 1 &lt;&lt; "  Значение: " &lt;&lt; *(mass + 1) &lt;&lt; endl;
 cout &lt;&lt; "2. Адрес: " &lt;&lt; mass + 2 &lt;&lt; "  Значение: " &lt;&lt; *(mass + 2) &lt;&lt; endl;
 cout &lt;&lt; "3. Адрес: " &lt;&lt; mass + 3 &lt;&lt; "  Значение: " &lt;&lt; *(mass + 3) &lt;&lt; endl;
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 short arr[3] = { 4, 12, 7 };
 int a = *arr + 1;
 *(arr + 1) = a;
 
 // arr = { 4, 5, 7 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Перебор элементов массива через указатель</h2>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 const int sz = 20;
 char mas[sz] = "abcdefghjklmnopqrst";
 for (char* cur = mas; cur &lt; mas + sz; ++cur)
@@ -817,13 +774,11 @@ for (char* cur = mas; cur &lt; mas + sz; ++cur)
     // cur -- адрес текущего элемента массива
     // *cur -- его значение
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int arr[100];
 int rmax = 10;
 int rmin = 10;
@@ -847,8 +802,7 @@ for (int* tmp = arr; tmp &lt; arr + 100; ++tmp)
 }
 avg /= array_size;
 cout &lt;&lt; "Средний элемент массива: " &lt;&lt; avg &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -857,14 +811,12 @@ cout &lt;&lt; "Средний элемент массива: " &lt;&lt; avg &lt;
                     <p>
                         Хоть имя массива и является указателем, его нелья изменять.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int mas[10];
 
 mas++;               // Ошибка
 mas = &amp;mas[4];       // Ошибка
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Это потому, что имя массива - константный указатель.
                     </p>
@@ -875,26 +827,22 @@ mas = &amp;mas[4];       // Ошибка
                         Для объявления константного указателя необходимо приписать ключевое слово 
                         <span class="blue">const</span> после звёздочки.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 тип* const имя = &переменная;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Константный указатель всегда указывает на один и тот же адрес, его нельзя перезаписать.
                     </p>
                     <p>
                         Константный указатель нельзя объявить без инициализации.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 float ff = 23.4f;
 float f2 = -3.7f;
 float* const pf;    // Ошибка
 float* const pf = &amp;ff;
 pf = &amp;f2;           // Ошибка
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Указатель на константу</h2>
@@ -902,11 +850,9 @@ pf = &amp;f2;           // Ошибка
                         Для объявления указателя на константу необходимо приписать ключевое слово 
                         <span class="blue">const</span> перед типом указателя.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 const тип* имя;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Указатель на константу не позволяет изменять значение в той ячейке памяти, на
                         которую он указывает. Но адрес указателя менять можно.
@@ -914,8 +860,7 @@ const тип* имя;
                 </section>
                 <section>
                     <h2>Различия</h2>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int a = 2;
 int b = 5;
 
@@ -934,8 +879,7 @@ cp = nullptr;
 
 // Константный указатель на константу
 const short* const pname = &amp;a;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -944,11 +888,9 @@ const short* const pname = &amp;a;
                     <p>
                         Указатель, как обычная переменная, может быть передан в аргумент функции.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void some_function(char* pointer);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         При передаче массива в функцию передаётся указатель на его нулевой элемент.
                         Поэтому для таких массивов перестаёт работать функция sizeof() - программа 
@@ -957,8 +899,7 @@ void some_function(char* pointer);
                 </section>
                 <section>
                     <h3>Пример передачи массива</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 bool swap(int* mas, int first, int second)
 {
     int temp = mas[first];
@@ -973,23 +914,20 @@ int main()
     swap(a, 1, 9);
     // a = { 1, 10, 3, 4, 5, 2, 7, 8, 9, 6 };
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Возврат указателя</h2>
                     <p>
                         Указатели также могут выступать возвращаемыми значениями функций.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 float* function_name(float* arg)
 {
     // ...
     return arg; 
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         <ins>Нельзя </ins> возвращать указатели на локальные переменные, созданные внутри функции.
                     </blockquote>
@@ -1008,8 +946,7 @@ float* function_name(float* arg)
                     <p>
                         Иногда это не будет работать:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 float* get_average(int* mas, int size)
 {
     float avg = 0;
@@ -1032,8 +969,7 @@ int main()
     cout &lt;&lt; *pa &lt;&lt; endl;        // 0, а может быть 6, а может и ещё что-то
     return 0;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Как можно разрешить подобную ситуацию</h3>
@@ -1041,8 +977,7 @@ int main()
                         Одним из вариантов решения подобной ситуации заключается в использовании
                         параметра для возврата значения.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void get_average(int* mas, int size, float* ret_avg)
 {
     *ret_avg = 0;
@@ -1064,8 +999,7 @@ int main()
     cout &lt;&lt; pa &lt;&lt; endl;        // 6
     return 0;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1096,15 +1030,13 @@ int main()
                         Универсальный способ сломать программу с помощью указателей - 
                         записать значение туда, где ему быть не положено.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char a;
 char* pa = &amp;a;
 
 pa += 3;
 *pa = 2;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Итого, стек вызова повреждён:
                     </p>
@@ -1136,16 +1068,34 @@ pa += 3;
 		</div>
 	</div>
 	<aside id="presentable-icon" class="cpp">
-		<a title="Содержание лекции" href="#/0/1">
-			<i class="fa fa-list-ul fa-2x"></i>
-		</a>
-	</aside>
-    <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
-	<script src="../../js/bundle.min.js"></script>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>

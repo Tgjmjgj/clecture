@@ -6,17 +6,29 @@
 	<title>Files</title>
 	<meta name="description" content="files">
 	<meta name="keywords" content="files">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -25,7 +37,7 @@
                     <h3>Работа с файлами</h3>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -138,11 +150,9 @@
                     <blockquote>
                         Для открытия файла используется функция <i>fopen</i>.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 FILE* fopen(char* filename, char* mode);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         При успешном открытии возвращает указатель на структуру типа FILE - указатель на файл. Эта структура 
                         связана с физическим файлом и используется для всех последующих операций над этим файлом.
@@ -217,13 +227,11 @@ FILE* fopen(char* filename, char* mode);
                 </section>
                 <section>
                     <h3>Пример открытия файла</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 FILE* f;
 f = fopen("D:\\programs\explos\init.txt", "tr+");
 FILE *fl = fopen("C:\\pagefile.sys", "bw");
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -231,11 +239,9 @@ FILE *fl = fopen("C:\\pagefile.sys", "bw");
                 <blockquote>
                     После работы с файлом он должен быть закрыт. Для закрытия файла используется функция <i>fclose</i>
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
                         int fclose(FILE* file);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Функции <i>fclose</i> передается дескриптор файла, который необходимо закрыть.
                 </blockquote>
@@ -248,19 +254,16 @@ FILE *fl = fopen("C:\\pagefile.sys", "bw");
                 <blockquote>
                     Для закрытия всех ранее открытых файлов используется функция <i>fcloseall</i>
                 </blockquote>
-                <pre>
-                    <code>
+                <pre><code>
 int fcloseall(void);            
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     При успешном завершении возвращает количество закрытых потоков.
                 </blockquote>
             </section>
             <section>
                 <h2>Пример обращения к файлу</h2>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 FILE *fp;
 if ((fp = fopen("file.txt", "w")) == NULL)
 {
@@ -269,8 +272,7 @@ if ((fp = fopen("file.txt", "w")) == NULL)
 }
 ...
 fclose(fp);
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
                 <h2>Функция перенаправления потока</h2>
@@ -278,11 +280,9 @@ fclose(fp);
                     Если требуется изменить режим доступа к файлу, то для этого сначала необходимо закрыть данный файл, 
                     а затем вновь его открыть, но с другими правами доступа. Для этого уже существует стандартная функция:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 FILE* freopen(char* filename, char* mode, FILE* handle);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Эта функция сначала закрывает файл, связанный с дескриптором <i>handle</i>, а затем открывает файл с 
                     именем файла <i>filename</i> и правами доступа <i>mode</i>.
@@ -297,11 +297,9 @@ FILE* freopen(char* filename, char* mode, FILE* handle);
                 <blockquote>
                     Состояние конца файла можно получить используя функцию <i>feof</i>.
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 int feof(FILE *f);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Эта функция возвращает ненулевое значение, если индикатор конца файла установлен, в противном случае возвращается 0.
                 </blockquote>
@@ -327,19 +325,15 @@ int feof(FILE *f);
                     <blockquote>
                         Функция считывания символа из файла:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fgetc(FILE* f);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция записи символа в файл:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fputc(int ch, FILE* f);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         После чтения или записи данными функциями индикатор текущей позиции продвигается на следующий символ.
                         При успешном выполнении функции возвращают код символа, иначе - EOF.
@@ -347,8 +341,7 @@ int fputc(int ch, FILE* f);
                 </section>
                 <section>
                     <h3>Применение посимвольных функций</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 FILE* out;
 char str[80];
 int n = 0;
@@ -360,27 +353,22 @@ while(str[n])
     fputc(str[n++], out);       // посимвольно записываем строку в файл                            
 }
 fclose(out);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
                 <section>
                     <h1>Построчный ввод/вывод</h1>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fgets(char* str, int size, FILE* f);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция <i>fgets</i> выполняет чтение из файла <i>f</i> в строку <i>str</i>
                         <i>size</i> символов. Чтение заканчивается, если встречается символ конца файла или конца строки.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fputs(char* str, FILE* f);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Запись в файл <i>f</i> строки <i>str</i> до тех пор, пока не встретится символ '\0', который в файл
                         не переносится и не заменяется на '\n'.
@@ -388,8 +376,7 @@ int fputs(char* str, FILE* f);
                 </section>
                 <section>
                     <h3>Применение построчных функций</h3>
-                    <pre>
-                        <code>
+                    <pre><code>
 FILE* f;
 char str[80];
 f = fopen("text.txt", "w");
@@ -414,8 +401,7 @@ while (fgets(str, 80, in))  // Чтение строк из файла
 }
 fclose(f);
 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -424,20 +410,16 @@ fclose(f);
                     <blockquote>
                         Функции блочного ввода/вывода позволяют читать и писать в файл содержимое любой структуры.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fread(void* p, int size, int n, FILE* f);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция <i>fread</i> считывает <i>n</i> блоков размера <i>size</i> байт каждый, из файла
                         <i>f</i> в область памяти по указателю <i>p</i>.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fwrite(void* p, int size, int n, FILE* f);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция <i>fwrite</i> записывает <i>n</i> блоков по <i>size</i> байт каждый, из области
                         памяти по указателю <i>p</i> в файл <i>f</i>.
@@ -445,8 +427,7 @@ int fwrite(void* p, int size, int n, FILE* f);
                 </section>
                 <section>
                     <h3>Применение блочных функций</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 typedef struct emp{
      int code;
      char name;
@@ -485,8 +466,7 @@ while (fread(&s, sizeof(W), 1, in))
     printf("\n nam &d code=%d name=%s salary=%f\n", num++, s.code, s.name. s.salary);
 }
 fclose(in);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -509,22 +489,18 @@ fclose(in);
                 </section>
                 <section>
                     <h3>Функция ftell</h3>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 long ftell(FILE* fp);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Эта функция возвращает текущую позицию в файле. Если по каким-то причинам текущая позиция не определена, функция возвращает -1L.
                     </blockquote>
                 </section>
                 <section>
                     <h3>Функция fseek</h3>
-                    <pre>
-                    <code class="cpp">
+                    <pre><code class="cpp">
 int fseek(FILE* fp, long pos, int mode);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Данная функция позволяет сдвинуть текущую позицию на <i>pos</i> байтов.
                     </blockquote>
@@ -539,26 +515,22 @@ int fseek(FILE* fp, long pos, int mode);
                 </section>
                 <section>
                     <h3>Функция rewind</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void rewind(FILE* fp);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция <i>rewind</i> просто перемещает указатель текущей позиции на начало файла.
                     </blockquote>
                 </section>
                 <section>
                     <h3>Пример управления позицией</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 FILE *fl = fopen("text.txt", "ta+");
 long fsize;
 fseek(fl, 0L, SEEK_END);        // Устанавливаем позицию на конец файла
 fsize = ftell(fd);              // Получаем значение текущей позиции
 printf("Длина файла: %dl байт.\n", fsize);  
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -566,27 +538,21 @@ printf("Длина файла: %dl байт.\n", fsize);
                 <blockquote>
                     Существует также и другие функции для файлов, например:
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 int fileno(FILE* fp);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Функция <i>fileno</i> определяет и возвращает числовой дескриптор файла <i>fp</i>.
                 </blockquote>
-                <pre>
-                <code class="cpp">
+                <pre><code class="cpp">
 int filelength(int fd);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Функция <i>filelength</i> возвращает длину файла в байтах, по его числовому дескриптору <i>fd</i>.
                 </blockquote>
-                <pre>
-                <code class="cpp">
+                <pre><code class="cpp">
 int ferror(FILE* fp);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Функция <i>ferror</i> отслеживает появление ошибок, связанных с потоком <i>fp</i>.
                 </blockquote>
@@ -596,11 +562,9 @@ int ferror(FILE* fp);
                 <blockquote>
                     Для изменения имени файла используется функция <i>rename</i> из библиотеки <i>io.h</i>
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 int rename(const char* oldname, const char* newname);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     В случае успешного переименования функция возвращает 0, иначе - ненулевое значение.
                 </blockquote>
@@ -610,11 +574,9 @@ int rename(const char* oldname, const char* newname);
                 <blockquote>
                     Для удаления файла используется функция <i>remove</i>
                 </blockquote>
-                <pre>
-                    <code class="cpp">
+                <pre><code class="cpp">
 int remove(const char* filename);
-                    </code>
-                </pre>
+                </code></pre>
                 <blockquote>
                     Если на момент удаления файл <i>filename</i> был открыт, то работа функции зависит от конкретной реализации.
                 </blockquote>
@@ -660,8 +622,7 @@ int remove(const char* filename);
                     <blockquote>
                         Каждый поток имеет связанное с ним состояние. Состояния потока описываются в классе <i>ios</i> в виде перечисления <i>enum</i>:
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 enum io_state{
         goodbit,        // Нет ошибки 0x00
         eofbit,         // Конец файла 0x01
@@ -669,8 +630,7 @@ enum io_state{
         badbit,         // Попытка использования недопустимой операции 0x04
         hardfail        // Фатальная ошибка 0x08
              };
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Получение состояния потока</h2>
@@ -698,32 +658,26 @@ enum io_state{
                     <p>
                         Чтобы начать работать с ним, нужно создать объект типа fstream:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 fstream some_name;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         И дальше, для открытия файла вызвать функцию open.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void fstream::open(const char* name, int mode, int p = filebuf::openprot);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Например</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 fstream inoutFile;
 inoutFile.open(("a.txt", ios_base::out));
 if (inoutFile)
 {
     // Работа с файлом
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Режими открытия файла</h2>
@@ -746,11 +700,9 @@ if (inoutFile)
                     <p>
                         Для сброса буфера потока, отсоединения  потока от файла и закрытия файла используется функция:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void fstream::close();
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Эту функцию необходимо явно вызвать при изменении режима работы с потоком, и в конце 
                         работы с файлом.
@@ -775,12 +727,10 @@ void fstream::close();
                     <p>
                         Функции позиционирования seekg и seekp имеют следующий формат:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 fstream::seekg(int offset_position, ios_base::seekdir dir);
 fstream::seekp(int offset_position, ios_base::seekdir dir);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Первым параметров offset_position идёт число байт, на которое нужно сдвинуть позицию.
                     </p>
@@ -799,12 +749,10 @@ fstream::seekp(int offset_position, ios_base::seekdir dir);
                         Получение позиций чтения и записи осуществляется при помощи функций 
                         tellg и tellp соответственно.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int fstream::tellg();
 int fstream::tellp();
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример</h3>
@@ -839,36 +787,29 @@ int main()
                     <p>
                         Если файл будет использоваться только для записи, лучше использовать ofstream.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 ofstream outfile("copy.out", ios_base::out);
 ofstream outfile3("copy.out");  // Одно и то же
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Функции записи через ofstream</h2>
                     <p>
                         Для записи одного символа в поток есть функция:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 ofstream&amp; ofstream::put(char symb);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Для записи строки, как массива символов, существует функция:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 ofstream&amp; ofstream::write(const char* buffer, int size);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример использования ofstream</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #include &lt;fstream&gt;
 
 int main()
@@ -886,8 +827,7 @@ int main()
     }
     out.close();            // Закрытие файла
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -902,24 +842,19 @@ int main()
                     <p>
                         Для считывания строки:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 ifstream&amp; ifstream::getline(char* buffer, int size, char delimiter='\n');
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Для считывания определённого количества символов:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 ifstream&amp; ifstream::read(char* buffer, int size);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример работы с ifstream</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 #include &lt;ifstream&gt;
 
 int main()
@@ -942,8 +877,7 @@ int main()
     }
     in.close();         // Закрытие файла
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
 
@@ -970,16 +904,34 @@ int main()
         </div>
     </div>
 	<aside id="presentable-icon" class="cpp">
-		<a title="Содержание лекции" href="#/0/1">
-			<i class="fa fa-list-ul fa-2x"></i>
-		</a>
-	</aside>
-    <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
-	<script src="../../js/bundle.min.js"></script>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
 </body>
 
 </html>

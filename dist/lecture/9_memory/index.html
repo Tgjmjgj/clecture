@@ -6,17 +6,29 @@
 	<title>Arrays</title>
 	<meta name="description" content="memory, stack and heap, static and dynamic memory">
 	<meta name="keywords" content="c, c++, memory, stack, heap, dynamic memory, new, delete">
-	<meta name="author" content="Edward & Albert">
+	<meta name="author" content="Pavel Karpovich">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
 	<!--[if lt IE 9]>
 		<script src="../../js/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -25,7 +37,7 @@
                     <h2>Управление памятью</h2>
                     <div>
                         <p style="display: inline-block;">
-                            Edward &amp; Albert / 
+                            Pavel Karpovich / 
                         </p>
                         <a href="https://github.com/tgjmjgj" class="icon-button github">
                             <i class="fa fa-github"></i><span></span>
@@ -168,8 +180,7 @@
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int func(double e)
 {
     int k = (int)(e / 3.1415);
@@ -195,8 +206,7 @@ int main()
     cout &lt;&lt; a &lt;&lt; endl;
     return 0;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Разбор примера</h3>
@@ -344,8 +354,7 @@ int main()
                         Чтобы из указателя на void получить полноценный указатель, нужно
                         преобразовать его тип.
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int iu = 4;
 void* pv = &amp;iu;
 *pv = 3;                // нельзя
@@ -353,8 +362,7 @@ iu = *pv;               // нельзя
 pv++;                   // нельзя
 int* pi = (int*)pv;     // преобразование в указатель на int
 *pi = 3;                // можно
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -363,36 +371,30 @@ int* pi = (int*)pv;     // преобразование в указатель н
                     <p>
                         Функция имеет следующее определение:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void* malloc(unsigned size);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция возвращает указатель на начало области выделенной динамической памяти 
                         длиной в size байт, при неудачном завершении возвращает NULL.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int* a = (int*)malloc(4);
 
 double* d = (double*)malloc(sizeof(double));
 
 void* pv = malloc(sizeof(short int));
 short int* ps = (short int*)pv;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Функция free</h2>
                     <p>
                         Функция имеет следующее определение:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void free(void* ptr);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция освобождает память, выделенную ранее функциями malloc, calloc или realloc,
                         делая её доступной для последующих повторных выделений.
@@ -400,31 +402,26 @@ void free(void* ptr);
                     <p><span><ins>
                         Для каждого вызова malloc, calloc или realloc в программе должен быть вызов free.
                     </ins></span></p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 free(a);
 free(d);
 free(ps);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Функция calloc</h2>
                     <p>
                         Функция имеет следующее определение:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void* calloc(unsigned num, unsigned size);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция возвращает указатель на начало области динамической памяти 
                         для размещения num элементов длиной по size байт каждый, 
                         при неудачном завершении возвращает NULL.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 char* mas = (char*)calloc(10, sizeof(char));
 
 float* arr = (float*)calloc(4, sizeof(float));
@@ -432,26 +429,22 @@ float* arr = (float*)calloc(4, sizeof(float));
 
 free(mas);
 free(arr);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Функция realloc</h2>
                     <p>
                         Функция имеет следующее определение:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 void* realloc(void* ptr, unsigned new_size);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <blockquote>
                         Функция изменяет размер блока ранее выделенной динамической памяти 
                         до размера new_size байт, параметр рtr - это адрес начала изменяемого 
                         блока, при неудачном завершении возвращает NULL.
                     </blockquote>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int* pa = (int*)calloc(4, sizeof(int));
 *(pa) = 1;
 *(pa + 1) = 2;
@@ -459,15 +452,13 @@ int* pa = (int*)calloc(4, sizeof(int));
 *(pa + 3) = 4;
 pa = (int*)realloc(pa, 2 * sizeof(int));
 cout &lt;&lt; pa[0] &lt;&lt; endl &lt;&lt; pa[1] &lt;&lt; endl &lt;&lt; pa[2] &lt;&lt; endl &lt;&lt; pa[3] &lt;&lt; endl;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
                 <section>
                     <h2>Примеры</h2>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 // Так нельзя
 int* create_static_arr()
 {
@@ -493,8 +484,7 @@ int* create_arr(int n)
     }
     return arr;
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -510,24 +500,20 @@ int* create_arr(int n)
                     <p>
                         Для одного значения:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 тип* имя = new тип;
 тип* имя = new тип(начальное_значение);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Например:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int* a = new int;
 float* b;
 b = new float;
 char* c = new char('f');
 double* d = new double(3.14);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>new для массивов</h2>
@@ -538,24 +524,20 @@ double* d = new double(3.14);
                     <p>
                         Для выделения памяти под несколько элементов:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 тип* имя = new тип[количество];
 тип* имя = new тип[количество] { список_инициализации };
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Например:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int size = 10;
 int* arr = new int[size];
 float* mas = new mas[4] { 1.6f, 0.75f, 4.2f, 1.0f };
 int* arr2 = new int[2] { 5, 2 };
 char* mas2 = new char[arr2[1]];
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>delete</h2>
@@ -568,22 +550,18 @@ char* mas2 = new char[arr2[1]];
                         Также как и с new, delete имеет 2 формы записи, для одиночных
                         значений и для массивов:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 delete имя;
 delete имя1, имя2, имяN;
 
 delete[] имя_массива;
 delete[] имя_массива1, имя_массива2, имя_массиваN;
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 delete a, b, c, d;
 
 delete arr, mas, arr2, mas2;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -601,8 +579,7 @@ delete arr, mas, arr2, mas2;
                 </section>
                 <section>
                     <h3>Матрица</h3>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 int** matr;         // Адрес адресов - массив указателей
 int i, j;
 int* n = new int;
@@ -618,17 +595,14 @@ for (i = 0; i &lt; *n; ++i)          // Для каждого указателя
         matr[i][j] = rand() % 10;       // Присвоить рандомное значение
     }
 }
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="cpp">
+                    </code></pre>
+                    <pre><code class="cpp">
 for (int k = 0; k &lt; *n; ++k)     // Для каждого указателя из массива указателей
 {
     delete[] matr[k];           // Освободить память по этому указателю
 }
 delete[] matr;          // Освободить память массива указателей
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -638,13 +612,11 @@ delete[] matr;          // Освободить память массива ук
                         Для создания константного динамического объекта перед оператором new
                         необходимо записать слово const:
                     </p>
-                    <pre>
-                        <code class="cpp">
+                    <pre><code class="cpp">
 const int *pci = new const int(1024);
 
 const char* str = new const char[6] { "text." };
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Выделение памяти под константный объект обязательно должно
                         сопровождаться инициализацией начального значения.
@@ -665,15 +637,33 @@ const char* str = new const char[6] { "text." };
             
         </div>
     </div>
-    <aside id="presentable-icon" class="cpp">
+	<aside id="presentable-icon" class="cpp">
         <a title="Содержание лекции" href="#/0/1">
-            <i class="fa fa-list-ul fa-2x"></i>
+            <i class="fa fa-list-ul fa-2x controls"></i>
         </a>
     </aside>
     <aside id="presentable-icon-close">
-        <a title="К списку материалов" href="../../index.html">
-            <i class="fa fa-times fa-2x"></i>
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
         </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
     </aside>
     <script src="../../js/bundle.min.js"></script>
 </body>
