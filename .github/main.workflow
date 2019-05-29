@@ -17,8 +17,8 @@ action "Build" {
 action "Deploy to GitHub Pages" {
   uses = "maxheld83/ghpages@v0.2.1"
   needs = ["Build"]
-  secrets = ["GH_PAT"]
   env = {
     BUILD_DIR = "dist/"
   }
+  secrets = ["GH_PAT"]
 }
