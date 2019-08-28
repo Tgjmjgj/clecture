@@ -1,0 +1,2061 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Dynamic structures</title>
+	<meta name="description" content="dynamic structures">
+	<meta name="keywords" content="stack, deq, queue, list">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="../../icon.png">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Структуры данных</h3>
+                    <div>
+                        <p style="display: inline-block;">
+                            Pavel Karpovich / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+            </section>
+            <section>
+                <section>
+                    <h1>Пользовательские типы данных</h1>
+                </section>
+                <section>
+                    <h2>Стандартные типы данных</h2>
+                    <p>
+                        До этого моменты мы пользовались лишь простыми
+                        фундаментальными типами данных:
+                    </p>
+                    <p>
+                        <span class="blue">bool</span>, <span class="blue">char</span>, 
+                        <span class="blue">short</span>, <span class="blue">int</span>, 
+                        <span class="blue">float</span>, <span class="blue">double</span> и т.д.
+                    </p>
+                    <p>
+                        В сложных системах использование только стандартных типов
+                        приводит к разрастанию и запутыванию кода, стандартные типы
+                        не обладают достаточной информативностью.
+                    </p>
+                </section>
+                <section>
+                    <h2>Нестандартные типы данных</h2>
+                    <ul>
+                        <li>Псевдонимы (typedef)</li>
+                        <li>Структуры (struct)</li>
+                        <li class="dark">Классы (class)</li>
+                        <li>Объединения (union)</li>
+                        <li>Перечисления (enum)</li>
+                        <li>Битовые поля (bit field)</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <h2>Описание нестандартных типов</h2>
+                <p>
+                    Нестандартные пользовательские типы необходимо <span class="purple">описывать</span>
+                    перед использованием, как функции.
+                </p>
+                <p>
+                    Обычно это делают в заголовочных файлах, или перед функцией main.
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Псевдонимы</h2>
+                    <blockquote>
+                        Псевдонимы используются для создания альтернативных имён к другим
+                        типам данных.
+                    </blockquote>
+                    <p>
+                        Определяются с помощью ключевого слова <span class="blue">typedef</span>:
+                    </p>
+                    <pre><code class="cpp">
+typedef новое_имя тип_данных;
+                    </code></pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre><code class="cpp">
+typedef unsigned long double ULD;
+typedef int * poINTer;
+typedef char INT8;
+typedef short int INT16;
+typedef int INT32;
+typedef long int INT64;
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Дикий пример</h3>
+                    <pre><code class="cpp">
+#define PRECISION 1e-4
+
+typedef short int length;
+typedef short int index;
+typedef long double L2;
+typedef long double* PL2;
+
+int main()
+{
+    setlocale(LC_CTYPE, "Russian");
+
+    length n_user, n_10 = 10;
+    while (true)
+    {
+        cout &lt;&lt; endl &lt;&lt; "Введите размер массива, или -1 для выхода: ";
+        cin &gt;&gt; n_user;
+        if (n_user &lt; 0)
+        {
+            cout &lt;&lt; "Завершение." &lt;&lt; endl;
+            break;
+        }
+        srand(time(0));
+
+        PL2 arr_user = new L2[n_user];
+        PL2 arr_10 = new L2[n_10]{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+
+        L2 sum = 0.0;
+        for (index i = 0; i &lt; n_user; ++i)
+        {
+            arr_user[i] = rand() % 10;
+            sum += arr_user[i];
+            cout &lt;&lt; arr_user[i] &lt;&lt; "  ";
+        }
+        cout &lt;&lt; "=  " &lt;&lt; sum &lt;&lt; endl;
+
+
+        float ratio = (float)n_user / n_10;
+        float prev_part = 0.0;
+        for (index i = 0, j = 0; i &lt; n_10; ++i)
+        {
+            float cur_r = ratio;
+            if (prev_part &gt; cur_r)
+            {
+                arr_10[i] += arr_user[j] * cur_r;
+                prev_part -= cur_r;
+                cur_r = 0.0;
+                if (prev_part &lt; PRECISION)
+                {
+                    ++j;
+                }
+            }
+            else if (prev_part &gt; PRECISION)
+            {
+                arr_10[i] += arr_user[j] * prev_part;
+                cur_r -= prev_part;
+                prev_part = 0.0;
+                ++j;
+
+            }
+            while (cur_r &gt;= 1.0)
+            {
+                arr_10[i] += arr_user[j];
+                ++j;
+                --cur_r;
+            }
+            if (cur_r &gt; PRECISION)
+            {
+                arr_10[i] += arr_user[j] * cur_r;
+                prev_part = 1.0 - cur_r;
+            }
+        }
+        sum = 0.0;
+        for (index i = 0; i &lt; n_10; ++i)
+        {
+            sum += arr_10[i];
+            cout &lt;&lt; arr_10[i] &lt;&lt; "  ";
+        }
+        cout &lt;&lt; "=  " &lt;&lt; sum &lt;&lt; endl;
+    }
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Структуры struct</h2>
+                    <blockquote>
+                        Структуры - это типы данных, определённые программистом в коде,
+                        состоящие из комбинаций стандартных типов данных (или других пользовательских).
+                    </blockquote>
+                    <p>
+                        Пользовательские типы нужны для внесения предметной области в текст программы,
+                        и построения уровня абстракции над числовыми значениями.
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        Простейший пример, если вы пишете программу, которая должна работать с
+                        трёхмерной графикой.
+                        Во всех вычислениях и операциях у вас должны фигурировать координаты.
+                    </p>
+                    <p>
+                        Вместо того, чтобы везде писать так: 
+                    </p>
+                    <pre><code class="cpp">
+int ax;
+int ay;
+int az;
+int bx;
+int by;
+int bz;
+
+                    </code></pre>
+                    <p>
+                        Гораздо лаконичнее и понятнее будет:    
+                    </p>
+                    <pre><code class="cpp">
+Point A;
+Point B;
+                    </code></pre>
+                </section>
+                <section>
+                    <p>
+                        Если ваша программа использует математические вектора и связанные с ними вычисления.
+                    </p>
+                    <p>
+                        Вместо такого описания функции скалярного произведения
+                    </p>
+                    <pre><code class="cpp">
+int vec_sum(int v1_x, int v1_y, int v2_x, int v2_y)
+{
+    int scal = v1_x * v2_x + v1_y * v2_y;
+    return scal;
+
+}
+                    </code></pre>
+                    <p>
+                        Достаточно было бы написать вот так:
+                    </p>
+                    <pre><code class="cpp">
+int vec_sum(Vector v1, Vector v2)
+{
+    int scal = v1 * v2;
+    return scal;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <p>А что если взять функцию векторного произведения векторов?</p>
+                    <p>
+                        Если хранить вектора как 2 числа, то что делать, когда в результате 
+                        функции нужно вернуть вектор? 2 int-а сразу не вернешь, придётся
+                        добавлять параметры-указатели.
+                    </p>
+                    <pre><code class="cpp">
+void vec_mult(int v1_x, int v1_y, int v2_x, int v2_y, int* vres_x, int* vres_y)
+{
+    *vres_x = v1_x * v2_y;
+    *vres_y = v1_y * v2_x;
+}
+                    </code></pre>
+                    <p>
+                        Добавив же пользовательский тип данных:
+                    </p>
+                    <pre><code class="cpp">
+Vector* vec_mult(Vector a, Vector b)
+{
+    Vector* res = a * b;
+    return res;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <p>
+                        Или если бы мы писали систему, например, для контроля качества
+                        на производстве холодильников.
+                    </p>
+                    <p>
+                        Огромное число характеристик холодильника можно было бы не
+                        прописывать целым зоопарком переменных:
+                    </p>
+                    <pre><code class="cpp">
+char* construction_type = "Sized with freezer";
+char* model = "Samsung RL52TEBSL1/BWT";
+int color = 0x0313FD;
+int power_usage = 315;
+float freezing_pow = 14.4;
+short min_t = -24;
+                    </code></pre>              
+                    <p>
+                        А описать всего одним объектом:
+                    </p>
+                    <pre><code class="cpp">
+Fridge_propertys samsungRL52T;                            
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Описание структуры</h2>
+                    <p>
+                        Описание структуры имеет следующий синтаксис:
+                    </p>
+                    <pre><code class="cpp">
+struct название_типа 
+{
+    тип имя1;
+    тип имя2;
+    // ...
+    тип имяN;
+};
+
+название_типа имя; 
+                    </code></pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre><code class="cpp">
+struct Point 
+{
+    int x;
+    int y;
+};
+
+Point A;
+Point B;
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Использование объектов</h2>
+                    <p>
+                        Переменные, из которых состоят структуры, называют
+                        <span class="blue">полями</span> этой структуры.
+                    </p>
+                    <p>
+                        Переменные типа пользовательских структур обычно 
+                        называют <span class="blue">объектами</span>.
+                    </p>
+                    <p>
+                        Работать с ними можно как с обычными типами данных:
+                        создавать статически и динамически, делать из них массивы,
+                        использовать с указателями.
+                    </p>
+                </section>
+                <section>
+                    <h2>Размер структур</h2>
+                    <p>
+                        Количество байт, занимаемое объектом структуры в памяти, рассчитывается
+                        как сумма размеров всех его полей ( + выравнивание).
+                    </p>
+                    <p>
+                        Значит, для примера со структурой Point, состоящей из двух int-ов,
+                        её размер будет тождественен 8 байтам.
+                    </p>
+                    <p>
+                        Элементы структуры, также как и элементы массивов, располагаются
+                        в памяти последовательно друг за другом ( + выравнивание).
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Пример использования</h3>
+                    <pre><code class="cpp">
+struct PassportInfo
+{
+    short series;
+    char* number;
+    char* name;
+    char* id;
+    char* authority;
+};
+                    </code></pre>
+                    <pre><code class="cpp">
+PassportInfo pass1;             // Объект структуры PassportInfo по имени pass1
+PassportInfo* ptrPas = new PassportInfo;
+
+PassportInfo arrOfPass[24]; 
+
+                    </code></pre>
+                    <pre><code class="cpp">
+// Функция принимает два объекта структуры PassportInfo
+// и возвращает указатель на объект структуры PassportInfo
+PassportInfo* functionName(PassportInfo pi1, PassportInfo pi2);
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Еще одна структура</h3>
+                    <p>
+                        В паспорте также должна содержаться информация о дате выдаче и сроке действия.
+                        Не будем же мы задавать одну логическую сущность 3 полями (год,
+                        месяц, день)? Нужно создать еще одну структуру.
+                    <pre>
+                    </p>
+                        <code class="cpp">
+struct Date
+{
+    int year;
+    int month;
+    int day;
+};
+     
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Вложенные структуры</h3>
+                    <p>
+                        Тогда можно дополнить предыдущий пример:
+                    </p>
+                    <pre><code class="cpp">
+struct PassportInfo
+{
+    short series;
+    char* number;
+    char* name;
+    char* id;
+    char* authority;
+
+    Date issue;         // Объекты одной структуры в качестве полей другой структуры
+    Date validity;
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Ещё один пример</h3>
+                    <p>
+                        Допустим, в вашей программе должна храниться информация о студентах
+                        из вашей группы. Допустим, их 20 человек. Для каждого студента 
+                        должна иметься информация о его имени, идентификаторе зачетки и телефонному номеру.
+                    </p>
+                    <p>
+                        Вас бы устроил такой код?
+                    </p>
+                    <pre><code class="cpp">
+char* st1_name;
+long st1_record;
+char* st1_phone;
+
+char* st2_name;
+long st2_record;
+char* st2_phone;
+
+char* st3_name;
+long st3_record;
+char* st3_phone;
+
+char* st4_name;
+long st4_record;
+char* st4_phone;
+
+char* st5_name;
+long st5_record;
+char* st5_phone;
+
+char* st6_name;
+long st6_record;
+char* st6_phone;
+
+char* st7_name;
+long st7_record;
+char* st7_phone;
+
+char* st8_name;
+long st8_record;
+char* st8_phone;
+
+char* st9_name;
+long st9_record;
+char* st9_phone;
+
+char* st10_name;
+long st10_record;
+char* st10_phone;
+
+char* st11_name;
+long st11_record;
+char* st11_phone;
+
+char* st12_name;
+long st12_record;
+char* st12_phone;
+
+char* st13_name;
+long st13_record;
+char* st13_phone;
+
+char* st14_name;
+long st14_record;
+char* st14_phone;
+
+char* st15_name;
+long st15_record;
+char* st15_phone;
+
+char* st16_name;
+long st16_record;
+char* st16_phone;
+
+char* st17_name;
+long st17_record;
+char* st17_phone;
+
+char* st18_name;
+long st18_record;
+char* st18_phone;
+
+char* st19_name;
+long st19_record;
+char* st19_phone;
+
+char* st20_name;
+long st20_record;
+char* st20_phone;
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Добавить массивы</h3>
+                    <pre><code class="cpp">
+char** st_names;
+long* st_records;
+char** st_phones;
+                    </code></pre>
+                    <p>
+                        Выглядит уже неплохо.
+                    </p>
+                    <p>
+                        Но. Значения имени, зачётки и телефона студента должны быть
+                        логически неразрывно связаны друг с другом. А у нас они являются
+                        совершенно разными переменными.
+                    </p>
+                </section>
+                <section>
+                    <h3>Разбавить структурами</h3>
+                    <pre><code class="cpp">
+struct StudentData
+{
+    char* name;
+    long record;
+    char* phone;
+};
+
+
+StudentData* students;
+                    </code></pre>
+                    <p>
+                        Теперь всё красиво. И со стороны логики, и со стороны внешнего вида.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Вскрытие показало..</h2>
+                    <p>
+                        Имея объект структуры, мы можем работать со всеми его
+                        полями.
+                    </p>
+                    <p>
+                        Для обращения ко внутреннему содержимому
+                        <ins>объявленного статически</ins> объекта
+                        используется оператор <span class="blue">. </span>(точка):
+                    </p>
+                    <pre><code class="cpp">
+Point A;
+A.x = 15;
+A.y = -2;
+cout &lt;&lt; A.x &lt;&lt; "  " &lt;&lt; A.y &lt;&lt; endl; 
+                    </code></pre>
+                    <p>
+                        Для обращения ко внутреннему содержимому
+                         объекта <ins>через указатель</ins>
+                        используется оператор <span class="blue">-> </span>(стрелка):
+                    </p>
+                    <pre><code class="cpp">
+Point* B = new Point;
+B->x = 15;
+B->y = -2;
+cout &lt;&lt; B->x &lt;&lt; "  " &lt;&lt; B->y &lt;&lt; endl; 
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Пример со студентами</h3>
+                    <pre><code class="cpp">
+StudentData student1;
+student1.name = new char[20];
+strcpy(student1.name, "John Doe");
+student1.record = 423478123;
+student1.phone = new char[20];
+strcpy(student1.name, "+375 (88) 987-65-43");
+
+StudentData* student2 = new StudentData;
+student2->name = new char[20];
+strcpy(student2->name, "John Smith");
+student2->record = 478234234;
+student2->phone = new char[20];
+strcpy(student2->phone, "+375 (77) 123-45-67");
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>В поисках Немо</h3>
+                    <pre><code class="cpp">
+int number_of_stud = 19;
+const char* sought = "Nemo";
+StudentData* students = new StudentData[n];
+// ...
+for (int i = 0; i &lt; number_of_stud; ++i)
+{
+    char* find = strstr(students[i].name, sought);
+    if (find != nullptr && find == studentd[i].name)
+    {
+        cout &lt;&lt; sought &lt;&lt; "найден!" &lt;&lt; endl
+            &lt;&lt; "\t" &lt;&lt; students[i].name &lt;&lt; endl
+            &lt;&lt; "Вы можете позвонить ему по номеру: " &lt;&lt; students[i].phone &lt;&lt; endl;
+    }
+}
+
+delete[] students;
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Считываем данные из файла</h3>
+                    <pre><code class="cpp">
+struct StudentData
+{
+    char* name;
+    long record;
+    char* phone;
+};
+
+int main()
+{
+    setlocale(LC_CTYPE, "Russian");
+
+    const int max_stud_number = 30;
+
+    FILE* file = fopen("student_list.txt", "r");
+    if (file == nullptr)
+    {
+        printf("Be careful. File not exist.");
+        exit(-1);
+    }
+
+    StudentData** students = new StudentData*[max_stud_number] { nullptr };
+    int stud_index = 0;
+
+    const int max_length = 200;
+    char* buffer = new char[max_length];
+    while (!feof(file))
+    {
+        memset(buffer, 0, max_length);
+        fgets(buffer, max_length, file);
+        char* first = strtok(buffer, ",\n");
+        char* second = strtok(nullptr, ",\n");
+        char* third = strtok(nullptr, "\n");
+        if (first != nullptr && second != nullptr && third != nullptr)
+        {
+            students[stud_index] = new StudentData;
+            students[stud_index]->name = first;
+			long record = atol(second);
+			students[stud_index]->record = record;
+            students[stud_index]->phone = third;
+            ++stud_index;
+        }
+    }
+
+    fclose(file);
+    delete[] students;
+}
+                    </code></pre>
+                    <p>
+                        В этом коде есть ошибка, найдите её. В итоговом массиве студентов поля 
+                        name и phone всех объектов будут равны "", а record будет правильный.
+                    </p>
+                </section>
+                <section >
+                    <h3>buffer = new char[15]</h3>
+                    <p>
+                        Для упрощения, примем размер buffer равным 15. Он создаётся перед
+                        циклом.
+                    </p>
+                    <img src="img/buffer_in_memory.jpg" />
+                </section>
+                <section>
+                    <h3>buffer = new char[15]</h3>
+                    <p>
+                        И в начале каждой операции обнуляется с помощью вызова 
+                        функции memset:
+                    </p>
+                    <img src="img/zero_buffer_in_memory.jpg" />
+                </section>
+                <section>
+                    <h3>fgets(buffer, 15, file)</h3>
+                    <p>
+                        Затем в buffer считывается очередная строка из файла.
+                    </p>
+                    <img src="img/gets_to_buffer.jpg" />
+                </section>
+                <section>
+                    <h3>strtok(buffer, ",\n")</h3>
+                    <p>
+                        Функция strtok разбивает buffer на три строки, и возвращает
+                        указатели на начало каждой из них.
+                    </p>
+                    <pre><code class="cpp">
+char* first = strtok(buffer, ",\n");        // Указатель на адрес 0034AFC7
+char* second = strtok(nullptr, ",\n");      // Указатель на адрес 0034AFCC
+char* third = strtok(nullptr, "\n");        // Указатель на адрес 0034AFCF
+                    </code></pre>
+                    <img src="img/strtok_1.jpg" />
+                </section>
+                <section>
+                    <h3>Сохранение адреса</h3>
+                    <pre><code class="cpp">
+students[stud_index]->name = first;         // В name записали адрес 0034AFC7
+long record = atol(second);                 // Создали переменную record = 14
+students[stud_index]->record = record;      // В record записали число 14
+students[stud_index]->phone = third;        // В phone записали адрес 0034AFCF
+                    </code></pre>
+                    <img src="img/student_1.jpg" />
+                </section>
+                <section>
+                    <h3>И так далее</h3>
+                    <p>
+                        На следующей итерации buffer обнулится, и всё начнётся по-новому.
+                        Функция strtok вернёт указатели на ту же память, на память в buffer.
+                    </p>
+                    <img src="img/strtok_2.jpg" />
+                </section>
+                <section>
+                    <h3>Те же адреса</h3>
+                    <pre><code class="cpp">
+students[stud_index]->name = first;         // В name записали адрес 0034AFC7
+long record = atol(second);                 // Создали переменную record = 275378
+students[stud_index]->record = record;      // В record записали число 275378
+students[stud_index]->phone = third;        // В phone записали адрес 0034AFD2
+                    </code></pre>
+                    <img src="img/student_2.jpg" />
+                </section>
+                <section>
+                    <h3>Итог</h3>
+                    <p>
+                        В конце концов в каждом объекте students указатели name и phone
+                        будут содержать адреса ячеек памяти buffer. Который, в свою очередь,
+                        будет полностью обнулён на последней итерации цикла. Соответственно,
+                        любой указатель на память buffer-а будет показывать пустую строку.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h2>Рекурсивные структуры</h2>
+                <p>
+                    Структура может содержать указатель на объект такой же структуры:
+                </p>
+                <pre><code class="cpp">
+struct Element
+{
+    char* name;
+    int value;
+    Element* next;
+};
+                </code></pre>
+                <p>
+                    Это свойство позволяет создавать по-настоящему динамические структуры данных
+                    с переменным числом элементов.
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Перечисления enum</h2>
+                    <p>
+                        Перечисления - это набор именованных целочисленных констант.
+                    </p>
+                    <p>
+                        Перечисления используются для повышения наглядности программы и 
+                        создания дополнительного уровня абстракции над числами в определённом
+                        контексте программного кода.
+                    </p>
+                    <p>
+                        Объявляются перечисления при помощь ключевого слова <span class="blue">enum</span>:
+                    </p>
+                    <pre><code class="cpp">
+enum Enum_name
+{
+    name1,
+    name2,
+    // ...
+    nameN
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Объекты перечисления</h2>
+                    <p>
+                        Можно создать объект перечисления. Такому объекту возможно 
+                        присвоить только одно из перечисленных в нём значений.
+                    </p>
+                    <pre><code class="cpp">
+enum Languages
+{
+    C,
+    Java,
+    Ada,
+    Lisp,
+    Python,
+    Haskell
+};
+
+Language Lang_to_use;
+Lang_to_use = Lisp;
+Lang_to_use = Haskell;
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Целочисленная интерпретация</h3>
+                    <p>
+                        По сути, объект перечисления хранит в себе один int. 
+                        Из этого следует, что объект любого перечисления занимает в памяти 4 байта.
+                    </p>
+                    <p>
+                        А каждое из возможных значений перечисления, фактически, является глобальной
+                        константой типа int. Значения для этих констант присваиваются неявно от 0
+                        и по возрастанию;
+                    </p>
+                    <pre><code class="cpp">
+enum KEYBOARD_KEYS
+{
+    ENTER,          // Неявно const int Enter = 0
+    TAB,            // const int Tab = 1
+    SHIFT,          // const int Shift = 2
+    CONTROL,        // const int Control = 3
+    ALT,            // const int Alt = 4
+    BACKSPACE       // const int Backspce = 5
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Явное назначение</h2>
+                    <p>
+                        Можно также присваивать значения элементам перечисления и самостоятельно:
+                    </p>
+                    <pre><code class="cpp">
+enum Units
+{
+    Bits = 1,
+    Bytes = 8,
+    KB = 1000;
+    MB = 1000000;
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Перечисления и числа</h3>
+                    <p>
+                        С объектами перечисления можно работать как с обыкновенными числами.
+                    </p>
+                    <p>
+                        Как правило, перечисления используются в сравнениях, для того чтобы
+                        придать им большую осмысленность и выразительность.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Пример</h3>
+                    <p>
+                        Пусть стоит задача реализовать функции для работы с какими-нибудь бинарными документами.
+                        Вы пишете функцию для открытия документа, у которого должно быть 3 режима:
+                         чтение, запись или чтение и запись.
+                    </p>
+                    <p>
+                        Можно сделать это так:
+                    </p>
+                    <pre><code class="cpp">
+bool open_document(char* name, char* security_token, int open_mode);
+
+open_document("docs.dts", "z7fsjf73jhmc011ncd8sjf", 3);
+open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", 1);
+                    </code></pre>
+                    <p>
+                        Где при передаче в open_mode единицы будет подразумеваться режим только для чтения,
+                        при передаче 2 режим только для записи, 3 - режим для чтения и записи.
+                    </p>
+                </section>
+                <section>
+                    <h3>Продолжение</h3>
+                    <p>
+                        А лучше сделать так:
+                    </p>
+                    <pre><code class="cpp">
+enum OPEN_MODE 
+{
+    READ_ONLY = 1,
+    WRITE_ONLY = 2,
+    READ_WRITE = 3
+};
+
+bool open_document(char* name, char* security_token, OPEN_MODE mode);
+
+open_document("docs.dts", "z7fsjf73jhmc011ncd8sjf", READ_WRITE);
+open_document("private.dts", "z7fsjf73jhmc011ncd8sjf", READ_ONLY);
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Еще один пример</h3>
+                    <p>
+                        Вместо того, чтобы писать вот так, с непонятными числами:
+                    </p>
+                    <pre><code class="cpp">
+bool draw_circle(unsigned int radius, int color, unsigned short thickness)
+{
+    bool ret_val = false;
+    if (color != 0)
+    {
+        Brush* brush = prepare_brush(thickness);
+        if (brush != nullptr)
+        {
+            brush->line = radius;
+            DC* context = nullptr;
+            switch (color)
+            {
+                case 1: 
+                    DC = make_from_cache(brush);
+                    break;
+                case 2:
+                    DC = get_inverse_std();
+                    break;
+                case 3:
+                    DC = brush->extract_R();
+                    DC->confirm();
+                case 4:
+                    DC = brush->extract_G();
+                    DC->confirm();
+                    break;
+                case 5:
+                    DC = brush->extract_B();
+                    DC->confirm();
+                    break;
+                default:
+                    DC = get_std();
+                    color = 1;
+                    break;
+            }
+            ret_val = paint(brush, color);
+        }
+    }
+    else
+    {
+        ret_val = create_stub(radius, thickness);
+    }
+    return ret_val;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Например:</h3>
+                    <p>
+                        Можно написать вот так:
+                    </p>
+                    <pre><code class="cpp">
+enum COLORS
+{
+    NO_COLOR = 0,
+    BLACK,
+    WHITE,
+    RED,
+    GREEN,
+    BLUE
+};
+
+bool draw_circle(unsigned int radius, COLORS color, unsigned short thickness)
+{
+    bool ret_val = false;
+    if (color != NO_COLOR)
+    {
+        Brush* brush = prepare_brush(thickness);
+        if (brush != nullptr)
+        {
+            brush->line = radius;
+            DC* context = nullptr;
+            switch (color)
+            {
+                case BLACK: 
+                    DC = make_from_cache(brush);
+                    break;
+                case WHITE:
+                    DC = get_inverse_std();
+                    break;
+                case RED:
+                    DC = brush->extract_R();
+                    DC->confirm();
+                case GREEN:
+                    DC = brush->extract_G();
+                    DC->confirm();
+                    break;
+                case BLUE:
+                    DC = brush->extract_B();
+                    DC->confirm();
+                    break;
+                default:
+                    DC = get_std();
+                    color = BLACK;
+                    break;
+            }
+            ret_val = paint(brush, color);
+        }
+    }
+    else
+    {
+        ret_val = create_stub(radius, thickness);
+    }
+    return ret_val;
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Объединения union</h2>
+                    <p>
+                        Объединение - это тип данных, который в разные моменты времени может
+                        выступать в роли различных типов данных.
+                    </p>
+                    <p>
+                        Объединения описываются также как и структуры, только вместо слова
+                        struct используется ключевое слово <span class="blue">union</span>.
+                    </p>
+                    <pre><code class="cpp">
+union Base
+{
+    int i;
+    float f;
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Структуры vs объединения</h2>
+                    <p>
+                        Если структуру можно ассоциировать с союзом <span class="purple">И</span>,
+                        то объединения - с союзом <span class="purple">ИЛИ</span>.
+                    </p>
+                    <p>
+                        Внутри структуры одновременно находятся И i, И f, И pchar.
+                    </p>
+                    <pre><code class="cpp">
+struct A
+{
+    int i;
+    double d;
+    char* pchar;
+};
+                    </code></pre>
+                    <p>
+                        Внутри объединения одновременно находятся ИЛИ i, ИЛИ f, ИЛИ pchar.
+                    </p>
+                    <pre><code class="cpp">
+union B
+{
+    int i;
+    double d;
+    char* pchar;
+};              
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Объединения в памяти</h2>
+                    <p>
+                        Объединения занимают в памяти объём, необходимый для хранения наибольшего
+                        из своих полей.
+                    </p>
+                    <p>
+                        Для предыдущего примера, размер структуры A будет составлять 16 байт.
+                    </p>
+                    <p>
+                        А объединения B - 8 байт.
+                    </p>
+                </section>
+                <section>
+                    <h2>Активное поле</h2>
+                    <p>
+                        Активным полем в объединении является то поле, в которое последним
+                        было присвоено значение.
+                    </p>
+                    <p>
+                        И у n.index, и у n.name, и у n.delta один и тот же адрес в памяти.
+                    </p>
+                    <pre><code class="cpp">
+union Bucket
+{
+    int index;
+    char* name;
+    float delta;
+};
+
+int main()
+{
+    Bucket n;
+
+    // Активное поле delta
+    n.delta = 13.46f;
+    float f = n.delta * 3.14159f;
+
+    // Теперь активным становится поле index
+    for (n.index = 0; n.index &lt; 10; ++n.index)
+    {
+        cout &lt;&lt; n.index &lt;&lt; endl;
+    }
+
+    // Активное поле index
+    n.name = new char[20];
+    scanf_s("%s", n.name, 20);
+    printf("%s\n", n.name);
+
+    return 0;
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Использование</h2>
+                <p>
+                    Обычно, объединения применяются для оптимизации работы с памятью, чтобы
+                    экономнее распоряжаться её объемом.
+                </p>
+                <p>
+                    Также бывают ситуации, когда специфика функционирования объединений
+                    логично вписывается в разрабатываемое решение.
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Битовые поля</h2>
+                    <p>
+                        Ещё один инструмент оптимизации используемой памяти.
+                    </p>
+                    <p>
+                        Битовые поля по сути не являются отдельными типами данных, но 
+                        их использование допускается только в качестве полей составных
+                        типов данных (структур, объединений).
+                    </p>
+                    <blockquote>
+                        Битовое поле - поле составного типа данных, размер которого указан в
+                        <span class="purple">битах</span> (двоичных разрядах).
+                    </blockquote>
+                    <p>
+                        Имеет такую форму определения:
+                    </p>
+                    <pre><code class="cpp">
+struct/union имя_типа 
+{
+    тип имя1 : размер1;
+    тип имя2 : размер2;
+    // ...
+    тип имяN : размерM;
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>А как же байты?</h2>
+                    <p>
+                        Да, минимальный размер выделяемой памяти компьютера - 1 байт,
+                        и никак меньше.
+                    </p>
+                    <p>
+                        Но в одной байтовой ячейке содержится 8 бит, и этим можно пользоваться.
+                    </p>
+                    <blockquote>
+                        Битовые поля позволяют побитово разделить одну ячейку памяти между
+                        несколькими полями структуры. 
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Вроде бы нормальный код</h3>
+                    <p>
+                        Обычная структура:
+                    </p>
+                    <pre><code class="cpp">
+struct StudentRecord
+{
+    int faculty;
+    int pulpit;
+    int course;
+    int group;
+};
+                    </code></pre>
+                    <p>
+                        Со стороны, обычная структура. Представляет запись группы студентов университета в программе,
+                        и содержит код факультета, код кафедры, номер курса и номер группы.
+                    </p>
+                    <p>
+                        Но, чёрт возьми, она занимает в памяти 16 байт!
+                    </p>
+                </section>
+                <section>
+                    <h3>..или нет</h3>
+                    <pre><code class="cpp">
+struct StudentRecord
+{
+    unsigned short faculty : 5;
+    unsigned short pulpit : 4;
+    unsigned short course : 2;
+    unsigned short group : 3;
+};                            
+                    </code></pre>
+                    <p>
+                        Теперь объект структуры занимает 2 байта. Это почти <span class="red">в 8 раз меньше</span>.
+                    </p>
+                    <p>
+                        Такая структура позволяет хранить значения до 32 разных факультетов, до 16 кафедр,
+                        4 номеров курсов и 8 групп. 
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример использования</h3>
+                    <pre><code class="cpp">
+struct StudentRecord
+{
+    unsigned short faculty : 5;
+    unsigned short pulpit : 4;
+    unsigned short course : 2;
+    unsigned short group : 3;
+};
+
+int main()
+{
+    setlocale(LC_CTYPE, "Russian");
+    
+    StudentRecord group816;
+    group816.faculty = 31;
+    group816.pulpit = 15;
+    group816.course = 3;
+    group816.group = 7;
+    cout &lt;&lt; "Размер: " &lt;&lt; sizeof(group816) &lt;&lt; endl;
+    cout &lt;&lt; "Ид факультета: " &lt;&lt; group816.faculty &lt;&lt; endl;
+    cout &lt;&lt; "Ид кафедры: " &lt;&lt; group816.pulpit &lt;&lt; endl;
+    cout &lt;&lt; "Курс: " &lt;&lt; group816.course &lt;&lt; endl;
+    cout &lt;&lt; "Группа: " &lt;&lt; group816.group &lt;&lt; endl;
+
+    return 0;
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Особенности 0</h2>
+                    <p>
+                        Битовые поля могут быть только целочисленного типа: unsigned, bool, char, short, int, long.
+                    </p>
+                    <p>
+                        Указатели, float, double, и тем более пользовательские типы, не допускаются.
+                    </p>
+                    <pre><code class="cpp">
+struct test_bf
+{
+    unsigned char first : 1;            // Okay
+    short second : 2;                   // Okay
+    int third : 3;                      // Okay
+    long long forth : 4;                // Okay
+    bool fifth : 5;                     // Okay
+
+    float ouch : 6;                     // Not okay
+    double ughh : 7;                    // Not okay 
+    char* oops : 8;                     // Not okay
+    test_bf mmgh: 9;                    // Not okay
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Особенности 1</h2>
+                    <p>
+                        Размер битового поля может составлять от 1 бита до размера типа данных этого поля.
+                    </p>
+                    <pre><code class="cpp">
+struct bit_fields
+{
+    char a : 1;         // Okay
+    char b : 5;         // Okay
+    char c : 10;        // Error
+    int  d : 10;        // Okay
+    int  e : 33;        // Error  
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Особенности 2</h2>
+                    <p>
+                        Битовые поля типов данных разного размера между собой никак не пересекаются
+                        (bool и char можно комбинировать - оба 1 байт).
+                    </p>
+                    <pre><code class="cpp">
+// sizeof(no_bits) == 8
+struct no_bits
+{
+    char c;
+    short s;
+    int i;
+};
+                    </code></pre>
+                    <pre><code class="cpp">
+// sizeof(with_bits) == 8 
+struct with_bits
+{
+    char c : 1;
+    short s : 1;
+    int i : 1;
+};
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Особенности 3</h2>
+                    <p>
+                        Память для битовых полей выделяется как для обычных переменных заданного типа, т.е.
+                        она всегда кратна размеру своего типа.
+                    </p>
+                    <p>
+                        Если у вас используется 15 бит битовых полей тип short, то под них будет выделена
+                        одна ячейка памяти short - 2 байта.
+                    </p>
+                    <p>
+                        Если 17 бит типа short, то выделено будет уже 4 байта - под 2 элемента типа short.
+                    </p>
+                    <pre><code class="cpp">
+// sizeof(another_test_struct) == 4
+struct another_test_struct
+{
+    int bit1 : 8;
+    int bit2 : 8;
+    int bit3 : 8;
+    int bit4 : 8;
+};
+                    </code></pre>
+                    <pre><code class="cpp">
+// sizeof(yet_another_one) == 8
+struct yet_another_one
+{
+    int bit1 : 8;
+    int bit2 : 9;
+    int bit3 : 8;
+    int bit4 : 8;
+};
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Типовые структуры данных</h1>
+                    <p>
+                        Механизмы построения пользовательских типов данных позволяют проектировать и
+                        разрабатывать разнообразные модели хранения данных.
+                    </p>
+                    <p>
+                        Структуры данных характеризуются особенными способами взаимосвязей между
+                        своими элементами и различающимися правилами обращения с ними.
+                    </p>
+                </section>
+                <section>
+                    <h2>Классификация структур данных</h2>
+                    <p>
+                        К основным классическим структурам данных можно отнести:
+                    </p>
+                    <ul>
+                        <li>Стеки</li>
+                        <li>Очереди</li>
+                        <li>Списки</li>
+                        <li>Деревья</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Совсем динамические структуры</h2>
+                    <p>
+                        Возможность описывать собственные структуры данных позволяет создавать 
+                        сложные составные структуры с неограниченным количеством элементов.
+                    </p>
+                    <blockquote>
+                        <i>Динамические структуры данных</i> - это структуры данных, память под которые 
+                        выделяется и освобождается по мере необходимости.
+                    </blockquote>
+                    <p>
+                        Элементы динамических структур создаются при помощи динамического выделения памяти
+                        и не располагаются в памяти последовательно.
+                    </p>
+                </section>
+                <section>
+                    <h2>Элементы</h2>
+                    <p>
+                        Каждый элемент динамической структуры представляет собой запись, 
+                        содержащую, как минимум, два поля: данные и указатель.
+                    </p>
+                    <blockquote>
+                        <ul>
+                            <li>В поле данных хранится значение текущего элемента структуры</li>
+                            <li>
+                                В поле указателя содержится один или несколько указателей, 
+                                связывающих данный элемент с другими элементами структуры
+                            </li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Объявление элемента</h2>
+                    <blockquote>
+                        Объявление элемента динамической структуры данных выглядит следующим образом:
+                    </blockquote>
+                    <pre><code class="cpp">
+struct имя_типа 
+{
+    информационное_поле;
+    адресное_поле;
+};
+                    </code></pre>
+                    Например:
+                    <pre><code class="cpp">
+struct TNode 
+{
+    int Data;       // целочисленные данные
+    TNode *Next;    // адресное поле
+};
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Пример структуры</h2>
+                <p>
+                    Рассмотрим в качестве примера следующую динамическую структуру:
+                </p>
+                <img src="img/abstruct.jpg" />
+            </section>
+            <section>
+                <section>
+                    <h1>Стек</h1>
+                    <blockquote>
+                        Стеком называется одномерная структура данных (читай, массив),
+                        добавление и удаление элементов из которой производится только
+                        с одного конца (правило LIFO - "last-in, first-out").
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Проще говоря</h3>
+                    <img src="img/stack_of_books.jpg" />
+                    <blockquote>
+                        Положить или снять книгу можно только на вершину стопки.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над стеком</h2>
+                    <p>
+                        Переменная, которая указывает на последний элемент стека - указатель стека.
+                    </p>
+                    <blockquote>
+                        Для стека определены две базовые операции:
+                    </blockquote>
+                    <p>
+                        <ul>
+                            <li><i>PUSH</i> - добавление нового элемента на вершину стека</li>
+                            <li><i>POP</i> - удаление элемента из вершины стека</li>
+                        </ul>
+                    </p>
+                    <img src="img/stack_scheme.jpg" />
+                </section>
+                <section>
+                    <h2>Пример работы стека</h2>
+                    <img src="img/stack_scheme-2.jpg" />
+                </section>
+                <section>
+                    <h3>Организация простого стека</h3>
+                    <blockquote>
+                        Рассмотрим пример организации полустатического стека через обыкновенный массив
+                    </blockquote>
+                    <pre><code class="cpp">
+#define SIZE 100            // Максимальный размер
+int Stack[SIZE];            // Массив для хранения стека
+int SP;                     // Указатель стека
+void Init()                 // Функция очистки стека
+{
+    SP = -1;                // Стек пуст                            
+}
+void Push(int val)          // Запись в стек
+{
+    SP++;                   // Указатель к следующему
+    Stack[SP] = val;        // Запись по указателю стека
+}
+int Pop()                   // Исключение из стека
+{
+    if (SP &lt; 0)
+        return 0;           // Стек пуст
+    return (Stack[SP--]);   // Вернуть элемент по указателю и уменьшить указатель
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Очередь</h1>
+                    <img src="img/older_queue.jpg" />
+                </section>
+                <section>
+                    <h1>Понятие очереди</h1>
+                    <blockquote>
+                        Очередь - одномерная структура данных, добавление элементов в которую
+                        осуществляется с одного конца (tail), а извлечение - с другого (head).
+                        Еще говорят: правило FIFO ("first-in, first-out").
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над очередью</h2>
+                    <p>
+                        Для очереди определено два указателя: указатель на начало очереди (<i>HEAD</i>) 
+                        и указатель на конец очереди (<i>TAIL</i>).
+                    </p>
+                    <p>
+                        Операции, которые можно выполнять с очередью:
+                    </p>
+                    <p>
+                        <ul>
+                            <li><i>PUSH</i> - добавление нового элемента в конец очереди</li>
+                            <li><i>POP</i> - удаление элемента из начала очереди</li>
+                        </ul>
+                    </p>
+                    <img src="img/queue_scheme.jpg" />
+                </section>
+                <section>
+                    <h2>Пример работы очереди</h2>
+                    <img src="img/queue_scheme-2.jpg" />
+                </section>
+                <section>
+                    <h2>Очереди с приоритетом</h2>
+                    <p>
+                        В реальных задачах иногда возникает необходимость в формировании очередей,
+                        где порядок выборки элементов определяется приоритетами элементов.
+                    </p>
+                    <p>
+                        Приоритет в общем случае может быть представлен числовым значением, которое 
+                        вычисляется либо на основании значений каких-либо полей элемента, 
+                        либо на основании внешних факторов. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Определение приоритетной очереди</h2>
+                    <p>
+                        Приоритетная очередь — это абстрактный тип данных, предназначенный для представления взвешенных множеств. 
+                    </p>
+                    <p>
+                        Множество называется взвешенным, если каждому его элементу однозначно 
+                        соответствует число, называемое ключом или весом. При выборке элемента 
+                        всякий раз выбирается элемент с наибольшим приоритетом, 
+                        т.е. "первым включается - с высшим приоритетом исключается". 
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Дек</h1>
+                    <blockquote>
+                        Дек - особый вид очереди. Дек (от англ. deq - double ended queue,т.е очередь с двумя концами) - 
+                        это тип данных, в котором как включение, так и 
+                        исключение элементов может осуществляться с любого из двух концов списка. 
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Операции над деком</h2>
+                    <blockquote>
+                        Структура дека поддерживает следующие операции:
+                    </blockquote>
+                    <blockquote>
+                        <ul>
+                            <li><i>PUSH</i> - добавление нового элемента на вершину дека</li>
+                            <li><i>POP</i> - удаление элемента на вершине дека</li>
+                            <li><i>PUSH_BACK</i> - добавление нового элемента в конец дека</li>
+                            <li><i>POP_BACK</i> - удаление элемента с конца дека</li>
+                        </ul>
+                    </blockquote>
+                    <img src="img/deq_scheme.jpg" />
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Списки</h1>
+                    <img src="img/notebook.jpg" />
+                </section>
+                <section>
+                    <h2>Понятие списка</h2>
+                    <p>
+                        Список представляет собой линейную последовательность переменных, 
+                        каждая из которых связана указателями со своими соседями.
+                    </p>
+                    Списки бывают следующих видов:
+                    <blockquote>
+                        <ul>
+                            <li>Односвязные</li>
+                            <li>Двусвязные</li>
+                            <li>Циклические</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Свойства списков</h2>
+                    <blockquote>
+                        Список - как массив, только неограниченного размера и 
+                        без последовательного размещения элементов в памяти.
+                    </blockquote>
+                    <p>
+                        Последовательность обхода списка зависит не от физического 
+                        размещения элементов списка в памяти, 
+                        а от последовательности их связывания указателями.
+                    </p>
+                    <p>
+                        Это значит, что у элементов списка нет физических индексов (номеров),
+                        только логические, полученные в результате обхода списка.
+                    </p>
+                </section>
+                <section>
+                    <h2>Односвязные списки</h2>
+                    <p>
+                        Односвязные списки являются наиболее простыми. 
+                        Основным их недостатком является возможность просмотра только в 
+                        одном направлении - от начала к концу. 
+                    </p>
+                    <p>
+                        Для односвязного списка наиболее простыми являются операции включения и 
+                        исключения элементов в начале и конце списка, соответственно они 
+                        используются для моделирования таких структур данных, как стеки и очереди.
+                    </p>
+                    <img src="img/simply_linked_list.jpg" />
+                </section>
+                <section>
+                    <h2>Двусвязные списки</h2>
+                    <p>
+                        Двусвязные списки дают возможность просмотра элементов в обоих 
+                        направлениях и являются наиболее универсальными. 
+                    </p>
+                    <p>
+                        Двусвязные списки используются для создания цепочек элементов, 
+                        которые допускают частые операции включения, исключения, упорядочения, замены и пр..
+                    </p>
+                    <img src="img/double_linked_list.jpg" />
+                </section>
+                <section>
+                    <h2>Циклические списки</h2>
+                    <p>
+                        В односвязных и двусвязных списках последний элемент содержит указатель 
+                        <span class="purple">nullptr</span> для обозначения факта окончания последовательности. 
+                        Аналогично первый элемент двусвязного списка содержит указатель 
+                        <span class="purple">nullptr</span> на предыдущий элемент. 
+                    </p>
+                    <p>
+                        В циклическом же списке, последний элемент ссылается на первый, а первый - на последний,
+                        образуя однородную неразрывную цепочку.
+                    </p>
+                    <img src="img/cyclic_list.jpg" />
+                </section>
+                <section>
+                    <h2>Работа со списками</h2>
+                    <pre><code class="cpp">
+struct list_element
+{
+    list_element* next;
+    int val;
+};
+list_element* phead;        // Указатель на начало списка
+
+list_element *p;
+p = phead;                  // Текущий указатель - на первый
+
+p->next                     // Указатель на следующий элемент
+
+p = p->next                 // Переход к следующему элементу
+
+p != nullptr                // Проверка "пока не конец списка"
+
+p->next == nullptr          // Проверка на последний элемент
+
+for (list_element* p = phead; p != nullptr; p = p->next)    // Обход списка
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Слияние двух списков</h2>
+                    <p>
+                        Операция слияния заключается в формировании из двух списков одного, как
+                        объединение строк.
+                    </p>
+                    <p>
+                        Последний элемент первого списка содержит пустой указатель на следующий элемент, 
+                        этот указатель служит признаком конца списка. 
+                        Вместо этого пустого указатель в последний элемент первого списка заносится 
+                        указатель на начало второго списка. Таким образом, 
+                        второй список становится продолжением первого.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>STL</h1>
+                    <blockquote>
+                        Все типовые структуры данных уже реализованы в Стандартной библиотеке шаблонов C++ (STL)
+                    </blockquote>
+                    <img src="img/holy_stl.jpg" />
+                </section>
+                <section>
+                    <h2>Содержание STL</h2>
+                    <p>
+                        Структуры данных в STL именуются контейнерами. 
+                        STL содержит подборку классов (структур) контейнеров для различных целей,
+                        а также поддерживает ряд алгоритмов для работы с ними.
+                    </p>
+                    Вообще, библиотека содержит пять видов компонентов:
+                    <blockquote>
+                        <ul>
+                            <li>Алгоритм (algorithm)</li>
+                            <li>Контейнер (container)</li>
+                            <li>Итератор (iterator)</li>
+                            <li>Функциональный объект (function object)</li>
+                            <li>Адаптер (adapter)</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Контейнеры STL</h2>
+                    <p>
+                        В библиотеке STL реализованы следующие контейнеры:
+                    </p>
+                    <blockquote>
+                        <ul>
+                            <li><i>&lt;stack&gt;</i> - стек</li>
+                            <li><i>&lt;queue&gt;</i> - очередь</li>
+                            <li><i>&lt;deque&gt;</i> - дек</li>
+                            <li><i>&lt;list&gt;</i> - двусвязный список</li>
+                            <li><i>&lt;vector&gt;</i> - динамический массив</li>
+                            <li><i>&lt;string&gt;</i> - динамические строки</li>
+                            <li><i>&lt;map&gt;</i> - ассоциативный массив</li>
+                            <li><i>&lt;set&gt;</i> - множество</li>
+                            <li><i>&lt;bitset&gt;</i> - битовый массив</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Подключение библиотек</h2>
+                    <p>
+                        Для использования какого-либо контейнера необходимо подключить 
+                        его библиотеку через команду <i>include</i>
+                    </p>
+                    <pre><code class="cpp">
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+#include &lt;deque&gt;
+#include &lt;list&gt;
+#include &lt;vector&gt;
+                    </code></pre>
+                    <p>
+                        Также стоит отметить, что все классы STL находятся в пространстве имён <i>std</i>.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h1>Шаблоны</h1>
+                <p>
+                    Все основные контейнеры библиотеки STL являются классами шаблонов. Это значит, что для описания
+                    контейнера должен явно определяться тип его элементов:
+                </p>
+                <code class="cpp">
+                    контейнер&lt;тип_элементов&gt; идентификатор;
+                </code>
+                <p>
+                    Например:
+                </p>
+                <pre><code class="cpp">
+stack&lt;int&gt; st1;
+queue&lt;double&gt; qu1;
+vector&lt;string&gt; vc1;
+
+struct Corpuscle
+{
+    int id;
+    double mass;
+    double charge;
+    short float spin;
+};
+
+list&lt;Corpuscle&gt; li1;
+                </code></pre>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа со стеком</h1>
+                    Основные операции в классе <i>stack</i>:
+                    <p>
+                        <ul>
+                            <li><i>push</i></li>
+                            <li><i>pop</i></li>
+                            <li><i>top</i></li>
+                            <li><i>empty</i></li>
+                            <li><i>size</i></li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h2>stack: push</h2>
+                    <p>
+                        Стандартная операция для стека - добавление элемента на вершину.
+                    </p>
+                    <code class="cpp">
+                        void std::stack.push(const типа &val);
+                    </code>
+                    <p>
+                        Пример:
+                    </p>
+                    <pre><code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);            // s == { 123 }
+s.push(-3578);          // s == { 123, -3578 }
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>stack: pop</h2>
+                    <p>
+                        Вторая стандартная операция для стека - удаление элемента с вершины стека.
+                    </p>
+                    <code class="cpp">
+                        void std::stack.pop();
+                    </code>
+                    <p>
+                        Пример:
+                    </p>
+                    <pre><code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);                // s == { 123 }
+s.push(-3578);              // s == { 123, -3578 }
+s.pop();                    // s == { 123 }
+s.pop();                    // s == { }
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>stack: top</h2>
+                    <p>
+                        Для просмотра верхнего элемента без извлечения 
+                        предусмотрена отдельный метод - <span class="blue">top</span>
+                    </p>
+                    <code class="cpp">
+                        const тип& std::stack.top();
+                    </code>
+                    <p>
+                        Пример:
+                    </p>
+                    <pre><code class="cpp">
+stack&lt;int&gt; s;
+s.push(123);
+cout &lt;&lt; s.top() &lt;&lt; endl;        // 123
+s.push(-3578);     
+cout &lt;&lt; s.top() &lt;&lt; endl;        // -3578
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>stack: empty</h2>
+                    <p>
+                        Функция <span class="blue">empty()</span> используется для проверки пустоты стека.
+                    </p>
+                    <code class="cpp">
+                        bool std::stack.empty();
+                    </code>
+                    <p>
+                        Пример:
+                    </p>
+                    <pre><code class="cpp">
+stack&lt;int&gt; s;
+if (s.empty())                      // true
+{
+    cout &lt;&lt; "стек пуст\n";   
+}
+s.push(123); 
+s.push(-3578);     
+s.pop();      
+if (s.empty())                      // false
+{
+    cout &lt;&lt; "стек пуст\n";
+}
+s.pop();     
+if (s.empty())                      // true
+{
+    cout &lt;&lt; "стек пуст\n";
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>stack: size</h2>
+                    <p>
+                        Функция <span class="blue">size()</span> позволяет получить текущий размер стека.
+                    </p>
+                    <code class="cpp">
+                        size_t std::stack.size();
+                    </code>
+                    <p>
+                        Пример:
+                    </p>
+                    <pre><code class="cpp">
+stack&lt;int&gt; s;
+int sz = s.size();      // sz = 0
+s.push(123); 
+s.push(-3578);     
+sz = s.size();          // sz = 2
+s.pop();
+sz = s.size();          // sz = 1     
+s.pop();     
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа с очередью</h1>
+                    Очередь <i>queue</i> в библиотеке шаблонов STL поддерживает следующие операции:
+                    <p>
+                        <ul>
+                            <li>push</li>
+                            <li>pop</li>
+                            <li>front</li>
+                            <li>back</li>
+                            <li>empty</li>
+                            <li>size</li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h2>Операции над очередью</h2>
+                    <p>
+                        По своему виду, функции очереди мало чем отличаются от функций стека.
+                        Главное различие между ними заключается в том, что метод 
+                        <span class="blue">pop()</span> извлекает не последний добавленный
+                        элемент, как в стеке, а первый.
+                    </p>
+                    <blockquote>
+                        Получить значение первого элемента очереди можно при 
+                        помощь метода <span class="blue">front()</span>, а последнего - 
+                        <span class="blue">back()</span>.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Пример использования очереди</h2>
+                    <pre><code class="cpp">
+queue&lt;char&gt; q;
+q.push('A');                // q == { 'A' }         
+q.push('B');                // q ==  { 'A', 'B' }
+char fr = q.front();        // fr == 'A'         
+q.push('C');                // q == { 'A', 'B', 'C' }
+q.pop();                    // q == { 'B', 'C' }
+char bk = q.back();         // bk == 'C'
+q.pop();                    // q == { 'C' }
+q.empty();                  // false
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Работа с деком</h1>
+                    Для дека в STL перечень доступных функций значительно расширен. 
+                    Ниже указаны лишь некоторые из них:
+                    <p>
+                        <ul>
+                            <li>push_front</li>
+                            <li>push_back</li>
+                            <li>pop_front</li>
+                            <li>pop_back</li>
+                            <li>insert</li>
+                            <li>erase</li>
+                            <li>clear</li>
+                            <li>size</li>
+                            <li>empty</li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h2>Добавление и удаление элементов дека</h2>
+                    <p>
+                        Поскольку удалять и добавлять элементы дека можно с обеих сторон, 
+                        то и функций для этого дела представлено не мало:
+                    </p>
+                    <p>
+                        <span class="blue">push_back()</span> и <span class="blue">pop_back()</span> 
+                        для добавления и удаления элементов в начало дека.
+                    </p>
+                    <p>
+                        <span class="blue">push_front()</span> и <span class="blue">pop_front()</span>
+                        для добавления и удаления элементов, соответственно, в конец дека.
+                    </p>
+                </section>
+                <section>
+                    <h2>deque: insert</h2>
+                    <p>
+                        Метод <span class="blue">insert()</span> позволяет гибким образом вставлять 
+                        элементы в дек: в любое место и в любом количестве.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h2>Что почитать дополнительно?</h2>
+                <ul>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=1153">
+                            <b>Глава 21-20</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+	<aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

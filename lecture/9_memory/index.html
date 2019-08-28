@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Arrays</title>
+	<meta name="description" content="memory, stack and heap, static and dynamic memory">
+	<meta name="keywords" content="c, c++, memory, stack, heap, dynamic memory, new, delete">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="../../icon.png">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h2>Управление памятью</h2>
+                    <div>
+                        <p style="display: inline-block;">
+                            Pavel Karpovich / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+            </section>
+            <section>
+                <section>
+                    <h2>Устройство памяти</h2>
+                    <p>
+                        Память компьютера для программы на C/C++ разделяется на несколько разделов.
+                    </p>
+                    <p>
+                        Основные из них, это
+                    </p>
+                    <ul>
+                        <li><span class="blue">Стек вызова</span></li>
+                        <li><span class="blue">Куча</span></li>
+                    </ul>
+                    <br />
+                    <img src="img/stack_and_heap.jpg" />
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Стек вызова</h2>
+                    <blockquote>
+                        Стек - упорядоченная и структурированная область памяти, используемая для
+                        быстрого доступа к временным локальным переменным.
+                    </blockquote>
+                    <p>
+                        Стек имеет ограниченный размер, по умолчанию в Visual Studio он составляет 1 МБ.
+                    </p>
+                    <p>
+                        У каждого потока выполнения свой собственный стек вызова.
+                    </p>
+                </section>
+                <section>
+                    <h2>Кадры (фреймы)</h2>
+                    <p>
+                        Стек состоит из кадров.
+                    </p>
+                    <img src="img/stack_frames.jpg" />
+                    <blockquote>
+                        Кадр (фрейм) - это специальная структура, связанная с вызовом функции, в которой 
+                        хранятся все локальные переменные функции и дополнительная служебная информация.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Кадры</h2>
+                    <p>
+                        Кадры напрямую связаны с вызовами функций. При каждом вызове функции на вершину 
+                        стека добавляется новый кадр с локальными переменными этой функции. После выхода 
+                        из функции этот кадр удаляется из стека, вместе с ним удаляются из памяти и все локальные 
+                        переменные этой функции.
+                    </p>
+                    <blockquote>
+                        Первый кадр стека всегда относится к функции main.
+                    </blockquote>
+                    <p>
+                        Структура стека вызова динамически изменяется во время работы программы.
+                    </p>
+                </section>
+                <section>
+                    <h2>Стек 1</h2>
+                    <img src="img/stack1_code.jpg" />
+                    <img style="float: right;" src="img/stack1.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 2</h2>
+                    <img src="img/stack2_code.jpg" />
+                    <img style="float: right;" src="img/stack2.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 3</h2>
+                    <img src="img/stack3_code.jpg" />
+                    <img style="float: right;" src="img/stack3.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 4</h2>
+                    <img src="img/stack4_code.jpg" />
+                    <img style="float: right;" src="img/stack2.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 5</h2>
+                    <img src="img/stack5_code.jpg" />
+                    <img style="float: right;" src="img/stack5.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 6</h2>
+                    <img src="img/stack6_code.jpg" />
+                    <img style="float: right;" src="img/stack2.jpg" />
+                </section>
+                <section>
+                    <h2>Стек 7</h2>
+                    <img src="img/stack7_code.jpg" />
+                    <img style="float: right;" src="img/stack1.jpg" />
+                </section>
+            </section>
+            <section>
+                <h2>Особенности стековой памяти</h2>
+                <ul>
+                    <li>Стек расширяется когда в функциях создаются локальные переменные</li>
+                    <li>Память в стеке автоматически очищается, когда из него удаляется кадр</li>
+                    <li>Размер стека ограничен</li>
+                    <li>Переменные стека существуют только во время выполнения функции</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Локальные переменные</h2>
+                <p>
+                    Все переменные (и массивы, и указатели), которые мы использовали ранее, 
+                    сохранялись в стеке. Это всё были локальные переменные.
+                </p>
+                <p>
+                    Объявленные в функции main, в собственных функциях, все они существуют
+                    временно, пока выполняется их функция и в памяти стека хранится её кадр.
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Статическое выделение памяти</h2>
+                    <p>
+                        Выделение памяти в стеке называется статическим выделением памяти.
+                    </p>
+                    <p>
+                        Его особенность заключается в том, что объём занимаемой 
+                        программой памяти рассчитывается <ins>во время компиляции</ins> программы,
+                        а не во время выполнения.
+                    </p>
+                    <p>Это значит, что размеры кадров стека имеют статический размер и не могут изменяться.</p>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre><code class="cpp">
+int func(double e)
+{
+    int k = (int)(e / 3.1415);
+    int ost = k % 42;
+    int q = ost * ost;
+    return q;
+}
+
+int main()
+{
+    int a;
+    double teta = 454.213, dzeta = -0.2781;
+    char str[20] = "Teta or dzeta";
+    cin >> a;
+    if (a == 2)
+    {
+        a = func(teta);
+    }
+    else
+    {
+        a = func(dzeta);
+    }
+    cout &lt;&lt; a &lt;&lt; endl;
+    return 0;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Разбор примера</h3>
+                    <p>
+                        Посмотрев на то, какие переменные создаются в данных функциях, даже 
+                        мы можем посчитать, сколько для них потребуется памяти.
+                    </p>
+                    <p>
+                        В main создаётся 1 переменная типа int, 2 переменные типа double и массив 
+                        из 20 элементов типа char. В сумме это даст 40 байт.
+                    </p>
+                    <p>
+                        Значит, еще на этапе компиляции будет подсчитано это число, и под кадр стека для
+                        функции main будет выделяться ровно 40 байт (грубо говоря), и ни сколько больше.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Куча (Хип)</h2>
+                    <blockquote>
+                        Куча (хип) -- неупорядоченная и неструктурированная область памяти, вся 
+                        оставшаяся память компьютера.
+                    </blockquote>
+                    <p>
+                        Соответственно, не имеет ограничения по размеру, кроме установленного
+                        физическим объёмом свободной памяти.
+                    </p>
+                    <p>
+                        Память в куче общая для всех потоков выполнения программы.
+                    </p>
+                </section>
+                <section>
+                    <h3>Структура кучи</h3>
+                    <p>
+                        Куча это куча. У неё нет какой бы то ни было структуры, это просто 
+                        набор ячеек памяти.
+                    </p>
+                    <p>
+                        <span class="red">
+                            Доступ к памяти кучи может быть получен только по адресу ячейки.
+                        </span>
+                        Т.е. только по указателю.
+                    </p>
+                </section>
+                <section>
+                    <h2>Особенности памяти в куче</h2>
+                    <ul>
+                        <li>Значения могут быть получены из любого места программы (если есть адрес)</li>
+                        <li>Куча не ограничена по размеру</li>
+                        <li>Слегка медленнее доступ (т.к. не напрямую, а только через указатели)</li>
+                        <li>Неэффективное и неупорядоченное расположение в памяти, приводящее к фрагментации</li>
+                        <li>Нужно самостоятельно выделять и освобождать память</li>
+                        <li>Размер созданных переменных можно менять</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Динамическое выделение памяти</h2>
+                    <blockquote>
+                        Выделение памяти в куче называется динамическим выделением памяти, и производится
+                        с помощью специализированных команд.
+                    </blockquote>
+                    <p>
+                        В отличие от стека, где необходимый объём памяти определяется заранее на этапе 
+                        компиляции программы, память в куче выделяется динамически по ходу работы программы.
+                    </p>
+                    <p>
+                        Объём выделяемой динамически памяти определяется во время выполнения, например, на 
+                        основании пользовательского ввода, или других событий. Может быть и прописан заранее
+                        в коде, как при статическом выделении. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Выделение и освобождение памяти</h2>
+                    <p>
+                        В стеке память выделяется и очищается автоматически при добавлении или удалении кадра
+                        из памяти.
+                    </p>
+                    <p>
+                        Куча же требует ручного обращения с памятью. Это значит, что нужно явно прописывать не
+                        только команды по выделению памяти, но и по её освобождению.
+                    </p>
+                    <p><ins><span class="red">
+                        Для каждого динамического выделения памяти должна быть прописана команда по её освобождению.
+                    </span></ins></p>
+                </section>
+                <section>
+                    <h2>Утечки памяти</h2>
+                    <p>
+                        Несоблюдение этого правила влечёт за собой так называемые "Утечки памяти".
+                    </p>
+                    <blockquote>
+                        Утечка памяти - это процесс неконтролируемого уменьшения объёма памяти компьютера
+                        из-за ошибок программиста по освобождению памяти.
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Функции динамического выделения памяти в C</h2>
+                    <p>
+                        В C для управления динамической памятью используется 4 функции:
+                    </p>
+                    <table>
+                        <tr>
+                            <td>malloc</td>
+                            <td>Выделение памяти для переменной</td>
+                        </tr>
+                        <tr>
+                            <td>calloc</td>
+                            <td>Выделение памяти для массива</td>
+                        </tr>
+                        <tr>
+                            <td>realloc</td>
+                            <td>Изменение размера выделенной памяти</td>
+                        </tr>
+                        <tr>
+                            <td>free</td>
+                            <td>Освобождение памяти</td>
+                        </tr>
+                    </table>    
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Указатель на void</h2>
+                    <p>
+                        Все эти функции работают с указателями на void.
+                    </p>
+                    <p>
+                        Указатель на void - это универсальная запись указателя на какую-то
+                        память без привязки к типу расположенного в ней элемента.
+                    </p>
+                </section>
+                <section>
+                    <h2>Использование указателя на void</h2>
+                    <p>
+                        Указатель на void не является полным типом объекта, поэтому с ним нельзя
+                        проводить никаких операций: нельзя получить значение, нельзя выполнять 
+                        арифметические действия.
+                    </p>
+                    <p>
+                        Чтобы из указателя на void получить полноценный указатель, нужно
+                        преобразовать его тип.
+                    </p>
+                    <pre><code class="cpp">
+int iu = 4;
+void* pv = &amp;iu;
+*pv = 3;                // нельзя
+iu = *pv;               // нельзя
+pv++;                   // нельзя
+int* pi = (int*)pv;     // преобразование в указатель на int
+*pi = 3;                // можно
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Функция malloc</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre><code class="cpp">
+void* malloc(unsigned size);
+                    </code></pre>
+                    <blockquote>
+                        Функция возвращает указатель на начало области выделенной динамической памяти 
+                        длиной в size байт, при неудачном завершении возвращает NULL.
+                    </blockquote>
+                    <pre><code class="cpp">
+int* a = (int*)malloc(4);
+
+double* d = (double*)malloc(sizeof(double));
+
+void* pv = malloc(sizeof(short int));
+short int* ps = (short int*)pv;
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Функция free</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre><code class="cpp">
+void free(void* ptr);
+                    </code></pre>
+                    <blockquote>
+                        Функция освобождает память, выделенную ранее функциями malloc, calloc или realloc,
+                        делая её доступной для последующих повторных выделений.
+                    </blockquote>
+                    <p><span><ins>
+                        Для каждого вызова malloc, calloc или realloc в программе должен быть вызов free.
+                    </ins></span></p>
+                    <pre><code class="cpp">
+free(a);
+free(d);
+free(ps);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Функция calloc</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre><code class="cpp">
+void* calloc(unsigned num, unsigned size);
+                    </code></pre>
+                    <blockquote>
+                        Функция возвращает указатель на начало области динамической памяти 
+                        для размещения num элементов длиной по size байт каждый, 
+                        при неудачном завершении возвращает NULL.
+                    </blockquote>
+                    <pre><code class="cpp">
+char* mas = (char*)calloc(10, sizeof(char));
+
+float* arr = (float*)calloc(4, sizeof(float));
+
+
+free(mas);
+free(arr);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Функция realloc</h2>
+                    <p>
+                        Функция имеет следующее определение:
+                    </p>
+                    <pre><code class="cpp">
+void* realloc(void* ptr, unsigned new_size);
+                    </code></pre>
+                    <blockquote>
+                        Функция изменяет размер блока ранее выделенной динамической памяти 
+                        до размера new_size байт, параметр ptr - это адрес начала изменяемого 
+                        блока, при неудачном завершении возвращает NULL.
+                    </blockquote>
+                    <pre><code class="cpp">
+int* pa = (int*)calloc(4, sizeof(int));
+*(pa) = 1;
+*(pa + 1) = 2;
+*(pa + 2) = 3;
+*(pa + 3) = 4;
+pa = (int*)realloc(pa, 2 * sizeof(int));
+cout &lt;&lt; pa[0] &lt;&lt; endl &lt;&lt; pa[1] &lt;&lt; endl &lt;&lt; pa[2] &lt;&lt; endl &lt;&lt; pa[3] &lt;&lt; endl;
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Примеры</h2>
+                    <pre><code class="cpp">
+// Так нельзя
+int* create_static_arr()
+{
+    const int n = 10;
+    int arr[n];
+    
+    for (int i = 0; i &lt; n; ++i)
+    {
+        arr[i] = rand() % 10;
+    }
+    return arr;
+}
+
+// Так можно
+int* create_arr(int n)
+{
+    int* arr;
+    arr = (int*)malloc(n*sizeof(int));
+    
+    for (int i = 0; i &lt; n; ++i)
+    {
+        arr[i] = rand() % 10;
+    }
+    return arr;
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Операторы динамического выделения памяти в C++</h2>
+                    <ul>
+                        <li><span class="blue">new</span></li>
+                        <li><span class="blue">delete</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>new</h2>
+                    <p>
+                        Для одного значения:
+                    </p>
+                    <pre><code class="cpp">
+тип* имя = new тип;
+тип* имя = new тип(начальное_значение);
+                    </code></pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre><code class="cpp">
+int* a = new int;
+float* b;
+b = new float;
+char* c = new char('f');
+double* d = new double(3.14);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>new для массивов</h2>
+                    <blockquote>
+                        Динамическое выделение памяти позволяет создавать массивы
+                        размера, заданного значением переменной.
+                    </blockquote>
+                    <p>
+                        Для выделения памяти под несколько элементов:
+                    </p>
+                    <pre><code class="cpp">
+тип* имя = new тип[количество];
+тип* имя = new тип[количество] { список_инициализации };
+                    </code></pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre><code class="cpp">
+int size = 10;
+int* arr = new int[size];
+float* mas = new mas[4] { 1.6f, 0.75f, 4.2f, 1.0f };
+int* arr2 = new int[2] { 5, 2 };
+char* mas2 = new char[arr2[1]];
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>delete</h2>
+                    <blockquote>
+                        <span class="red">
+                            Всё, что создаётся в программе с помощью new, должно быть освобождено через delete.
+                        </span>
+                    </blockquote>
+                    <p>
+                        Также как и с new, delete имеет 2 формы записи, для одиночных
+                        значений и для массивов:
+                    </p>
+                    <pre><code class="cpp">
+delete имя;
+delete имя1, имя2, имяN;
+
+delete[] имя_массива;
+delete[] имя_массива1, имя_массива2, имя_массиваN;
+                    </code></pre>
+                    <pre><code class="cpp">
+delete a, b, c, d;
+
+delete arr, mas, arr2, mas2;
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Двумерные массивы через указатели</h2>
+                    <p>
+                        Для формирования динамического двумерного массива сначала выделяется
+                        память для массива указателей, а затем для каждого из этих указателей
+                        выделяется память под массив значений.
+                    </p>
+                    <p>
+                        При удалении такого массива, важно сначала в цикле освободить память внутренних
+                        массивов, а только после этого освободить память внешнего массива указателей.
+                    </p>
+                </section>
+                <section>
+                    <h3>Матрица</h3>
+                    <pre><code class="cpp">
+int** matr;         // Адрес адресов - массив указателей
+int i, j;
+int* n = new int;
+printf("Введите порядок матрицы:");
+scanf("%d", n);
+matr = new int*[*n];    // Выделить память под массив из n указателей
+
+for (i = 0; i &lt; *n; ++i)          // Для каждого указателя из массива указателей
+{
+    matr[i] = new int[*n];          // Выделить память под n int-ов
+    for (j = 0; j &lt; *n; ++j)          // Для каждого элемента i-ого массива
+    {
+        matr[i][j] = rand() % 10;       // Присвоить рандомное значение
+    }
+}
+                    </code></pre>
+                    <pre><code class="cpp">
+for (int k = 0; k &lt; *n; ++k)     // Для каждого указателя из массива указателей
+{
+    delete[] matr[k];           // Освободить память по этому указателю
+}
+delete[] matr;          // Освободить память массива указателей
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Константы</h2>
+                    <p>
+                        Для создания константного динамического объекта перед оператором new
+                        необходимо записать слово const:
+                    </p>
+                    <pre><code class="cpp">
+const int *pci = new const int(1024);
+
+const char* str = new const char[6] { "text." };
+                    </code></pre>
+                    <p>
+                        Выделение памяти под константный объект обязательно должно
+                        сопровождаться инициализацией начального значения.
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <h2>Что почитать дополнительно?</h2>
+                <ul>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=271">
+                            <b>Глава 26</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            
+        </div>
+    </div>
+	<aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

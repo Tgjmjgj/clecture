@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Arrays</title>
+	<meta name="description" content="static arrays">
+	<meta name="keywords" content="c, c++">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="../../icon.png">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Статические массивы</h3>
+                    <div>
+                        <p style="display: inline-block;">
+                            Pavel Karpovich / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <section>
+                    <h1>Массив</h1>
+                    <p>
+                        Массив (или вектор) – это группа связанных друг с другом элементов одного типа (double, float, int и т.п.) последовательно расположенных в памяти.
+                        Из объявления массива компилятор должен получить информацию о типе элементов массива и их количестве.
+                    </p> 
+                    <p>
+                        Объявление массива имеет два формата:
+                    </p>
+                    <blockquote>
+                            <span class="blue">спецификатор-типа</span> 
+                            идентификатор [<span class="purple">константный размер</span>];
+                    </blockquote>
+                    <blockquote>
+                        <span class="blue">спецификатор-типа</span> идентификатор [];
+                    </blockquote>
+                    <p>
+                        Элементами массива не могут быть функции и элементы типа void.
+                    </p>
+                </section>
+                <section>
+                    <h2>Массив 2</h2>
+                    <blockquote>Количество элементов при объявлении массива может быть опущено в следующих случаях:</blockquote>
+                    <ul>
+                        <li>при объявлении массив инициализируется</li>
+                        <li>массив объявлен как формальный параметр функции</li>
+                        <li>массив объявлен как ссылка на массив, явно определенный в другом файле</li>
+                    </ul>
+                    <blockquote>
+                        Пример определения массива:
+                    </blockquote>
+                    <pre><code class="cpp">
+int arr[5];
+int n = 5;
+int arr2[n];        // ошибка
+                    </code></pre> 
+                </section>
+            </section>
+            <section>
+                <h2>Объявление</h2>
+                <blockquote>
+                    При объявлении автоматических и статических массивов для задания их размеров лучше использовать именованные константы:
+                </blockquote>
+                <pre><code class="cpp">
+const int array_size;
+...
+char arr[array_size];
+                </code></pre>
+                <blockquote>
+                    Это делает программу более масштабируемой, при изменении размера массива надо будет поменять число только в одном месте.
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h1>Инициализация массива</h1>
+                    <blockquote>
+                        Инициализация массива означает присвоение начальных значений его элементам при объявлении.
+                    </blockquote>
+                    <blockquote>
+                        Массивы можно инициализировать списком значений или выражений, отделенных запятой, заключенных в фигурные скобки:
+                    </blockquote>
+                    <pre><code class="cpp">
+double d[] = { 1.0, 2.0, 3.0, 4.0, 5.0 };
+int n[5] = { 2 };
+                    </code></pre>
+                    <blockquote>
+                        Длина массива вычисляется компилятором по количеству значений, перечисленных в фигурных скобках.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Инициализация массива</h3>
+                    <blockquote>
+                        Если размер массива задан, нельзя специфицировать значений больше, 
+                        чем объявлено в массиве (синтаксическая ошибка), 
+                        но меньше указать можно (минимально должен быть определен один элемент).
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Индексация</h1>
+                    <p>
+                        У каждого элемента массива есть свой индекс ( ~ номер). 
+                        Индекс элемента - это его смещение относительно первого элемента.
+                    </p>
+                    <p>
+                        Поэтому <ins class="red">индексация в массиве начинается с 0</ins>.
+                    </p>
+                    <img src="img/index.jpg" />
+                </section>
+                <section>
+                    <h2>Индексы</h2>
+                    <pre><code class="cpp">
+double mas[8] = { 2.3, 0.1, 3.0, 13.4, -0.44, 2.9, 8.8, 0.05 };
+                    </code></pre>
+                    <img src="img/index_2.jpg">
+                </section>
+                <section>
+                    <h1>Ограничения</h1>
+                    <blockquote>
+                        С++ не проверяет границ массивов и не предупреждает о ссылках  на несуществующие элементы.
+                    </blockquote>
+                    <pre><code class="cpp">
+int arr[5];
+int temp = arr[8];      // обращение к 9-му элементу массива, вызовет ошибку выполнения
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Элементы массива</h2>
+                    <p>
+                        Для обращения к элементам массива используются символы квадратных скобок [].
+                    </p>
+                    <p>
+                        Обращение осуществляется по индексу элемента. 
+                    </p>
+                    <pre><code class="cpp">
+const int SIZE = 13;
+
+int vector[SIZE] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+
+int a = vector[6];                  // a = 8
+int b = vector[0];                  // b = 0
+int c = vector[2] + vector[8];      // c = 1 + 21 = 22
+
+vector[SIZE - 1] = -10;
+vector[1] = 42;
+vector[4] = a * SIZE;
+vector[10] = vector[1];
+
+// vector = { 0, 42, 1, 2, 104, 5, 8, 13, 21, 34, 42, 89, -10 }
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Перебор элементов массива</h2>
+                <p>
+                    Стандартный способ перебора всех элементов массива через цикл for:
+                </p>
+                <pre><code class="cpp">
+char mas[8];
+for (int i = 0; i &lt; 8; ++i)
+{
+    mas[i];
+}
+                </code></pre>
+            </section>
+            <section>
+                <h2>Массивы и функции</h2>
+                <p>
+                    Статический массив не может быть указан как тип возвращаемого значения функции.
+                </p>
+                <p>
+                    Но может быть передан в качестве параметра:
+                </p>
+                <pre><code class="cpp">
+void print_array(double arr[], int size)
+{
+    for (int i = 0; i &lt; size; ++i)
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+} 
+
+void main()
+{
+    double mas[] = { 1.0, 5.4, 2.03, 0.002 };
+    
+    print_array(mas, sizeof(mas) / sizeof(double));
+}                 
+                </code></pre>
+                <p>
+                    Для массивов, переданных как аргумент функции, <ins>исчезает возможность 
+                    использования функции sizeof()</ins> для получения размера всего массива!
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Пример работы с массивом 1</h2>
+                    <pre><code class="cpp">
+int main()
+{    
+        int arr[10];
+
+        // Заполняем массив с клавиатуры
+        for (int i = 0; i &lt; 10; ++i) {
+            cout &lt;&lt; "[" &lt;&lt; i + 1 &lt;&lt; "]" &lt;&lt; ": ";
+            cin &gt;&gt; arr[i];
+        }
+
+        // И выводим заполненный массив.
+        cout &lt;&lt; "\nВаш массив: ";
+
+        for (int i = 0; i &lt; 10; ++i) {
+            cout &lt;&lt; arr[i] &lt;&lt; " ";
+        }
+
+        cout &lt;&lt; endl;
+
+        return 0;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пример работы с массивом 2</h2>
+                    <p>
+                        Нужно преобразовать исходный массив чисел, возведя каждый из них в квадрат.
+                    </p>
+                    <pre><code class="cpp">
+int main() {
+
+    int a[10] = { 7, -12, 9, 10, 100, -90, 200, 300, 23, -555 }; 
+
+    for (int i = 0; i &lt; 10; ++i) {
+        int b = a[i];
+        b = b * 2;
+        a[i] = b;
+
+        cout &lt;&lt; a[i] &lt;&lt; endl;
+    }
+
+    getchar();
+    return 0;
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пример работы с массивом 3</h2>
+                    <p>
+                        В массиве С(n) каждый третий элемент заменить полусуммой двух предыдущих.
+                    </p>
+                    <pre><code class="cpp">
+const int n = 10;
+int C[n] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+for (int i = 0; i &lt; n; i += 3)
+{
+    C[i] = (C[i - 2] + C[i - 1]) / 2;
+}
+
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пример работы с массивом 4</h2>
+                    <p>
+                        Стоит задача: подсчитать количество пар соседних 
+                        элементов массива с одинаковыми значениями.
+                    </p>
+                    <pre><code class="cpp">
+const int N = 20;
+float arr[N] = { 4.543, 3.21, 3.21, 3.21, 3.21, 
+                 0.47, -4.32, 6.87, 6.29, 6.29, 
+                 -1.0, 67.34, 2.38, 2.38, 1.84,
+                 -4.2, -4.2, 18.08, 18.08, 9.0 };
+
+int pair_count = 0;
+
+for (int i = 0; i &lt; N - 1; ++i)
+{
+    if (arr[i] == arr[i + 1])
+    {
+        ++pair_count;
+    }
+}
+
+cout &lt;&lt; "Найдено " &lt;&lt; pair_count &lt;&lt; " пар одинаковых элементов\n";
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пример работы с массивом 5</h2>
+                    <p>
+                        Необходимо ввести целочисленный массив размера <i>n</i>. Затем удалить из массива все элементы, встречающиеся два и более раз.
+                    </p>
+                    <pre><code class="cpp">
+// объявление переменных
+int a[50];      // 50 - максимальный размер массива
+int n;
+// инициализация переменных
+cout &lt;&lt; "Введите размер массива, до 50: " &lt;&lt; endl;
+cin &gt;&gt; n;
+for (int i = 0; i &lt; n; ++i)
+    scanf("%d", &a[i]);     // ввод массива
+// обработка
+for (int k = 0; k &lt; n; ++k)
+{
+    for (int i = k + 1; i &lt; n; ++i)
+    {
+        if (a[k] == a[i])
+        {
+            for (int l = i; l &lt; n; ++l)
+                a[l] = a[l + 1];    // удаление повторяющихся элементов
+                i--;    // чтобы повторно проверить i-ый элемент
+                n--;    // скорректировать фактический размер массива
+        }
+    }
+}
+// вывод результата
+for (int i = 0); i &lt; n; ++i)
+    printf("%d ", a[i]);     // вывод массива
+printf("\n");
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h1>Многомерные массивы</h1>
+                <blockquote>
+                    Двухмерный массив (массив массивов) представляется как одномерный, элементы которого тоже массивы.
+                    Двухмерный массив можно представить как матрицу или таблицу.
+                </blockquote>
+                <blockquote>
+                    Размерность массива – это количество индексов, используемых для ссылки на конкретный элемент массива.
+                </blockquote>
+                <blockquote>
+                    Пример определения двухмерного массива из 10 последовательностей по 30 элементов:
+                </blockquote>
+                <pre><code class="cpp">
+int matrix[10][30];
+                </code></pre>
+            </section>
+            <section>
+                <section>
+                    <h1>Инициализация двухмерных массивов</h1>
+                    <blockquote>
+                        Инициализация 	происходит построчно,  в порядке возрастания самого правого индекса.
+                        В таком порядке элементы многомерных массивов располагаются в памяти компьютера.
+                    </blockquote>
+                    <blockquote>
+                        Пример инициализации:
+                    </blockquote>
+                    <pre><code class="cpp">
+int arr[2][2][2] = {1, 2, 3, 4, 5, 6, 7, 8};
+arr[0][0][0]    // 1
+arr[0][0][1]    // 2                            
+arr[0][1][0]    // 3                            
+arr[0][1][1]    // 4                            
+arr[1][0][0]    // 5                            
+arr[1][0][1]    // 6                            
+arr[1][1][0]    // 7                            
+arr[1][1][1]    // 8
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Инициализация</h3>
+                    <blockquote>
+                        Многомерные массивы могут инициализироваться и без указания одной (самой левой) из размерностей массива. 
+                        В этом случае количество элементов компилятор определяет по количеству членов в списке инициализации.
+                    </blockquote>
+                    <pre><code class="cpp">
+int mtr[][3] = { 1, 2, 3, 4, 5, 6};         // mtr[2][3]
+int mtr2[][3] = { 1, 2, 3, 4, 5, 6, 7};     // mtr[3][3], неинициализированные элементы примут значение 0
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Инициализация</h3>
+                    <blockquote>
+                        Если необходимо проинициализировать не все элементы массива, а только несколько первых элементов, 
+                        то в списке инициализации можно использовать фигурные скобки, охватывающие значения для этой последовательности. 
+                    </blockquote>
+                    <pre><code class="cpp">
+int mtr[][3] = { { 12 }, {10, 14}, {21, 4, 13} };  
+ // остальные проинициализируются нулями
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Определение размера массива</h2>
+                <blockquote>
+                    Определить, под какое количество элементов выделена память в массиве, можно используя следующую конструкцию:
+                </blockquote>
+                <pre><code class="cpp">
+int a[][4] = { {1}, {2}, {3} };
+int size = sizeof(a) / sizeof(int);     // size = 12
+                </code></pre>
+            </section>
+            <section>
+                <section>
+                    <h2>Примеры работы с многомерными массивами</h2>
+                    <p>
+                        Перебор элементов двумерного массива:
+                    </p>
+                    <pre><code class="cpp">
+int main()
+{
+    int aMatrix[3][5] = {{3, 5, 5, 7, 8},
+                         {4, 1, 1, 2, 9},
+                         {3, 8, 8, 9, 7}};
+
+    aMatrix[1][4] = 0;
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        for(int j = 0; j &lt; 5; j++)
+        {
+            cout &lt;&lt; aMatrix[i][j] &lt;&lt; ", ";
+        }
+
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Генерация случайных чисел</h1>
+                    <p>
+                        Элемент случайности может быть введен в приложения с помощью функции 
+                        <i>rand</i> из стандартной библиотеки.
+                    </p>
+                    <pre><code class="cpp">
+i = rand();
+                    </code></pre>
+                    <p>
+                        Функция <i>rand</i> генерирует целое число в диапазоне от <i>0</i> до <i>RAND_MAX</i>. 
+                        Значение <i>RAND_MAX</i> должно быть, по меньшей мере, равно 32767 – 
+                        максимальное положительное значение двухбайтового целого числа.
+                </section>
+                <section>
+                    <h2>Генерация чисел из диапазона</h2>
+                    <p>
+                        Для того, чтобы сгенерировать целые числа в заданном диапазоне, 
+                        используется операция вычисления остатка (%) в сочетании с <i>rand</i>:
+                    </p>
+                    <pre><code class="cpp">
+i = (rand() % 12) - 6;     // генерирует случайное число от -6 до 6
+                    </code></pre>
+                    <blockquote>
+                        Это называется масштабированием, а число 6 называется масштабирующим коэффициентом.
+                    </blockquote>
+                </section>
+                <section>
+                    <h1>Более рандомный рандом</h1>
+                    <blockquote>
+                        Числа, генерируемые функцией <i>rand</i>, кажутся случайными, однако это не совсем так.
+                        Последовательность генерируемых чисел зависит от начального значения сида, которое 
+                        по умолчанию всегда равно 1.
+                    </blockquote>
+                    <blockquote>
+                        Для задания полностью случайной генерации чисел можно предварительно перед
+                        получением случайных чисел функцией <i>rand</i> вызвать функцию
+                        для задания сида <i>srand</i>:
+                    </blockquote>
+                    <pre><code class="cpp">
+srand(time(nullptr));
+// Задаём сид от текущего времени
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Что почитать дополнительно?..</h2>
+				<ul>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=219">
+                            <b>Главы 21-23</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=423">
+                            <b>Глава 7</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                        </a>
+                    </li>
+				</ul>
+            </section>
+		</div>
+	</div>
+	<aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

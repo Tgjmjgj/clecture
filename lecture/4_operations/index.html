@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Basic Operations</title>
+	<meta name="description" content="basic operations">
+	<meta name="keywords" content="c, c++">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="../../icon.png">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Базовые операции языка C/C++</h3>
+                    <div>
+                        <p style="display: inline-block;">
+                            Pavel Karpovich / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <h1>Классификация операций</h1>
+                <ul>
+                    <li>Унарные</li>
+                    <li>Бинарные</li>
+                    <li>Тернарные</li>
+                </ul>
+                <blockquote>
+                    Операции разделяются в зависимости от количества воздействующих выражений.
+                    Для унарных - одно выражение, для бинарных - на два, для тернарных - три.
+                </blockquote>
+            </section>
+            <section>
+                <h1>Унарные операции</h1>
+                <img src="img/Unary_operations.jpg" />
+            </section>
+            <section>
+                <section>
+                    <h1>Бинарные операции</h1>
+                    <h3>Арифметические операции</h3>
+                    <img src="img/Binary_operations_1.jpg" />
+                </section>
+                <section>
+                    <h1>Бинарные операции</h1>
+                    <h3>Операции над битами</h3>
+                    <img src="img/Binary_operations_2.jpg" />
+                </section>
+                <section>
+                    <h1>Бинарные операции</h1>
+                    <h3>Операции сравнения и логические операции</h3>
+                    <img src="img/Binary_operations_3.jpg" />
+                </section>
+                <section>
+                    <h1>Бинарные операции</h1>
+                    <h3>Операции присваивания</h3>
+                    <img src="img/Binary_operations_4.jpg" />
+                </section>
+            </section>
+            <section>
+                <h1>Приоритеты операций</h1>
+                <img src="img/Priorities.jpg" />
+            </section>
+            <section>
+                <h1>Выражения</h1>
+                <blockquote>Комбинация знаков операций и операндов, результатом которой является определенное значение, называется выражением. 
+                Каждый операнд в выражении может быть выражением. Значение выражения зависит от расположения знаков операций и круглых скобок 
+                в выражении, а также от приоритета выполнения операций. Каждое выражение состоит из одного или 
+                нескольких операндов, символов операций и ограничителей.
+                </blockquote>
+                <pre><code class="cpp">
+15 * f - t % 5
+counter < 10
+-13
+                </code></pre>
+                <blockquote>
+                    Выражение, после которого стоит точка с запятой – это оператор-выражение.
+                </blockquote>
+            </section>
+            <section>
+                <section>
+                    <h2>Операция присваивания (=)</h2>
+                    <blockquote>
+                        Операция присвоения (=) рассматривается как выражение, имеющее значение левого операнда после присваивания.
+                        Присваивание может включать несколько операций присваивания, изменяя значения нескольких операндов.
+                    </blockquote>
+                    <pre><code class="cpp">
+double x = 1.0;
+char c;
+int i, j, k;
+i = j = x;          // эквивалентно j = x; i = j;
+i = j + (k = 7) - (c = 20);     // c = 20; k = 7; i = j + k + c;
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Недопустимыми являются:</h3>
+                    <ul>
+                        <li>Присвоение константе</li>
+                        <li>Присваивание функции</li>
+                        <li>Присваивание результату операции</li>
+                    </ul>
+                    <pre><code class="cpp">
+2 = i + j;          // ошибка
+getch() = c;        // ошибка
+(i + 1) = k - 1;    // ошибка 
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Арифметические операции</h2>
+                <blockquote>
+                    Арифметические операции задают обычные действия над операндами арифметического типа.
+                </blockquote>
+                <pre><code class="cpp">
+1 % j           // i - (i/j) * j
+12 % 6          // 0
+13 % 6          // 1
+                </code></pre>
+                <blockquote>
+                    Если арифметическая операция содержит операнды различных типов, то компилятор выполняет автоматическое преобразование их типов.
+                    <p>Часто арифметические операции используются для обработки чисел, например:</p>
+                </blockquote>
+                <pre><code class="cpp">
+int n = 12345;
+int low, i = 5;
+
+low = n % 10;           // младшая цифра числа n
+n = n / 10;             // отбросить младшую цифру числа n
+if (n % i == 0) ...     // елси n делится нацело на i
+n = n * 10 + i;         // добавить цифру i к числу n
+                </code></pre>
+            </section>
+            <section>
+                <section>
+                    <h2>Операции инкремента и декремента (++, --)</h2>
+                    <blockquote>
+                        Операции инкремента и декремента (++, --) относятся к унарным арифметическим операциям, которые служат соответственно 
+                        для увеличения или уменьшения значения, хранимого в переменной целого типа. Например, следующие три оператора дадут  один и тот же эффект:
+                    </blockquote>
+                    <pre><code class="cpp">
+a = a + 1;
+a += 1;
+a ++;
+                    </code></pre>
+                    <blockquote>
+                        Операции инкремента и декремента не только изменяют значения переменных, 
+                        но и возвращают значения. Таким образом, их можно сделать частью более сложного выражения.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Постфиксная и префиксная форма</h3>
+                    <blockquote>
+                        Имеется постфиксная и префиксная форма операторов инкремента и декремента. В постфиксной форме записи переменная, 
+                        к которой применена операция, увеличивается (или уменьшается) только после того, как ее значение будет использовано в контексте.
+                    </blockquote>
+                    <pre><code class="cpp">
+int a = 0, b = 0, c, d;
+c = ++ a;               // a = 1, c = a = 1
+d = b ++;               // d = b = 0, b = 1
+                    </code></pre>
+                    <blockquote>
+                        Типичной ошибкой является попытка использовать в операции инкремента или декремента операнд, отличный от имени простой переменной:
+                    </blockquote>
+                    <pre><code class="cpp">
+(x - 6) ++; // ошибка
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Операции сравнения</h2>
+                <blockquote>
+                    Общий вид операции сравнения (отношения):
+                    <p><i>&lt;выражение 1&gt;&lt;знак операции&gt;&lt;выражение 2&gt;</i></p>
+                    Выражениями могут быть любые базовые (скалярные) типы. Значения выражений перед сравнением преобразуются к одному типу. 
+                    Результат операции сравнения – значение 1, если отношение истинно, или 0 в противном случае (ложно). 
+                    Операция сравнения может использоваться в любых арифметических выражениях:
+                </blockquote>
+                <pre><code class="cpp">
+int b = 5;
+int c = 10;
+a = b > c;              // a = 0
+a = (b < c) * 2;        // a = 2
+                </code></pre>
+            </section>
+            <section>
+                <section>
+                    <h2>Битовые операции</h2>
+                    <blockquote>
+                        В С/С++ предусмотрены битовые операции для работы с отдельными битами. Эти операции нельзя применять к переменным вещественного типа.
+                        Операндами операций над битами могут быть только  выражения, приводимые к целому типу.
+                        Операции (~, &, |, ^) выполняются поразрядно над всеми битами операндов (знаковый разряд не выделяется).
+                        <p>Общий вид операции инвертирования:</p>
+                        <p><i>~&lt;выражение&gt;</i></p>
+                        <p>Остальные операции над битами имеют вид:</p>
+                        <p><i>&lt;выражение 1&gt;&lt;знак операции&gt;&lt;выражение 2&gt;</i></p>
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Таблица истинности</h3>
+                    <blockquote>
+                        Ниже приведена таблица истинности логических операций &, | и ^.
+                    </blockquote>
+                    <img src="img/Truth_table.jpg" />
+                </section>
+                <section>
+                    <h3>Работа с битами</h3>
+                    <blockquote>
+                        Операция & часто используется для маскирования некоторого  множества бит. 
+                        Операция ! используется для включения (устанавливает в единицу те биты, которые были нулями).
+                        <p>Необходимо отличать побитовые операции & и ! от логических бинарных операций && и ||.</p>
+                    </blockquote>
+                    <pre><code class="cpp">
+int x = 1;
+int y = 2;
+int c;
+c = x &Aacute; y; // результат 0, т.к. 0001 &Aacute; 0010 = 0000
+c = x &Aacute;&Aacute; y;  // результат 1, т.к. в операции сравнения оба операнда - истина
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Операции сдвига (&lt;&lt;, &gt;&gt;)</h2>
+                    <blockquote>
+                        Операции сдвига &lt;&lt; и &gt;&gt; осуществляют соответственно сдвиг вправо  и влево своего левого операнда на число позиций,
+                        задаваемых правым операндом. Операции сдвига выполняются также для всех разрядов с потерей выходящих за границы бит.
+                    </blockquote>
+                    <pre><code class="cpp">
+0x81 &lt;&lt; 1       // 10000001 &lt;&lt; 1 = 00000010 = 0x02
+0x81 &gt;&gt; 1       // 10000001 &gt;&gt; 1 = 01000000 = 0x40
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Операции сдвига 2</h3>
+                    <blockquote>
+                        Если левостоящее выражение имеет тип <i>unsigned</i>, то при сдвиге вправо освобождающиеся разряды гарантированно заполняются нулями (логический сдвиг). 
+                        Выражения типа <i>signed</i> могут, но не необязательно, сдвигаться вправо с копированием знакового разряда (арифметический сдвиг). 
+                        При сдвиге влево освобождающиеся разряды всегда заполняются нулями. Если правостоящее выражение отрицательно либо больше длины 
+                        левостоящего выражения в битах, то результат операции сдвига не определен.
+                    </blockquote>
+                    <blockquote>
+                        Операции сдвига вправо на <i>k</i> разрядов можно использовать  для деления, а сдвиг влево – для умножения целых чисел на 2 в степени <i>k</i>:
+                    </blockquote>
+                    <pre><code class="cpp">
+x &lt;&lt; 1;     // x * 2
+x &gt;&gt; 1;     // x / 2
+x &lt;&lt; 3;     // x * 8
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Операция <i>sizeof</i></h2>
+                <blockquote>
+                    Операция <i>sizeof</i> выполняется на этапе компиляции программы и дает константу, которая равна числу байтов, 
+                    требуемых для хранения в памяти данного объекта. Объектом может быть имя переменной, массива, структуры или просто спецификация типа.
+                </blockquote>
+                <pre><code class="cpp">
+int k = 20;
+std::cout &lt;&lt; sizeof(int) &lt;&lt; sizeof(k);
+                </code></pre>
+            </section>
+            <section>
+                <h2>Операция запятая (,)</h2>
+                <blockquote>
+                    Операция запятая (,) используется при организации строго гарантированной последовательности вычисления выражений (используется там, где по синтаксису 
+                    допустима только одна операция, и для организации множественных выражений, расположенных внутри круглых скобок). Форма записи:
+                    <p><i>выражение 1, ..., выражение N</i></p>
+                    <p>Выражения вычисляются слева направо. Например:</p>
+                </blockquote>
+                <pre><code class="cpp">
+char X, Y;
+(X = Y, Y = getch())    // присваиваем переменной X значение Y, cчитываем символ
+                        // вводимый с клавиатуры, и запоминаем его в Y
+int i, j, k, n;
+m = (i = 1, j = i++, k = 6, n = i + j + k)
+            // i = 1, j = i = 1, i = 2, k = 6, n = 2 + 1 + 6, m = n = 9
+                </code></pre>
+            </section>
+            <section>
+                <section>
+                    <h1>Преобразование типов</h1>
+                    <blockquote>
+                            В операциях могут участвовать операнды различных типов, в этом случае они неявно 
+                            преобразуются к общему типу в порядке увеличения их объема памяти, необходимого 
+                            для хранения их значений. Поэтому неявные преобразования всегда идут от «меньших» 
+                            объектов к «большим». Схема выполнения преобразований операндов арифметических операций:  
+                    </blockquote>
+                    <blockquote>
+                            short, char  →   int  →   unsigned  →   long  →   double
+
+                            float  →   double
+                    </blockquote>
+                    <blockquote>
+                        Стоит отметить, что по возможности стоит всегда избегать преобразования типов.
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Неявное преобразование</h3>
+                    <ul>
+                        <li>Значения типов char и short всегда преобразуются в int</li>
+                        <li>Если любой из операндов имеет тип double, то второй преобразуется в double</li>
+                        <li>Если один из операндов long, то другой преобразуется в long</li>
+                    </ul>
+                    <blockquote>
+                        При присваивании значение правой части преобразуется к типу левой, который и является типом результата.
+                    </blockquote>
+                    <pre><code class="cpp">
+float x;
+int i;
+
+x = i;
+i = x;  // float преобразуется в int, дробная часть отбрасывается
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Явное преобразование Си</h3>
+                    <blockquote>
+                            В любом выражении преобразование типов может быть осуществлено явно, 
+                            в С для этого достаточно перед выражением поставить в скобках идентификатор 
+                            соответствующего типа:
+                    </blockquote>
+                    <blockquote>
+                            (тип) выражение; 
+                    </blockquote>
+                    <pre><code class="cpp">
+float a;
+int i = 6, j = 4;
+
+a = (i + j) / 3;            // a = 3
+a = (float)(i + j) / 3;     // a = 3.333333
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Безопасное преобразование типов C++</h2>
+                    <p>
+                        В С++ явное преобразование типов производится при помощи следующих операторов:
+                    </p>
+                    <ul>
+                        <li>static_cast</li>
+                        <li>const_cast</li>
+                        <li>reinterpret_cast</li>
+                        <li>dynamic_cast</li>
+                    </ul>
+                    <p>
+                        Синтаксис операций явного преобразования:
+                    </p>
+                    <pre><code class="cpp">
+вид_преобразования &lt; требуемый_тип &gt; ( выражение ) 
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Виды преобразований</h2>
+                    <ul>
+                        <li>
+                            const_cast служит для преобразования константного типа в неконстантный
+                        </li>
+                        <li>
+                            static_cast - основной тип преобразования, когда значение может быть 
+                            конвертировано не явно по стандартным правилам
+                        </li>
+                        <li>
+                            reinterpret_cast - не выполняет никаких проверок, пытаясь побитово интерпретировать 
+                            объект как объект нужного типа.
+                        </li>
+                        <li>
+                            dynamic_cast используется для динамического приведения типов во время выполнения.
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Примеры</h3>
+                    <pre><code class="cpp">
+float f = 97.0;
+char c = static_cast&lt; char &gt;(f);
+
+int u = 34;
+const int&amp; const_ref = u;
+int&amp; non_const_ref = const_cast&lt;int&amp;&gt;(const_ref);
+
+char n[4] = "\b\0\0";
+int* num = reinterpret_cast&lt;int*&gt;(n);
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Стандартные математические функции</h1>
+                    <blockquote>
+                        В любой программе кроме операторов и операций используются средства библиотек, 
+                        входящих в среду программирования, которые облегчают создание программ. Часть 
+                        библиотек стандартизована и поставляется с компилятором. В стандартную библиотеку 
+                        входят функции, макросы, глобальные константы. Это файлы, хранящиеся в папке include.  
+                    </blockquote>   
+                    <blockquote>
+                            Математические функции языка С декларированы в файлах &lt;сmath&gt; и &lt;stdlib.h&gt;.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Список основных математических функций:</h2>
+                    <img src="img/math.jpg">
+                </section>
+                <section>
+                    <h3>Использование</h3>
+                    <pre><code class="cpp">
+cout &lt;&lt; "log10(10)       = " &lt;&lt; log10(10.0)   &lt;&lt; endl; // 1
+cout &lt;&lt; "log10(1)        = " &lt;&lt; log10(1.0)    &lt;&lt; endl; // 0
+cout &lt;&lt; "log(2.718281)   = " &lt;&lt; log(2.718281) &lt;&lt; endl; // 1
+cout &lt;&lt; "sqrt(9)         = " &lt;&lt; sqrt(9.0)     &lt;&lt; endl; // 3
+cout &lt;&lt; "pow(2,3)        = " &lt;&lt; pow(2.0,3.0)  &lt;&lt; endl; // 8
+cout &lt;&lt; "abs(0)          = " &lt;&lt; abs(0.0)      &lt;&lt; endl; // 0
+cout &lt;&lt; "abs(-5)         = " &lt;&lt; abs(-5.0)     &lt;&lt; endl; // 5
+cout &lt;&lt; "ceil(3.14)      = " &lt;&lt; ceil(3.14)    &lt;&lt; endl; // 4   
+cout &lt;&lt; "ceil(-2.4)      = " &lt;&lt; ceil(-2.4)    &lt;&lt; endl; // -2  
+cout &lt;&lt; "floor(3.14)     = " &lt;&lt; floor(3.14)   &lt;&lt; endl; // 3  
+cout &lt;&lt; "floor(-2.4)     = " &lt;&lt; floor(-2.4)   &lt;&lt; endl; // -3  
+cout &lt;&lt; "fmod(2.4/2.0)   = " &lt;&lt; fmod(2.4,2.0) &lt;&lt; endl; // 0.4
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h2>Что почитать дополнительно?</h2>
+				<ul>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1XxoO8rXvNQvp3DHW5Q31DQES5JHZvLBQ#page=95">
+                                <b>Главы 9-10</b> :<br>Г.Перри, Д. Миллер - Программирование на C для начинающих
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/uc?export=view&id=1LEiih0sJ41e1SXzf2tYCEnVFcs3eAIAn#page=53">
+                                <b>Глава 2</b> :<br>Х.М.Дейтейл - Как программировать на C++
+                            </a>
+                        </li>
+				</ul>
+            </section>
+
+
+		</div>
+	</div>
+	<aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>

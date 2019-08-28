@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Visual C++</title>
+	<meta name="description" content="процедурное программирование, visual c++, visual c, конструкции c++">
+	<meta name="keywords" content="c, c++">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="../../icon.png">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Основы алгоритмизации и программирования</h1>
+                    <h3>Графическое представление алгоритмов</h3>
+                    <div>
+                        <p style="display: inline-block;">
+                            Pavel Karpovich / 
+                        </p>
+                        <a href="https://github.com/tgjmjgj" class="icon-button github">
+                            <i class="fa fa-github"></i><span></span>
+                        </a>
+                        <a href="https://facebook.com/paradox7master" class="icon-button facebook">
+                            <i class="fa fa-facebook"></i><span></span>
+                        </a>
+                    </div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <section>
+                    <h2>Алгоритм</h2>
+                    <p>
+                        Алгоритм — набор инструкций, описывающих порядок действий исполнителя для достижения некоторого результата.
+                    </p>
+                </section>
+                <section>
+                    <h3>Способы представления алгоритмов</h3>
+                    <blockquote>
+                        <ul>
+                            <li>Словесный</li>
+                            <li>Программный</li>
+                            <li>Псевдокод</li>
+                            <li>Графический</li>
+                        </ul>
+                    </blockquote>
+                </section>
+                <section>
+                    <h3>Графический способ представления алгоритмов</h3>
+                    <p>
+                        При графическом представлении алгоритм изображается в виде последовательности 
+                        связанных между собой функциональных блоков, каждый из которых соответствует 
+                        выполнению одного или нескольких действий.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <img src="img/first_flowchart.jpg">
+                </section>
+            </section>
+            <section>
+                <h2>Стандарты</h2>
+                <blockquote>
+                    <ul>
+                        <li>
+                            <a href="http://cert.obninsk.ru/gost/282/282.html">
+                                ГОСТ 19.701-90
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.iso.org/standard/11955.html">
+                                ISO 5807-85
+                            </a>
+                        </li>
+                    </ul>
+                </blockquote>
+            </section>
+            <section>
+                <h2>ГОСТ</h2>
+            </section>
+            <section>
+                <h1>Основные элементы схем</h1>
+                <p>
+                    Все отображаемые элементы на схеме можно классифицировать по группам:
+                </p>
+                <ul>
+                    <li>Линии</li>
+                    <li>Процессы</li>
+                    <li>Данные</li>
+                    <li>Спец. блоки</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <h2>Линии</h2>
+                    <img src="img/just_line.jpg">
+                    <p>
+                        По ГОСТ последовательность действий алгоритма на схеме по возможности 
+                        должна быть направлена сверху вниз и слева на право.
+                    </p>
+                    <p>
+                        Также следует избегать пересечения линий.
+                    </p>
+                    <p>
+                        Стрелки к линиям можно не приписывать, это не строго.
+                    </p>
+                </section>
+                <section>
+                    <h2>Параллельные действия</h2>
+                    <img src="img/parallel_exec.jpg">
+                    <p>
+                        Параллельные действия обозначаются на схеме через символ двойной линии.
+                        Блоки, выходящие из одной линии могут выполняться параллельно друг другу.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример параллельных операций</h3>
+                    <img src="img/parallel_exec_example.jpg">
+                    <p>
+                        Здесь операции C, D и E будут выполняться параллельно.
+                    </p>
+                </section>
+                <section>
+                    <h2>Особые линии</h2>
+                    <p>
+                        Существует несколько особых типов соединителей для специфических ситуаций.
+                    </p>
+                    <table>
+                        <tr>
+                            <td>Альтернативная связь</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/alternative_line.jpg"></td>
+                            <td>
+                                Когда необходимо показать альтернативные 
+                                варианты действий без условий.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Передача по каналу связи</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/channel_line.jpg"></td>
+                            <td>
+                                Если передача управления или данных осуществляется между 
+                                компьютерными системами по каналу связи.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Передача управления между процессами</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/control_transfer.jpg"></td>
+                            <td>
+                                Когда управление передается от одного процесса другому.
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Процессы</h2>
+                    <p>
+                        Блоки процессов - это основные функциональные элементы блок-схемы.
+                        Именно с помощью них описывается основная логика алгоритма.
+                    </p>
+                    <p>
+                        Стандартный блок для выполнения какой-либо функции:
+                    </p>
+                    <img src="img/process.jpg">
+                </section>
+                <section>
+                    <h2>Решение</h2>
+                    <img src="img/decision.jpg">
+                    <p>
+                        Блок решения используется для ветвления пути выполнения алгоритма, когда 
+                        в зависимости от исполнения определённого условия должны быть выполнены 
+                        различные действия.
+                    </p>
+                    <img src="img/decision_example.jpg">
+                </section>
+                <section>
+                    <h2>Цикл</h2>
+                    <img src="img/loop.jpg">
+                    <p>
+                        Блоки цикла используются для обозначения набора циклических инструкций и 
+                        условий для количества их повторений.
+                    </p>
+                    <p>
+                        Все блоки, расположенные между открывающим блоком цикла и закрывающим блоком 
+                        цикла, являются содержимым цикла и повторяются в соответствии с заданными условиями.
+                    </p>
+                </section>
+                <section>
+                    <h3>Примеры циклов</h3>
+                    <img style="vertical-align: middle; margin-right: 100px;" src="img/loop_example.jpg">
+                    <img style="vertical-align: middle;" src="img/loop_example_2.jpg">
+                </section>
+                <section>
+                    <h2>Более редкие блоки процессов</h2>
+                    <table>
+                        <tr>
+                            <td>Предопределённый процесс</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/predefined.jpg"></td>
+                            <td>
+                                Процесс, описанный в другом модуле, подпрограмме.   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ручная операция</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/manual.jpg"></td>
+                            <td>
+                                Процесс, выполняемый человеком вручную.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Подготовка</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/preparing.jpg"></td>
+                            <td>
+                                Модификация с целью воздействия на некоторую последующую функцию 
+                                (инициализация программы, установка переключателя, регистра). 
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Данные</h2>
+                    <p>
+                        Данные - это то, что управляет алгоритмом и определяет его конечную форму.
+                    </p>
+                    <p>
+                        Основной блок для задания данных:
+                    </p>
+                    <img src="img/data.jpg">
+                    <blockquote>
+                        Это наиболее общий блок для данных, который применяется тогда, когда нет 
+                        жесткой необходимости задавать конкретный тип носителя данных.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Специфические элементы данных</h2>
+                    <table>
+                        <tr>
+                            <td>Хранимые данных</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/predefined.jpg"></td>
+                            <td>
+                                Описывает общий вид данных на устройстве хранения.   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Данные в оперативной памяти</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/manual.jpg"></td>
+                            <td>
+                                Для данных из оперативной памяти компьютера.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Данные с последовательным доступом</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/preparing.jpg"></td>
+                            <td>
+                                Данные на устройстве с последовательным доступом (магнитная лента).
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Специфические элементы данных 2</h2>
+                    <table>
+                        <tr>
+                            <td>Данные с прямым доступом</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/direct_data.jpg"></td>
+                            <td>
+                                Данные на устройстве с прямым доступом (жесткий диск, магнитные диски, флеш память).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Документ</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/document_data.jpg"></td>
+                            <td>
+                                Данные в подготовленном и удобочитаемом виде.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ручной ввод</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/manual_data.jpg"></td>
+                            <td>
+                                Данные, которые самостоятельно вводит пользователь.
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Специфические элементы данных 3</h2>
+                    <table>
+                        <tr>
+                            <td>Данные с карты</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/card_data.jpg"></td>
+                            <td>
+                                Данные, представленные на носителе в виде карты (перфокарты, магнитные карты, смарт-карты). 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Бумажный носитель</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/paper_data.jpg"></td>
+                            <td>
+                                Отображает данные, представленные на носителе в виде бумажной ленты.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Данные с дисплея</td>
+                            <td style="width: 20%; vertical-align: middle;"><img src="img/manual_data.jpg"></td>
+                            <td>
+                                Данные на носителе в виде отображающего устройства (экран, индикаторы).
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Специальные элементы</h2>
+                </section>
+                <section>
+                    <h3>Соединитель</h3>
+                    <img src="img/connector.jpg">
+                    <p>
+                        Используется для обрыва соединительной линии и продолжения ее в другом месте. Соответствующие 
+                        символы-соединители должны содержать одно и то же уникальное обозначение.
+                    </p>
+                    <p>
+                        Всегда парные.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример соединителя</h3>
+                    <img src="img/connector_example.jpg">
+                </section>
+                <section>
+                    <h2>Терминатор</h2>
+                    <img src="img/terminator.jpg">
+                    <p>
+                        Приход терминатора предвещает начало и конец программы, а также любую 
+                        ситуацию выхода во внешнюю среду (например, необработанное исключение).
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример терминаторов</h3>
+                    <img src="img/terminator_example.jpg">
+                </section>
+                <section>
+                    <h2>Комментарий</h2>
+                    <img src="img/comment.jpg">
+                    <p>
+                        Комментарии нужны, чтобы оставлять пометки по элементам алгоритма.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример комментариев</h3>
+                    <img src="img/comment_example.jpg">
+                </section>
+            </section>
+            <section>
+                <h2>Конец ГОСТ-а</h2>
+            </section>
+            <section>
+                <h2>Базы данных</h2>
+                <p>
+                    Если на схеме необходимо обозначить базу данных, 
+                    общепринятым считается следующее обозначение:
+                </p>
+                <img src="img/database.jpg">
+            </section>
+            <section>
+                <section>
+                    <h2>Примеры блок-схем</h2>
+                </section>
+                <section>
+                    <h3>Блок-схема алгоритма формирования ЭЦП</h3>
+                    <img src="img/flowchart_example_1.jpg">
+                </section>
+                <section>
+                    <h3>Блок-схема алгоритма верификации ЭЦП</h3>
+                    <img src="img/flowchart_example_2.jpg">
+                </section>
+                <section>
+                    <h3>Блок-схема алгоритма расчёта допускаемых скоростей в кривых</h3>
+                    <img src="img/flowchart_example_3.jpg">
+                </section>
+                <section>
+                    <h3>Еще одна блок-схема</h3>
+                    <img src="img/flowchart_example_3.jpg">
+                </section>
+            </section>
+            <section>
+                <h1>UML</h1>
+            </section>
+            <section>
+                <section>
+                    <h2>UML</h2>
+                    <p>
+                        Обычные блок-схемы слишком просты, и предназначены только для описания 
+                        конкретных алгоритмов, а не работы всей системы.
+                    </p>
+                    <p>
+                        Поэтому существует UML.
+                    </p>
+                    <blockquote>
+                        UML (Unified Modeling Language) - язык графического описания для объектного моделирования 
+                        в области разработки программного обеспечения, моделирования бизнес-процессов, 
+                        системного проектирования и отображения организационных структур.
+                    </blockquote>
+                    <p>
+                        Стандартизацией UML занимается консорциум OMG.
+                    </p>
+                </section>
+                <section>
+                    <h2>Виды диаграмм</h2>
+                    <img src="img/uml_diagrams.jpg">
+                </section>
+                <section>
+                    <h3>Ссылки</h3>
+                    <p>
+                        Больше о UML можно почитать на <a href="https://ru.wikipedia.org/wiki/UML">Википедии</a>
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <h2>Что почитать дополнительно?..</h2>
+                <br>
+                <p>
+                    Боже упаси
+                </p>
+            </section>
+
+		</div>
+	</div>
+	<aside id="presentable-icon" class="cpp">
+        <a title="Содержание лекции" href="#/0/1">
+            <i class="fa fa-list-ul fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-icon-close">
+        <a title="К списку материалов" href="../../index.html#/1">
+            <i class="fa fa-times fa-2x controls"></i>
+        </a>
+    </aside>
+    <aside id="presentable-theme-picker">
+        <div id="hidden-bar" class="invisible">
+            <div>
+                <div data-theme="beige" class="theme-circle theme-beige"></div>
+                <div data-theme="black" class="theme-circle theme-black"></div>
+                <div data-theme="blood" class="theme-circle theme-blood"></div>
+                <div data-theme="league" class="theme-circle theme-league"></div>
+                <div data-theme="moon" class="theme-circle theme-moon"></div>
+                <div data-theme="night" class="theme-circle theme-night"></div>
+                <div data-theme="serif" class="theme-circle theme-serif"></div>
+                <div data-theme="simple" class="theme-circle theme-simple"></div>
+                <div data-theme="sky" class="theme-circle theme-sky"></div>
+                <div data-theme="solarized" class="theme-circle theme-solarized"></div>
+                <div data-theme="white" class="theme-circle theme-white"></div>
+            </div>
+        </div>
+        <div id="selected-theme" class="theme-circle"></div>
+    </aside>
+    <script src="../../js/bundle.min.js"></script>
+</body>
+</html>
